@@ -19,7 +19,8 @@ namespace windows_form_app
             float value = 0;
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
             var result_1 = (value * percents_lavorations[0]) / 100; // risultato per le ore relative alla prima lavorazione
-            MessageBox.Show("Le ore per la prima fase sono: " + result_1);
+            // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
+            Result1Fase.Text = Result1Fase.Text + result_1;
         }
 
         public Form1()
@@ -40,9 +41,18 @@ namespace windows_form_app
             il suo nome così verrà stampato il suo valore */
 
             CalculateHours();
-            
-            
+
+
+        }
+        private void ShowValues_Click(object sender, EventArgs e)
+        {
+               
         }
 
+        private void Result1Fase_Click(object sender, EventArgs e)
+        {
+            /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+            secondo le percentuali per ogni lavorazione */
+        }
     }
 }

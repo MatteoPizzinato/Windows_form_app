@@ -8,3 +8,13 @@ C:\Users\Utente\Desktop\C#_Matteone\windows_form_app\windows_form_app\obj\Debug\
 C:\Users\Utente\Desktop\C#_Matteone\windows_form_app\windows_form_app\obj\Debug\windows_form_app.exe
 C:\Users\Utente\Desktop\C#_Matteone\windows_form_app\windows_form_app\obj\Debug\windows_form_app.pdb
 C:\Users\Utente\Desktop\C#_Matteone\windows_form_app\windows_form_app\obj\Debug\windows_form_app.Form1.resources
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\windows_form_app.exe.config
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\windows_form_app.exe
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\windows_form_app.pdb
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csprojAssemblyReference.cache
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.Form1.resources
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.Properties.Resources.resources
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csproj.GenerateResource.cache
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csproj.CoreCompileInputs.cache
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.exe
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.pdb
