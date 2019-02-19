@@ -44,6 +44,12 @@ namespace windows_form_app
         {
             // voglio creare un metodo clear per eliminare i risultati in coda al label 
             Result1Fase.Text = "Le ore per la prima fase sono: ";
+            Result2Fase.Text = "Le ore per la seconda fase sono: ";
+            Result3Fase.Text = "Le ore per la terza fase sono: ";
+            Result4Fase.Text = "Le ore per la quarta fase sono: ";
+            Result5Fase.Text = "Le ore per la quinta fase sono: ";
+            Result6Fase.Text = "Le ore per la sesta fase sono: ";
+            Result7Fase.Text = "Le ore per la settima fase sono: ";
 
         }
 
