@@ -30,10 +30,17 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Result7Fase = new System.Windows.Forms.Label();
+            this.Result6Fase = new System.Windows.Forms.Label();
+            this.Result4Fase = new System.Windows.Forms.Label();
+            this.Result5Fase = new System.Windows.Forms.Label();
+            this.Result3Fase = new System.Windows.Forms.Label();
+            this.Result2Fase = new System.Windows.Forms.Label();
             this.Result1Fase = new System.Windows.Forms.Label();
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.ResetHours = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +55,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ResetHours);
+            this.groupBox1.Controls.Add(this.Result7Fase);
+            this.groupBox1.Controls.Add(this.Result6Fase);
+            this.groupBox1.Controls.Add(this.Result4Fase);
+            this.groupBox1.Controls.Add(this.Result5Fase);
+            this.groupBox1.Controls.Add(this.Result3Fase);
+            this.groupBox1.Controls.Add(this.Result2Fase);
             this.groupBox1.Controls.Add(this.Result1Fase);
             this.groupBox1.Controls.Add(this.ShowValues);
             this.groupBox1.Controls.Add(this.oreMacchina);
@@ -55,15 +69,74 @@
             this.groupBox1.Controls.Add(this.calcolaOre);
             this.groupBox1.Location = new System.Drawing.Point(107, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(535, 188);
+            this.groupBox1.Size = new System.Drawing.Size(535, 270);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome";
             // 
+            // Result7Fase
+            // 
+            this.Result7Fase.AutoSize = true;
+            this.Result7Fase.Location = new System.Drawing.Point(216, 236);
+            this.Result7Fase.Name = "Result7Fase";
+            this.Result7Fase.Size = new System.Drawing.Size(212, 17);
+            this.Result7Fase.TabIndex = 10;
+            this.Result7Fase.Text = "Le ore per la settima fase sono: ";
+            // 
+            // Result6Fase
+            // 
+            this.Result6Fase.AutoSize = true;
+            this.Result6Fase.Location = new System.Drawing.Point(216, 209);
+            this.Result6Fase.Name = "Result6Fase";
+            this.Result6Fase.Size = new System.Drawing.Size(201, 17);
+            this.Result6Fase.TabIndex = 9;
+            this.Result6Fase.Text = "Le ore per la sesta fase sono: ";
+            this.Result6Fase.Click += new System.EventHandler(this.Result6Fase_Click);
+            // 
+            // Result4Fase
+            // 
+            this.Result4Fase.AutoSize = true;
+            this.Result4Fase.Location = new System.Drawing.Point(216, 153);
+            this.Result4Fase.Name = "Result4Fase";
+            this.Result4Fase.Size = new System.Drawing.Size(208, 17);
+            this.Result4Fase.TabIndex = 7;
+            this.Result4Fase.Text = "Le ore per la quarta fase sono: ";
+            this.Result4Fase.Click += new System.EventHandler(this.Result4Fase_Click);
+            // 
+            // Result5Fase
+            // 
+            this.Result5Fase.AutoSize = true;
+            this.Result5Fase.Location = new System.Drawing.Point(216, 182);
+            this.Result5Fase.Name = "Result5Fase";
+            this.Result5Fase.Size = new System.Drawing.Size(206, 17);
+            this.Result5Fase.TabIndex = 8;
+            this.Result5Fase.Text = "Le ore per la quinta fase sono: ";
+            this.Result5Fase.Click += new System.EventHandler(this.Result5Fase_Click);
+            // 
+            // Result3Fase
+            // 
+            this.Result3Fase.AutoSize = true;
+            this.Result3Fase.Location = new System.Drawing.Point(216, 124);
+            this.Result3Fase.Name = "Result3Fase";
+            this.Result3Fase.Size = new System.Drawing.Size(199, 17);
+            this.Result3Fase.TabIndex = 6;
+            this.Result3Fase.Text = "Le ore per la terza fase sono: ";
+            this.Result3Fase.Click += new System.EventHandler(this.Result3Fase_Click);
+            // 
+            // Result2Fase
+            // 
+            this.Result2Fase.AutoSize = true;
+            this.Result2Fase.Location = new System.Drawing.Point(216, 98);
+            this.Result2Fase.Name = "Result2Fase";
+            this.Result2Fase.Size = new System.Drawing.Size(221, 17);
+            this.Result2Fase.TabIndex = 5;
+            this.Result2Fase.Text = "Le ore per la seconda fase sono: ";
+            this.Result2Fase.Click += new System.EventHandler(this.Result2Fase_Click);
+            // 
             // Result1Fase
             // 
             this.Result1Fase.AutoSize = true;
-            this.Result1Fase.Location = new System.Drawing.Point(219, 71);
+            this.Result1Fase.Location = new System.Drawing.Point(216, 71);
             this.Result1Fase.Name = "Result1Fase";
             this.Result1Fase.Size = new System.Drawing.Size(202, 17);
             this.Result1Fase.TabIndex = 4;
@@ -75,9 +148,9 @@
             this.ShowValues.AutoSize = true;
             this.ShowValues.Location = new System.Drawing.Point(216, 42);
             this.ShowValues.Name = "ShowValues";
-            this.ShowValues.Size = new System.Drawing.Size(105, 17);
+            this.ShowValues.Size = new System.Drawing.Size(98, 17);
             this.ShowValues.TabIndex = 3;
-            this.ShowValues.Text = "Mostra Risultati";
+            this.ShowValues.Text = "Risultati in ore";
             this.ShowValues.Click += new System.EventHandler(this.ShowValues_Click);
             // 
             // oreMacchina
@@ -95,6 +168,15 @@
             this.label2.Size = new System.Drawing.Size(144, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
+            // 
+            // ResetHours
+            // 
+            this.ResetHours.Location = new System.Drawing.Point(9, 182);
+            this.ResetHours.Name = "ResetHours";
+            this.ResetHours.Size = new System.Drawing.Size(141, 23);
+            this.ResetHours.TabIndex = 11;
+            this.ResetHours.Text = "Reset";
+            this.ResetHours.Click += new System.EventHandler(this.ResetHours_Click);
             // 
             // Form1
             // 
@@ -118,5 +200,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label ShowValues;
         private System.Windows.Forms.Label Result1Fase;
+        private System.Windows.Forms.Label Result6Fase;
+        private System.Windows.Forms.Label Result4Fase;
+        private System.Windows.Forms.Label Result5Fase;
+        private System.Windows.Forms.Label Result3Fase;
+        private System.Windows.Forms.Label Result2Fase;
+        private System.Windows.Forms.Label Result7Fase;
+        private System.Windows.Forms.Button ResetHours;
     }
 }

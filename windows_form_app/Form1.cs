@@ -21,6 +21,24 @@ namespace windows_form_app
             var result_1 = (value * percents_lavorations[0]) / 100; // risultato per le ore relative alla prima lavorazione
             // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
             Result1Fase.Text = Result1Fase.Text + result_1;
+            // adesso faccio i calcoli per seconda fase
+            var result_2 = (value * percents_lavorations[1]) / 100;
+            Result2Fase.Text = Result2Fase.Text + result_2;
+            // adesso faccio i calcoli per terza fase
+            var result_3 = (value * percents_lavorations[2]) / 100;
+            Result3Fase.Text = Result3Fase.Text + result_3;
+            // adesso faccio i calcoli per quarta fase
+            var result_4 = (value * percents_lavorations[3]) / 100;
+            Result4Fase.Text = Result4Fase.Text + result_4;
+            // adesso faccio i calcoli per quinta fase
+            var result_5 = (value * percents_lavorations[4]) / 100;
+            Result5Fase.Text = Result5Fase.Text + result_5;
+            // adesso faccio i calcoli per sesta fase
+            var result_6 = (value * percents_lavorations[5]) / 100;
+            Result6Fase.Text = Result6Fase.Text + result_6;
+            // adesso faccio i calcoli per sesta fase
+            var result_7 = (value * percents_lavorations[6]) / 100;
+            Result7Fase.Text = Result7Fase.Text + result_7;
         }
 
         public Form1()
@@ -54,5 +72,47 @@ namespace windows_form_app
             /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
             secondo le percentuali per ogni lavorazione */
         }
+
+        private void Result2Fase_Click(object sender, EventArgs e)
+        {
+            /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+            secondo le percentuali per ogni lavorazione */
+        }
+
+        private void Result3Fase_Click(object sender, EventArgs e)
+        {
+              /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+              secondo le percentuali per ogni lavorazione */
+        }
+
+        private void Result4Fase_Click(object sender, EventArgs e)
+        {
+             /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+             secondo le percentuali per ogni lavorazione */
+        }
+
+        private void Result5Fase_Click(object sender, EventArgs e)
+        {
+            /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+             secondo le percentuali per ogni lavorazione */
+        }
+
+        private void Result6Fase_Click(object sender, EventArgs e)
+        {
+            /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+            secondo le percentuali per ogni lavorazione */
+        }
+
+        private void Result7Fase_Click(object sender, EventArgs e)
+        {
+            /* in questo label printo attraverso la funzione CalculateHours il valore delle ore
+            secondo le percentuali per ogni lavorazione */
+        }
+
+        private void ResetHours_Click(object sender, EventArgs e)
+        {
+            Result1Fase.Text = Result1Fase.Text + " ";
+        }
     }
 }
+
