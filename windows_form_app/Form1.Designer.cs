@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ResetHours = new System.Windows.Forms.Button();
             this.Result7Fase = new System.Windows.Forms.Label();
             this.Result6Fase = new System.Windows.Forms.Label();
             this.Result4Fase = new System.Windows.Forms.Label();
@@ -40,13 +41,13 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.ResetHours = new System.Windows.Forms.Button();
+            this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // calcolaOre
             // 
-            this.calcolaOre.Location = new System.Drawing.Point(9, 137);
+            this.calcolaOre.Location = new System.Drawing.Point(12, 238);
             this.calcolaOre.Name = "calcolaOre";
             this.calcolaOre.Size = new System.Drawing.Size(141, 23);
             this.calcolaOre.TabIndex = 2;
@@ -55,6 +56,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LavorazioneLentiRadioButton);
             this.groupBox1.Controls.Add(this.ResetHours);
             this.groupBox1.Controls.Add(this.Result7Fase);
             this.groupBox1.Controls.Add(this.Result6Fase);
@@ -67,17 +69,26 @@
             this.groupBox1.Controls.Add(this.oreMacchina);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.calcolaOre);
-            this.groupBox1.Location = new System.Drawing.Point(107, 42);
+            this.groupBox1.Location = new System.Drawing.Point(55, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(535, 270);
+            this.groupBox1.Size = new System.Drawing.Size(925, 531);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome";
             // 
+            // ResetHours
+            // 
+            this.ResetHours.Location = new System.Drawing.Point(12, 283);
+            this.ResetHours.Name = "ResetHours";
+            this.ResetHours.Size = new System.Drawing.Size(141, 23);
+            this.ResetHours.TabIndex = 11;
+            this.ResetHours.Text = "Reset";
+            this.ResetHours.Click += new System.EventHandler(this.ResetHours_Click);
+            // 
             // Result7Fase
             // 
             this.Result7Fase.AutoSize = true;
-            this.Result7Fase.Location = new System.Drawing.Point(216, 236);
+            this.Result7Fase.Location = new System.Drawing.Point(219, 337);
             this.Result7Fase.Name = "Result7Fase";
             this.Result7Fase.Size = new System.Drawing.Size(212, 17);
             this.Result7Fase.TabIndex = 10;
@@ -86,7 +97,7 @@
             // Result6Fase
             // 
             this.Result6Fase.AutoSize = true;
-            this.Result6Fase.Location = new System.Drawing.Point(216, 209);
+            this.Result6Fase.Location = new System.Drawing.Point(219, 310);
             this.Result6Fase.Name = "Result6Fase";
             this.Result6Fase.Size = new System.Drawing.Size(201, 17);
             this.Result6Fase.TabIndex = 9;
@@ -96,7 +107,7 @@
             // Result4Fase
             // 
             this.Result4Fase.AutoSize = true;
-            this.Result4Fase.Location = new System.Drawing.Point(216, 153);
+            this.Result4Fase.Location = new System.Drawing.Point(219, 254);
             this.Result4Fase.Name = "Result4Fase";
             this.Result4Fase.Size = new System.Drawing.Size(208, 17);
             this.Result4Fase.TabIndex = 7;
@@ -106,7 +117,7 @@
             // Result5Fase
             // 
             this.Result5Fase.AutoSize = true;
-            this.Result5Fase.Location = new System.Drawing.Point(216, 182);
+            this.Result5Fase.Location = new System.Drawing.Point(219, 283);
             this.Result5Fase.Name = "Result5Fase";
             this.Result5Fase.Size = new System.Drawing.Size(206, 17);
             this.Result5Fase.TabIndex = 8;
@@ -116,7 +127,7 @@
             // Result3Fase
             // 
             this.Result3Fase.AutoSize = true;
-            this.Result3Fase.Location = new System.Drawing.Point(216, 124);
+            this.Result3Fase.Location = new System.Drawing.Point(219, 225);
             this.Result3Fase.Name = "Result3Fase";
             this.Result3Fase.Size = new System.Drawing.Size(199, 17);
             this.Result3Fase.TabIndex = 6;
@@ -126,7 +137,7 @@
             // Result2Fase
             // 
             this.Result2Fase.AutoSize = true;
-            this.Result2Fase.Location = new System.Drawing.Point(216, 98);
+            this.Result2Fase.Location = new System.Drawing.Point(219, 199);
             this.Result2Fase.Name = "Result2Fase";
             this.Result2Fase.Size = new System.Drawing.Size(221, 17);
             this.Result2Fase.TabIndex = 5;
@@ -136,7 +147,7 @@
             // Result1Fase
             // 
             this.Result1Fase.AutoSize = true;
-            this.Result1Fase.Location = new System.Drawing.Point(216, 71);
+            this.Result1Fase.Location = new System.Drawing.Point(219, 172);
             this.Result1Fase.Name = "Result1Fase";
             this.Result1Fase.Size = new System.Drawing.Size(202, 17);
             this.Result1Fase.TabIndex = 4;
@@ -146,7 +157,7 @@
             // ShowValues
             // 
             this.ShowValues.AutoSize = true;
-            this.ShowValues.Location = new System.Drawing.Point(216, 42);
+            this.ShowValues.Location = new System.Drawing.Point(219, 143);
             this.ShowValues.Name = "ShowValues";
             this.ShowValues.Size = new System.Drawing.Size(98, 17);
             this.ShowValues.TabIndex = 3;
@@ -155,7 +166,7 @@
             // 
             // oreMacchina
             // 
-            this.oreMacchina.Location = new System.Drawing.Point(9, 71);
+            this.oreMacchina.Location = new System.Drawing.Point(12, 172);
             this.oreMacchina.Name = "oreMacchina";
             this.oreMacchina.Size = new System.Drawing.Size(141, 22);
             this.oreMacchina.TabIndex = 0;
@@ -163,20 +174,23 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 42);
+            this.label2.Location = new System.Drawing.Point(9, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // ResetHours
+            // LavorazioneLentiRadioButton
             // 
-            this.ResetHours.Location = new System.Drawing.Point(9, 182);
-            this.ResetHours.Name = "ResetHours";
-            this.ResetHours.Size = new System.Drawing.Size(141, 23);
-            this.ResetHours.TabIndex = 11;
-            this.ResetHours.Text = "Reset";
-            this.ResetHours.Click += new System.EventHandler(this.ResetHours_Click);
+            this.LavorazioneLentiRadioButton.AutoSize = true;
+            this.LavorazioneLentiRadioButton.Location = new System.Drawing.Point(12, 45);
+            this.LavorazioneLentiRadioButton.Name = "LavorazioneLentiRadioButton";
+            this.LavorazioneLentiRadioButton.Size = new System.Drawing.Size(142, 21);
+            this.LavorazioneLentiRadioButton.TabIndex = 12;
+            this.LavorazioneLentiRadioButton.TabStop = true;
+            this.LavorazioneLentiRadioButton.Text = "Lavorazione Lenti";
+            this.LavorazioneLentiRadioButton.UseVisualStyleBackColor = true;
+            this.LavorazioneLentiRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneLentiRadioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -205,5 +219,6 @@
         private System.Windows.Forms.Label Result2Fase;
         private System.Windows.Forms.Label Result7Fase;
         private System.Windows.Forms.Button ResetHours;
+        private System.Windows.Forms.RadioButton LavorazioneLentiRadioButton;
     }
 }
