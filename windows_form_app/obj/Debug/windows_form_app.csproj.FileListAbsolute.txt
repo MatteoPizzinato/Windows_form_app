@@ -18,3 +18,8 @@ C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\wi
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csproj.CoreCompileInputs.cache
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.exe
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.pdb
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\Google.Protobuf.dll
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\MySql.Data.dll
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\Google.Protobuf.xml
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\MySql.Data.xml
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csproj.CopyComplete

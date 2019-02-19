@@ -40,6 +40,12 @@ namespace windows_form_app
             var result_7 = (value * percents_lavorations[6]) / 100;
             Result7Fase.Text = Result7Fase.Text + result_7;
         }
+        public void Clear()
+        {
+            // voglio creare un metodo clear per eliminare i risultati in coda al label 
+            Result1Fase.Text = "Le ore per la prima fase sono: ";
+
+        }
 
         public Form1()
         {
@@ -111,7 +117,7 @@ namespace windows_form_app
 
         private void ResetHours_Click(object sender, EventArgs e)
         {
-            Result1Fase.Text = Result1Fase.Text + " ";
+            Clear();
         }
     }
 }

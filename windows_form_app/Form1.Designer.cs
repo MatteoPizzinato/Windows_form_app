@@ -191,13 +191,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Diagnostics.EventLog eventLog1;
+       
         private System.Windows.Forms.Button calcolaOre;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox oreMacchina;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label2; // è la scritta: "Inserire ore macchina"
         private System.Windows.Forms.Label ShowValues;
         private System.Windows.Forms.Label Result1Fase;
         private System.Windows.Forms.Label Result6Fase;
