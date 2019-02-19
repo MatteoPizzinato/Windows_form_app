@@ -31,11 +31,13 @@
             this.CustomLavorationContainer = new System.Windows.Forms.GroupBox();
             this.CustomLavorationName = new System.Windows.Forms.Label();
             this.InsertNameCustomLavoration = new System.Windows.Forms.TextBox();
+            this.SavingDataInMySQLDB = new System.Windows.Forms.Button();
             this.CustomLavorationContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // CustomLavorationContainer
             // 
+            this.CustomLavorationContainer.Controls.Add(this.SavingDataInMySQLDB);
             this.CustomLavorationContainer.Controls.Add(this.InsertNameCustomLavoration);
             this.CustomLavorationContainer.Controls.Add(this.CustomLavorationName);
             this.CustomLavorationContainer.Location = new System.Drawing.Point(40, 17);
@@ -62,6 +64,16 @@
             this.InsertNameCustomLavoration.TabIndex = 1;
             this.InsertNameCustomLavoration.TextChanged += new System.EventHandler(this.InsertNameCustomLavoration_TextChanged);
             // 
+            // SavingDataInMySQLDB
+            // 
+            this.SavingDataInMySQLDB.Location = new System.Drawing.Point(9, 130);
+            this.SavingDataInMySQLDB.Name = "SavingDataInMySQLDB";
+            this.SavingDataInMySQLDB.Size = new System.Drawing.Size(216, 32);
+            this.SavingDataInMySQLDB.TabIndex = 2;
+            this.SavingDataInMySQLDB.Text = "Save";
+            this.SavingDataInMySQLDB.UseVisualStyleBackColor = true;
+            this.SavingDataInMySQLDB.Click += new System.EventHandler(this.SavingDataInMySQLDB_Click);
+            // 
             // CustomLavorations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.GroupBox CustomLavorationContainer;
         private System.Windows.Forms.TextBox InsertNameCustomLavoration;
         private System.Windows.Forms.Label CustomLavorationName;
+        private System.Windows.Forms.Button SavingDataInMySQLDB;
     }
 }
