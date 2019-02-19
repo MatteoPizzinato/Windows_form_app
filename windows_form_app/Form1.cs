@@ -217,6 +217,15 @@ namespace windows_form_app
             Clear(); /* funzione che mi pulisce i risultati 
                         quando cambio lavorazione con il radio button */
         }
+
+        private void CreateCustomLavorations_Click(object sender, EventArgs e)
+        {
+            // Create a new instance of the Form2 class
+            CustomLavorations createNewLavorations = new CustomLavorations();
+
+            // Show the settings form
+            createNewLavorations.Show();
+        }
     }
 }
 

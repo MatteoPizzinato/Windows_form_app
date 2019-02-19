@@ -44,6 +44,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.CreateCustomLavorations = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CreateCustomLavorations);
             this.groupBox1.Controls.Add(this.LavorazionePlasticaRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneFerroRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneLentiRadioButton);
@@ -220,6 +222,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
+            // CreateCustomLavorations
+            // 
+            this.CreateCustomLavorations.Location = new System.Drawing.Point(495, 45);
+            this.CreateCustomLavorations.Name = "CreateCustomLavorations";
+            this.CreateCustomLavorations.Size = new System.Drawing.Size(258, 23);
+            this.CreateCustomLavorations.TabIndex = 15;
+            this.CreateCustomLavorations.Text = "Crea Lavorazione Personalizzata";
+            this.CreateCustomLavorations.UseVisualStyleBackColor = true;
+            this.CreateCustomLavorations.Click += new System.EventHandler(this.CreateCustomLavorations_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -250,5 +262,6 @@
         private System.Windows.Forms.RadioButton LavorazioneLentiRadioButton;
         private System.Windows.Forms.RadioButton LavorazioneFerroRadioButton;
         private System.Windows.Forms.RadioButton LavorazionePlasticaRadioButton;
+        private System.Windows.Forms.Button CreateCustomLavorations;
     }
 }

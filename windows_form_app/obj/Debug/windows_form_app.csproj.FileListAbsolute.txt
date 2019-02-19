@@ -23,3 +23,4 @@ C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\My
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\Google.Protobuf.xml
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\bin\Debug\MySql.Data.xml
 C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.csproj.CopyComplete
+C:\Users\Utente\Desktop\C#FormApp\Windows_form_app\windows_form_app\obj\Debug\windows_form_app.CustomLavorations.resources
