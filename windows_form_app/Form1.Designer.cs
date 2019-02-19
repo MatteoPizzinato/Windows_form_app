@@ -30,6 +30,8 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LavorazionePlasticaRadioButton = new System.Windows.Forms.RadioButton();
+            this.LavorazioneFerroRadioButton = new System.Windows.Forms.RadioButton();
             this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
             this.ResetHours = new System.Windows.Forms.Button();
             this.Result7Fase = new System.Windows.Forms.Label();
@@ -42,7 +44,6 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.LavorazioneFerroRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LavorazionePlasticaRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneFerroRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneLentiRadioButton);
             this.groupBox1.Controls.Add(this.ResetHours);
@@ -76,7 +78,31 @@
             this.groupBox1.Size = new System.Drawing.Size(925, 531);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Welcome";
+            this.groupBox1.Text = "Welcome User";
+            // 
+            // LavorazionePlasticaRadioButton
+            // 
+            this.LavorazionePlasticaRadioButton.AutoSize = true;
+            this.LavorazionePlasticaRadioButton.Location = new System.Drawing.Point(311, 45);
+            this.LavorazionePlasticaRadioButton.Name = "LavorazionePlasticaRadioButton";
+            this.LavorazionePlasticaRadioButton.Size = new System.Drawing.Size(160, 21);
+            this.LavorazionePlasticaRadioButton.TabIndex = 14;
+            this.LavorazionePlasticaRadioButton.TabStop = true;
+            this.LavorazionePlasticaRadioButton.Text = "Lavorazione Plastica";
+            this.LavorazionePlasticaRadioButton.UseVisualStyleBackColor = true;
+            this.LavorazionePlasticaRadioButton.CheckedChanged += new System.EventHandler(this.LavorazionePlasticaRadioButton_CheckedChanged);
+            // 
+            // LavorazioneFerroRadioButton
+            // 
+            this.LavorazioneFerroRadioButton.AutoSize = true;
+            this.LavorazioneFerroRadioButton.Location = new System.Drawing.Point(160, 45);
+            this.LavorazioneFerroRadioButton.Name = "LavorazioneFerroRadioButton";
+            this.LavorazioneFerroRadioButton.Size = new System.Drawing.Size(145, 21);
+            this.LavorazioneFerroRadioButton.TabIndex = 13;
+            this.LavorazioneFerroRadioButton.TabStop = true;
+            this.LavorazioneFerroRadioButton.Text = "Lavorazione Ferro";
+            this.LavorazioneFerroRadioButton.UseVisualStyleBackColor = true;
+            this.LavorazioneFerroRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneFerroRadioButton_CheckedChanged);
             // 
             // LavorazioneLentiRadioButton
             // 
@@ -194,18 +220,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // LavorazioneFerroRadioButton
-            // 
-            this.LavorazioneFerroRadioButton.AutoSize = true;
-            this.LavorazioneFerroRadioButton.Location = new System.Drawing.Point(222, 45);
-            this.LavorazioneFerroRadioButton.Name = "LavorazioneFerroRadioButton";
-            this.LavorazioneFerroRadioButton.Size = new System.Drawing.Size(145, 21);
-            this.LavorazioneFerroRadioButton.TabIndex = 13;
-            this.LavorazioneFerroRadioButton.TabStop = true;
-            this.LavorazioneFerroRadioButton.Text = "Lavorazione Ferro";
-            this.LavorazioneFerroRadioButton.UseVisualStyleBackColor = true;
-            this.LavorazioneFerroRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneFerroRadioButton_CheckedChanged);
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -235,5 +249,6 @@
         private System.Windows.Forms.Button ResetHours;
         private System.Windows.Forms.RadioButton LavorazioneLentiRadioButton;
         private System.Windows.Forms.RadioButton LavorazioneFerroRadioButton;
+        private System.Windows.Forms.RadioButton LavorazionePlasticaRadioButton;
     }
 }

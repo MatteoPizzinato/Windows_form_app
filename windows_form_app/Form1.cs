@@ -13,8 +13,9 @@ namespace windows_form_app
 {
     public partial class Form1 : Form
     {
-        float[] percents_lavorations_LL = {12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
-        float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
+        float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
+        float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni ferro
+        float[] percents_lavorations_LP = { 17, 13, 7, 17, 19, 4, 23 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni plastica
         public void CalculateHours_LL()
         {
             float value = 0;
@@ -67,7 +68,32 @@ namespace windows_form_app
             var result_7 = (value * percents_lavorations_LF[6]) / 100;
             Result7Fase.Text = Result7Fase.Text + result_7;
         }
-
+        public void CalculateHours_LP()
+        {
+            float value = 0;
+            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+            var result_1 = (value * percents_lavorations_LP[0]) / 100; // risultato per le ore relative alla prima lavorazione
+            // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
+            Result1Fase.Text = Result1Fase.Text + result_1;
+            // adesso faccio i calcoli per seconda fase
+            var result_2 = (value * percents_lavorations_LP[1]) / 100;
+            Result2Fase.Text = Result2Fase.Text + result_2;
+            // adesso faccio i calcoli per terza fase
+            var result_3 = (value * percents_lavorations_LP[2]) / 100;
+            Result3Fase.Text = Result3Fase.Text + result_3;
+            // adesso faccio i calcoli per quarta fase
+            var result_4 = (value * percents_lavorations_LP[3]) / 100;
+            Result4Fase.Text = Result4Fase.Text + result_4;
+            // adesso faccio i calcoli per quinta fase
+            var result_5 = (value * percents_lavorations_LP[4]) / 100;
+            Result5Fase.Text = Result5Fase.Text + result_5;
+            // adesso faccio i calcoli per sesta fase
+            var result_6 = (value * percents_lavorations_LP[5]) / 100;
+            Result6Fase.Text = Result6Fase.Text + result_6;
+            // adesso faccio i calcoli per sesta fase
+            var result_7 = (value * percents_lavorations_LP[6]) / 100;
+            Result7Fase.Text = Result7Fase.Text + result_7;
+        }
         public void Clear()
         {
             // voglio creare un metodo clear per eliminare i risultati in coda al label 
@@ -102,6 +128,10 @@ namespace windows_form_app
             else if (LavorazioneFerroRadioButton.Checked == true)
             {
                 CalculateHours_LF();
+            }
+            else if (LavorazionePlasticaRadioButton.Checked == true)
+            {
+                CalculateHours_LP();
             }
             else
             {
@@ -159,6 +189,7 @@ namespace windows_form_app
         private void ResetHours_Click(object sender, EventArgs e)
         {
             Clear();
+            oreMacchina.Text = " "; // cancello automaticamente le ore inserite in precedenza
         }
 
         private void LavorazioneLentiRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -179,6 +210,12 @@ namespace windows_form_app
                 Clear(); /* funzione che mi pulisce i risultati 
                             quando cambio lavorazione con il radio button */
             }
+        }
+
+        private void LavorazionePlasticaRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            Clear(); /* funzione che mi pulisce i risultati 
+                        quando cambio lavorazione con il radio button */
         }
     }
 }
