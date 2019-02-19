@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
             this.ResetHours = new System.Windows.Forms.Button();
             this.Result7Fase = new System.Windows.Forms.Label();
             this.Result6Fase = new System.Windows.Forms.Label();
@@ -41,7 +42,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
+            this.LavorazioneFerroRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LavorazioneFerroRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneLentiRadioButton);
             this.groupBox1.Controls.Add(this.ResetHours);
             this.groupBox1.Controls.Add(this.Result7Fase);
@@ -75,6 +77,18 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome";
+            // 
+            // LavorazioneLentiRadioButton
+            // 
+            this.LavorazioneLentiRadioButton.AutoSize = true;
+            this.LavorazioneLentiRadioButton.Location = new System.Drawing.Point(12, 45);
+            this.LavorazioneLentiRadioButton.Name = "LavorazioneLentiRadioButton";
+            this.LavorazioneLentiRadioButton.Size = new System.Drawing.Size(142, 21);
+            this.LavorazioneLentiRadioButton.TabIndex = 12;
+            this.LavorazioneLentiRadioButton.TabStop = true;
+            this.LavorazioneLentiRadioButton.Text = "Lavorazione Lenti";
+            this.LavorazioneLentiRadioButton.UseVisualStyleBackColor = true;
+            this.LavorazioneLentiRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneLentiRadioButton_CheckedChanged);
             // 
             // ResetHours
             // 
@@ -180,17 +194,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // LavorazioneLentiRadioButton
+            // LavorazioneFerroRadioButton
             // 
-            this.LavorazioneLentiRadioButton.AutoSize = true;
-            this.LavorazioneLentiRadioButton.Location = new System.Drawing.Point(12, 45);
-            this.LavorazioneLentiRadioButton.Name = "LavorazioneLentiRadioButton";
-            this.LavorazioneLentiRadioButton.Size = new System.Drawing.Size(142, 21);
-            this.LavorazioneLentiRadioButton.TabIndex = 12;
-            this.LavorazioneLentiRadioButton.TabStop = true;
-            this.LavorazioneLentiRadioButton.Text = "Lavorazione Lenti";
-            this.LavorazioneLentiRadioButton.UseVisualStyleBackColor = true;
-            this.LavorazioneLentiRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneLentiRadioButton_CheckedChanged);
+            this.LavorazioneFerroRadioButton.AutoSize = true;
+            this.LavorazioneFerroRadioButton.Location = new System.Drawing.Point(222, 45);
+            this.LavorazioneFerroRadioButton.Name = "LavorazioneFerroRadioButton";
+            this.LavorazioneFerroRadioButton.Size = new System.Drawing.Size(145, 21);
+            this.LavorazioneFerroRadioButton.TabIndex = 13;
+            this.LavorazioneFerroRadioButton.TabStop = true;
+            this.LavorazioneFerroRadioButton.Text = "Lavorazione Ferro";
+            this.LavorazioneFerroRadioButton.UseVisualStyleBackColor = true;
+            this.LavorazioneFerroRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneFerroRadioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -220,5 +234,6 @@
         private System.Windows.Forms.Label Result7Fase;
         private System.Windows.Forms.Button ResetHours;
         private System.Windows.Forms.RadioButton LavorazioneLentiRadioButton;
+        private System.Windows.Forms.RadioButton LavorazioneFerroRadioButton;
     }
 }

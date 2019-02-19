@@ -41,6 +41,33 @@ namespace windows_form_app
             var result_7 = (value * percents_lavorations_LL[6]) / 100;
             Result7Fase.Text = Result7Fase.Text + result_7;
         }
+        public void CalculateHours_LF()
+        {
+            float value = 0;
+            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+            var result_1 = (value * percents_lavorations_LF[0]) / 100; // risultato per le ore relative alla prima lavorazione
+            // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
+            Result1Fase.Text = Result1Fase.Text + result_1;
+            // adesso faccio i calcoli per seconda fase
+            var result_2 = (value * percents_lavorations_LF[1]) / 100;
+            Result2Fase.Text = Result2Fase.Text + result_2;
+            // adesso faccio i calcoli per terza fase
+            var result_3 = (value * percents_lavorations_LF[2]) / 100;
+            Result3Fase.Text = Result3Fase.Text + result_3;
+            // adesso faccio i calcoli per quarta fase
+            var result_4 = (value * percents_lavorations_LF[3]) / 100;
+            Result4Fase.Text = Result4Fase.Text + result_4;
+            // adesso faccio i calcoli per quinta fase
+            var result_5 = (value * percents_lavorations_LF[4]) / 100;
+            Result5Fase.Text = Result5Fase.Text + result_5;
+            // adesso faccio i calcoli per sesta fase
+            var result_6 = (value * percents_lavorations_LF[5]) / 100;
+            Result6Fase.Text = Result6Fase.Text + result_6;
+            // adesso faccio i calcoli per sesta fase
+            var result_7 = (value * percents_lavorations_LF[6]) / 100;
+            Result7Fase.Text = Result7Fase.Text + result_7;
+        }
+
         public void Clear()
         {
             // voglio creare un metodo clear per eliminare i risultati in coda al label 
@@ -51,7 +78,6 @@ namespace windows_form_app
             Result5Fase.Text = "Le ore per la quinta fase sono: ";
             Result6Fase.Text = "Le ore per la sesta fase sono: ";
             Result7Fase.Text = "Le ore per la settima fase sono: ";
-
         }
 
         public Form1()
@@ -62,8 +88,7 @@ namespace windows_form_app
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
             oreMacchina.SelectionStart = 0; // dovrebbe prendere in input una stringa
-            oreMacchina.SelectionLength = 0; // calcola la lunghezza dell'imput
-          
+            oreMacchina.SelectionLength = 0; // calcola la lunghezza dell'imput   
         }
 
         private void calcolaOre_Click(object sender, EventArgs e)
@@ -74,6 +99,10 @@ namespace windows_form_app
             {
                 CalculateHours_LL();
             }
+            else if (LavorazioneFerroRadioButton.Checked == true)
+            {
+                CalculateHours_LF();
+            }
             else
             {
                 MessageBox.Show("Prego selezionare la lavorazione");
@@ -82,7 +111,7 @@ namespace windows_form_app
         }
         private void ShowValues_Click(object sender, EventArgs e)
         {
-               
+              // label con la scritta "Riusutati in ore" 
         }
 
         private void Result1Fase_Click(object sender, EventArgs e)
@@ -134,7 +163,22 @@ namespace windows_form_app
 
         private void LavorazioneLentiRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-           // radiobutton che mi servono per selezionare la lavorazione
+            // radiobutton che mi servono per selezionare la lavorazione lenti
+            if (LavorazioneLentiRadioButton.Checked == true) 
+            {
+                Clear(); /* funzione che mi pulisce i risultati 
+                            quando cambio lavorazione con il radio button */
+            }
+        }
+
+        private void LavorazioneFerroRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            // radiobutton che mi serve per selezionare la lavorazione ferro
+            if (LavorazioneFerroRadioButton.Checked == true) 
+            {
+                Clear(); /* funzione che mi pulisce i risultati 
+                            quando cambio lavorazione con il radio button */
+            }
         }
     }
 }
