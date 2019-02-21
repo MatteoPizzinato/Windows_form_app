@@ -8,15 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-/*
- 
-     
-     PROVA A CREARE UN DB NUOVO 
-     
-     
-     
-     
-     */
+
 namespace windows_form_app
 {
     public partial class CustomLavorations : Form
@@ -56,7 +48,7 @@ namespace windows_form_app
             {
                 openConnection();
                 command = new MySqlCommand(query, connection);
-                if (command.ExecuteNonQuery() == 1)
+                if (command.ExecuteNonQuery() == 0)
                 {
                     MessageBox.Show("Query Executed");
                 }else
@@ -75,10 +67,8 @@ namespace windows_form_app
         }
 
         private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
-        {
-            string using_db = "sql use db lavorazioni_meccaniche";
-            string query_saving_custom_lavoration = "select * Tables.from lavorazioni_lenti";
-            executeQuery(using_db);
+        { 
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE Lenovo (id INT)";
             executeQuery(query_saving_custom_lavoration);
 
         }
