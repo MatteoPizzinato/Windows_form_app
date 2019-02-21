@@ -113,8 +113,7 @@ namespace windows_form_app
 
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
-            oreMacchina.SelectionStart = 0; // dovrebbe prendere in input una stringa
-            oreMacchina.SelectionLength = 0; // calcola la lunghezza dell'imput   
+         
         }
 
         private void calcolaOre_Click(object sender, EventArgs e)

@@ -19,8 +19,7 @@ namespace windows_form_app
         }
         private void InsertNameCustomLavoration_TextChanged(object sender, EventArgs e)
         {
-            InsertNameCustomLavoration.SelectionStart = 0; // dovrebbe prendere in input una stringa
-            InsertNameCustomLavoration.SelectionLength = 0; // calcola la lunghezza dell'imput   
+            
         }
 
         /* apro la connessione al DB */

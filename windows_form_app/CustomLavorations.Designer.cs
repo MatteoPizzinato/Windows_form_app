@@ -63,7 +63,7 @@
             this.InsertNameCustomLavoration.Name = "InsertNameCustomLavoration";
             this.InsertNameCustomLavoration.Size = new System.Drawing.Size(216, 22);
             this.InsertNameCustomLavoration.TabIndex = 1;
-            this.InsertNameCustomLavoration.Tag = "Name_custom_lavorations";
+            this.InsertNameCustomLavoration.Tag = "";
             this.InsertNameCustomLavoration.TextChanged += new System.EventHandler(this.InsertNameCustomLavoration_TextChanged);
             // 
             // CustomLavorationName
