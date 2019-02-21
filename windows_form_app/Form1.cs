@@ -194,7 +194,7 @@ namespace windows_form_app
 
         private void LavorazioneLentiRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            // radiobutton che mi servono per selezionare la lavorazione lenti
+            // radiobutton che mi serve per selezionare la lavorazione lenti
             if (LavorazioneLentiRadioButton.Checked == true) 
             {
                 Clear(); /* funzione che mi pulisce i risultati 
@@ -214,8 +214,12 @@ namespace windows_form_app
 
         private void LavorazionePlasticaRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            Clear(); /* funzione che mi pulisce i risultati 
-                        quando cambio lavorazione con il radio button */
+            // radiobutton che mi serve per selezionare la lavorazione ferro
+            if (LavorazionePlasticaRadioButton.Checked == true)
+            {
+                Clear(); /* funzione che mi pulisce i risultati 
+                            quando cambio lavorazione con il radio button */
+            }
         }
 
         private void CreateCustomLavorations_Click(object sender, EventArgs e)

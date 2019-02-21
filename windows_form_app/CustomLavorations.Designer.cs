@@ -64,7 +64,6 @@
             this.InsertNameCustomLavoration.Size = new System.Drawing.Size(216, 22);
             this.InsertNameCustomLavoration.TabIndex = 1;
             this.InsertNameCustomLavoration.Tag = "Name_custom_lavorations";
-            this.InsertNameCustomLavoration.Text = "Inserire nome lavorazione";
             this.InsertNameCustomLavoration.TextChanged += new System.EventHandler(this.InsertNameCustomLavoration_TextChanged);
             // 
             // CustomLavorationName
@@ -72,9 +71,9 @@
             this.CustomLavorationName.AutoSize = true;
             this.CustomLavorationName.Location = new System.Drawing.Point(6, 40);
             this.CustomLavorationName.Name = "CustomLavorationName";
-            this.CustomLavorationName.Size = new System.Drawing.Size(219, 17);
+            this.CustomLavorationName.Size = new System.Drawing.Size(227, 17);
             this.CustomLavorationName.TabIndex = 0;
-            this.CustomLavorationName.Text = "Inserire il nome della lavorazione ";
+            this.CustomLavorationName.Text = "Inserire il nome  della  lavorazione ";
             // 
             // CustomLavorations
             // 
