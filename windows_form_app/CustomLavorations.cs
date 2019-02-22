@@ -66,8 +66,8 @@ namespace windows_form_app
         }
 
         private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
-        { 
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE "+InsertNameCustomLavoration.Text+" (id INT)";
+        {
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + " " ;
             executeQuery(query_saving_custom_lavoration);
 
         }
