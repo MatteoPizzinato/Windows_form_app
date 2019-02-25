@@ -217,7 +217,7 @@ namespace windows_form_app
             if (LavorazionePlasticaRadioButton.Checked == true)
             {
                 Clear(); /* funzione che mi pulisce i risultati 
-                            quando cambio lavorazione con il radio button */
+                            quando cambio lavorazione con il radio button */ 
             }
         }
 
