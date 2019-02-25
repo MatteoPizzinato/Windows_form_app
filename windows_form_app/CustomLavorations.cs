@@ -55,7 +55,7 @@ namespace windows_form_app
                     MessageBox.Show("Query Not Executed");
                 }
             }
-            catch(Exception ex) // prendo l'eccezione
+            catch(Exception ex) // prendo l'eccezione e la mostro
             {
                 MessageBox.Show(ex.Message);
             }
@@ -65,10 +65,14 @@ namespace windows_form_app
             }
         }
 
-        private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
+        private void SavingDataInMySQLDB_Click(object sender, EventArgs e)  
         {
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + " " ;
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(ID int) ";
             executeQuery(query_saving_custom_lavoration);
+        }
+
+        private void CustomLavorations_Load(object sender, EventArgs e)
+        {
 
         }
     }
