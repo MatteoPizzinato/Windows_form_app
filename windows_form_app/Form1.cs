@@ -93,6 +93,7 @@ namespace windows_form_app
             // adesso faccio i calcoli per sesta fase
             var result_7 = (value * percents_lavorations_LP[6]) / 100;
             Result7Fase.Text = Result7Fase.Text + result_7;
+            // adesso faccio i calcoli per settima fase
         }
         public void Clear()
         {
