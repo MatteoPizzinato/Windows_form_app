@@ -67,7 +67,7 @@ namespace windows_form_app
 
         private void SavingDataInMySQLDB_Click(object sender, EventArgs e)  
         {
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percent_1_phase int, percent_2_phase int, percent_3_phase int, percent_4_phase int, percent_5_phase int, percent_6_phase int, percent_7_phase int); INSERT INTO " + InsertNameCustomLavoration.Text + "(percent_1_phase, percent_2_phase, percent_3_phase, percent_4_phase, percent_5_phase, percent_6_phase, percent_7_phase) VALUES (" + Lavorazione1Custom + Lavorazione2Custom + Lavorazione3Custom + Lavorazione4Custom + Lavorazione5Custom + Lavorazione6Custom + Lavorazione7Custom +"        )";
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percent_1_phase INT, percent_2_phase INT, percent_3_phase INT, percent_4_phase INT, percent_5_phase INT, percent_6_phase INT, percent_7_phase INT) VALUES " + CustPercFase1.Text + CustPercFase2.Text + CustPercFase3.Text + CustPercFase4.Text + CustPercFase5.Text + CustPercFase6.Text + CustPercFase7.Text + "";
             executeQuery(query_saving_custom_lavoration);
         }
 
