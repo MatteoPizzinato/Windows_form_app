@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+
 namespace windows_form_app
 {
     public partial class CustomLavorations : Form
@@ -21,7 +22,10 @@ namespace windows_form_app
         {
                
         }
-        MySqlDataReader myReader;
+        private void CustPercFase1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
         /* apro la connessione al DB */
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
@@ -69,9 +73,9 @@ namespace windows_form_app
         private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
         {
             
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE diomerda (percent_1_phase VARCHAR(78)); INSERT INTO diomerda VALUES('" + CustPercFase1.Text + "')";
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE "+CustPercFase1.Text+" (id INT)";
             executeQuery(query_saving_custom_lavoration);  
-                  
+           
         }   
 
         private void CustomLavorations_Load(object sender, EventArgs e)
