@@ -21,8 +21,7 @@ namespace windows_form_app
             float value = 0;
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
             var result_1 = (value * percents_lavorations_LL[0]) / 100; // risultato per le ore relative alla prima lavorazione
-            // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
-            Result1Fase.Text = Result1Fase.Text + result_1;
+            Result1Fase.Text = Result1Fase.Text + result_1; // stampo il risultato nel label
             // adesso faccio i calcoli per seconda fase
             var result_2 = (value * percents_lavorations_LL[1]) / 100;
             Result2Fase.Text = Result2Fase.Text + result_2;
@@ -114,7 +113,7 @@ namespace windows_form_app
 
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
-         
+          // questo private void mi serve per 
         }
 
         private void calcolaOre_Click(object sender, EventArgs e)
