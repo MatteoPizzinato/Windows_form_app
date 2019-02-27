@@ -30,6 +30,9 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
+            this.CreateCustomLavorations = new System.Windows.Forms.Button();
             this.LavorazionePlasticaRadioButton = new System.Windows.Forms.RadioButton();
             this.LavorazioneFerroRadioButton = new System.Windows.Forms.RadioButton();
             this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
@@ -44,7 +47,6 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CreateCustomLavorations = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +61,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.ShowCustomLavorations);
             this.groupBox1.Controls.Add(this.CreateCustomLavorations);
             this.groupBox1.Controls.Add(this.LavorazionePlasticaRadioButton);
             this.groupBox1.Controls.Add(this.LavorazioneFerroRadioButton);
@@ -81,6 +85,34 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(492, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(189, 17);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Mostra lavorazioni disponibili";
+            // 
+            // ShowCustomLavorations
+            // 
+            this.ShowCustomLavorations.FormattingEnabled = true;
+            this.ShowCustomLavorations.Location = new System.Drawing.Point(495, 117);
+            this.ShowCustomLavorations.Name = "ShowCustomLavorations";
+            this.ShowCustomLavorations.Size = new System.Drawing.Size(258, 24);
+            this.ShowCustomLavorations.TabIndex = 16;
+            this.ShowCustomLavorations.SelectedIndexChanged += new System.EventHandler(this.ShowCustomLavorations_SelectedIndexChanged);
+            // 
+            // CreateCustomLavorations
+            // 
+            this.CreateCustomLavorations.Location = new System.Drawing.Point(495, 38);
+            this.CreateCustomLavorations.Name = "CreateCustomLavorations";
+            this.CreateCustomLavorations.Size = new System.Drawing.Size(258, 34);
+            this.CreateCustomLavorations.TabIndex = 15;
+            this.CreateCustomLavorations.Text = "Crea Lavorazione Personalizzata";
+            this.CreateCustomLavorations.UseVisualStyleBackColor = true;
+            this.CreateCustomLavorations.Click += new System.EventHandler(this.CreateCustomLavorations_Click);
             // 
             // LavorazionePlasticaRadioButton
             // 
@@ -222,16 +254,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // CreateCustomLavorations
-            // 
-            this.CreateCustomLavorations.Location = new System.Drawing.Point(495, 45);
-            this.CreateCustomLavorations.Name = "CreateCustomLavorations";
-            this.CreateCustomLavorations.Size = new System.Drawing.Size(258, 23);
-            this.CreateCustomLavorations.TabIndex = 15;
-            this.CreateCustomLavorations.Text = "Crea Lavorazione Personalizzata";
-            this.CreateCustomLavorations.UseVisualStyleBackColor = true;
-            this.CreateCustomLavorations.Click += new System.EventHandler(this.CreateCustomLavorations_Click);
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -263,5 +285,7 @@
         private System.Windows.Forms.RadioButton LavorazioneFerroRadioButton;
         private System.Windows.Forms.RadioButton LavorazionePlasticaRadioButton;
         private System.Windows.Forms.Button CreateCustomLavorations;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox ShowCustomLavorations;
     }
 }

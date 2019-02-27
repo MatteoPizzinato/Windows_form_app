@@ -8,14 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MySql.Data.MySqlClient;
 
 namespace windows_form_app
 {
     public partial class Form1 : Form
-    {
+    {    
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
         float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni ferro
         float[] percents_lavorations_LP = { 17, 13, 7, 17, 19, 4, 23 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni plastica
+
         public void CalculateHours_LL()
         {
             float value = 0;
@@ -228,6 +230,67 @@ namespace windows_form_app
 
             // Show the settings form
             createNewLavorations.Show();
+        }
+
+        // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
+
+        /* apro la connessione al DB */
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
+        MySqlCommand command;
+        /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
+        public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
+        {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
+        public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+        }
+
+        public void executeQuery(String query) // funzione che mi permette di creare una stringa per fare cose del database
+        {
+            try // provo ad aprire la connessione e generare un nuovo comando di query e di connessione 
+            {
+                openConnection();
+                command = new MySqlCommand(query, connection);
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Query Executed");
+                }
+                else
+                {
+                    MessageBox.Show("Query Not Executed");
+                }
+            }
+            catch (Exception ex) // prendo l'eccezione e la mostro
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
+
+        MySqlDataReader myReader;
+        private void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query_show_tables = "USE lavorazioni_meccaniche; SHOW TABLES";
+            executeQuery(query_show_tables);
+
+            while (myReader.Read())
+            {
+                string show_title = myReader.GetString("Tables");
+                ShowCustomLavorations.Items.Add(show_title);
+            }
+
         }
     }
 }
