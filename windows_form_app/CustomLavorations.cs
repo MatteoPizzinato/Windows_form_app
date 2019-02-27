@@ -19,8 +19,9 @@ namespace windows_form_app
         }
         private void InsertNameCustomLavoration_TextChanged(object sender, EventArgs e)
         {
-            
+               
         }
+        MySqlDataReader myReader;
 
         /* apro la connessione al DB */
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
@@ -65,10 +66,12 @@ namespace windows_form_app
             }
         }
 
-        private void SavingDataInMySQLDB_Click(object sender, EventArgs e)  
+        private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
         {
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percent_1_phase INT, percent_2_phase INT, percent_3_phase INT, percent_4_phase INT, percent_5_phase INT, percent_6_phase INT, percent_7_phase INT); INSERT INTO" + InsertNameCustomLavoration + "(percent_1_phase, percent_2_phase, percent_3_phase, percent_4_phase, percent_5_phase, percent_6_phase, percent_7_phase) VALUES ('"+CustPercFase1.Text+"','"+CustPercFase2.Text+"','"+CustPercFase3.Text+"','"+CustPercFase4.Text+"','"+CustPercFase5.Text+"','"+CustPercFase6.Text+"',"+CustPercFase7.Text+")";
-            executeQuery(query_saving_custom_lavoration);
+            
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE diomerda (percent_1_phase VARCHAR(78)); INSERT INTO diomerda VALUES('" + CustPercFase1.Text + "')";
+            executeQuery(query_saving_custom_lavoration);  
+                  
         }   
 
         private void CustomLavorations_Load(object sender, EventArgs e)
