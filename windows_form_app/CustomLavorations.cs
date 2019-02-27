@@ -85,7 +85,7 @@ namespace windows_form_app
             {
                 openConnection();
                 command = new MySqlCommand(query, connection);
-                if (command.ExecuteNonQuery() == 0)
+                if (command.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Query Executed");
                 }else
@@ -106,8 +106,9 @@ namespace windows_form_app
         private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
         {
 
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " +InsertNameCustomLavoration.Text+ "(percent_phase_1 INT, percent_phase_2 INT, percent_phase_3 INT, percent_phase_4 INT, percent_phase_5 INT, percent_phase_6 INT, percent_phase_7 INT); INSERT INTO" + InsertNameCustomLavoration+" VALUES('"+CustPercFase1.Text+"','"+CustPercFase2.Text+"','"+CustPercFase3.Text+"','"+CustPercFase4.Text+"','"+CustPercFase5.Text+"','"+CustPercFase6.Text+"',"+CustPercFase7.Text+")";
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " +InsertNameCustomLavoration.Text+ "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text+" VALUES('"+CustPercFase1.Text+"','"+CustPercFase2.Text+"','"+CustPercFase3.Text+"','"+CustPercFase4.Text+"','"+CustPercFase5.Text+"','"+CustPercFase6.Text+"','"+CustPercFase7.Text+"')";
             executeQuery(query_saving_custom_lavoration);
+            InsertNameCustomLavoration.Text = " ";
         }
 
         private void CustomLavorations_Load(object sender, EventArgs e)
