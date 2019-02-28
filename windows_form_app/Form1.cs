@@ -13,7 +13,12 @@ using MySql.Data.MySqlClient;
 namespace windows_form_app
 {
     public partial class Form1 : Form
-    {    
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
         float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni ferro
         float[] percents_lavorations_LP = { 17, 13, 7, 17, 19, 4, 23 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni plastica
@@ -108,10 +113,7 @@ namespace windows_form_app
             Result7Fase.Text = "Le ore per la settima fase sono: ";
         }
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        
 
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
@@ -237,6 +239,7 @@ namespace windows_form_app
         /* apro la connessione al DB */
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
         MySqlCommand command;
+        MySqlDataReader myReader; // proprietà o meglio funzione che permette di leggere un flusso di dati in sequenza
         /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
         public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
         {
@@ -277,20 +280,25 @@ namespace windows_form_app
                 closeConnection();
             }
         }
-
-
-        MySqlDataReader myReader;
-        private void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
+        void FillCombo()
         {
-            string query_show_tables = "USE lavorazioni_meccaniche; SHOW TABLES";
+            
+            string query_show_tables = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche'";
             executeQuery(query_show_tables);
 
-            while (myReader.Read())
+            while(myReader.Read())
             {
-                string show_title = myReader.GetString("Tables");
-                ShowCustomLavorations.Items.Add(show_title);
+                string table_name = myReader.GetString("TABLE_NAME");
+                ShowCustomLavorations.Items.Add(table_name);
             }
+        }
 
+       
+        public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+            
         }
     }
 }
