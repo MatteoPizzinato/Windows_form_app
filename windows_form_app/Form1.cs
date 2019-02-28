@@ -17,6 +17,8 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
+            
+            FillCombo();
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -26,7 +28,7 @@ namespace windows_form_app
         public void CalculateHours_LL()
         {
             float value = 0;
-            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo  faccio per poter fare i calcoli 
             var result_1 = (value * percents_lavorations_LL[0]) / 100; // risultato per le ore relative alla prima lavorazione
             Result1Fase.Text = Result1Fase.Text + result_1; // stampo il risultato nel label
             // adesso faccio i calcoli per seconda fase
@@ -233,35 +235,38 @@ namespace windows_form_app
             // Show the settings form
             createNewLavorations.Show();
         }
-
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
 
         /* apro la connessione al DB */
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
-        MySqlCommand command;
-        MySqlDataReader myReader; // proprietà o meglio funzione che permette di leggere un flusso di dati in sequenza
-        /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
-        public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
-        {
-            if (connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-        }
-        public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
-        {
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
-        }
+       
 
-        public void executeQuery(String query) // funzione che mi permette di creare una stringa per fare cose del database
+        /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
+           
+        void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro  */
         {
+            
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
+            string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
+           // DataTable ciao = connection.GetSchema("TABLES");
+            MySqlCommand command = new MySqlCommand(ciao, connection);
+            MySqlDataReader myReader; // proprietà o meglio funzione che permette di leggere un flusso di dati in sequenza
+            void openConnection() // con questa funzione apro la connessione se questa è chiusa 
+            {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+            }
+            void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
             try // provo ad aprire la connessione e generare un nuovo comando di query e di connessione 
             {
                 openConnection();
-                command = new MySqlCommand(query, connection);
                 if (command.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Query Executed");
@@ -279,26 +284,31 @@ namespace windows_form_app
             {
                 closeConnection();
             }
-        }
-        void FillCombo()
-        {
-            
-            string query_show_tables = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche'";
-            executeQuery(query_show_tables);
 
-            while(myReader.Read())
+            try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
+            {                
+                myReader = command.ExecuteReader();               
+
+                while (myReader.Read())
+                {
+                    
+                    ShowCustomLavorations.Items.Add(ciao);
+                }
+            }
+            catch(Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
-                string table_name = myReader.GetString("TABLE_NAME");
-                ShowCustomLavorations.Items.Add(table_name);
+                MessageBox.Show(ex.Message);
             }
         }
 
-       
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
+        { 
+            
+        }
+
+        private void DangerButton_Click(object sender, EventArgs e)
         {
-            
-            
-            
+
         }
     }
 }
