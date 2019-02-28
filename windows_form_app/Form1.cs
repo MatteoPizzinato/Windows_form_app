@@ -244,19 +244,22 @@ namespace windows_form_app
         void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro  */
         {
             
-            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
+            string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
             string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
-            
-            MySqlCommand command = new MySqlCommand(query, connection);
-            MySqlDataAdapter myAdapter;
+            MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
+            MySqlCommand command = new MySqlCommand(query, connect_to_DB);
+            MySqlDataReader myReader;
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                connection.Open();
-                myAdapter = new MySqlDataAdapter(command);
-                DataTable tables_list_name = new DataTable();
-                myAdapter.Fill(tables_list_name);
-                ShowCustomLavorations.Items.Add(tables_list_name);
+                connect_to_DB.Open();
+                myReader = command.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string nameTable = myReader.GetString("TABLE_NAME");
+                    ShowCustomLavorations.Items.Add(nameTable);
+                }
             }
             catch(Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
