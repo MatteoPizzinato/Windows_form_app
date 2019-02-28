@@ -17,7 +17,6 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            
             FillCombo();
         }
 
@@ -247,68 +246,28 @@ namespace windows_form_app
             
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
             string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
-           // DataTable ciao = connection.GetSchema("TABLES");
-            MySqlCommand command = new MySqlCommand(ciao, connection);
-            MySqlDataReader myReader; // proprietà o meglio funzione che permette di leggere un flusso di dati in sequenza
-            void openConnection() // con questa funzione apro la connessione se questa è chiusa 
-            {
-                if (connection.State == ConnectionState.Closed)
-                {
-                    connection.Open();
-                }
-            }
-            void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
-            {
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-            try // provo ad aprire la connessione e generare un nuovo comando di query e di connessione 
-            {
-                openConnection();
-                if (command.ExecuteNonQuery() == 1)
-                {
-                    MessageBox.Show("Query Executed");
-                }
-                else
-                {
-                    MessageBox.Show("Query Not Executed");
-                }
-            }
-            catch (Exception ex) // prendo l'eccezione e la mostro
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                closeConnection();
-            }
+            
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataAdapter myAdapter;
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
-            {                
-                myReader = command.ExecuteReader();               
-
-                while (myReader.Read())
-                {
-                    
-                    ShowCustomLavorations.Items.Add(ciao);
-                }
+            {
+                connection.Open();
+                myAdapter = new MySqlDataAdapter(command);
+                DataTable tables_list_name = new DataTable();
+                myAdapter.Fill(tables_list_name);
+                ShowCustomLavorations.Items.Add(tables_list_name);
             }
             catch(Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         { 
             
-        }
-
-        private void DangerButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

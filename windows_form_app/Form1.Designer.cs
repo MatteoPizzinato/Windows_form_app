@@ -47,7 +47,6 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.DangerButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +61,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.DangerButton);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
             this.groupBox1.Controls.Add(this.CreateCustomLavorations);
@@ -256,16 +254,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // DangerButton
-            // 
-            this.DangerButton.Location = new System.Drawing.Point(204, 441);
-            this.DangerButton.Name = "DangerButton";
-            this.DangerButton.Size = new System.Drawing.Size(236, 27);
-            this.DangerButton.TabIndex = 18;
-            this.DangerButton.Text = "DANGER";
-            this.DangerButton.UseVisualStyleBackColor = true;
-            this.DangerButton.Click += new System.EventHandler(this.DangerButton_Click);
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -299,6 +287,5 @@
         private System.Windows.Forms.Button CreateCustomLavorations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
-        private System.Windows.Forms.Button DangerButton;
     }
 }
