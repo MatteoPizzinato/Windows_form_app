@@ -237,11 +237,11 @@ namespace windows_form_app
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
 
         /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
-        
+
         void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro, 
                             che alla fine non sono poi così molto diverse le due connesisoni usate */
         {
-            
+
             string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
             string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
             MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
@@ -256,21 +256,15 @@ namespace windows_form_app
                 while (myReader.Read())
                 {
                     string nameTable = myReader.GetString("TABLE_NAME");
-                    ShowCustomLavorations.Items.Add(nameTable);                    
-                }               
+                    ShowCustomLavorations.Items.Add(nameTable);
+                }
             }
-            catch(Exception ex) // e se c'è un eccezione la prendo e la mostro
+            catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
-            }
-            reconnection();
+            }           
         }
-
-        void reconnection()
-        {
-            string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
-            MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
-        }
+        
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu 
