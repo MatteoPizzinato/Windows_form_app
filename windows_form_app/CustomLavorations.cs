@@ -25,7 +25,7 @@ namespace windows_form_app
 
         private void InsertNameCustomLavoration_TextChanged(object sender, EventArgs e)
         {
-               
+
         }
         private void CustPercFase1_TextChanged(object sender, EventArgs e)
         {
@@ -88,25 +88,25 @@ namespace windows_form_app
                 if (command.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Query Executed");
-                }else
+                } else
                 {
                     MessageBox.Show("Query Not Executed");
                 }
             }
-            catch(Exception ex) // prendo l'eccezione e la mostro
+            catch (Exception ex) // prendo l'eccezione e la mostro
             {
                 MessageBox.Show(ex.Message);
             }
             finally
             {
                 closeConnection();
-            }
+            }           
         }
 
-        private void SavingDataInMySQLDB_Click(object sender, EventArgs e)
+        public void SavingDataInMySQLDB_Click(object sender, EventArgs e)
         {
 
-            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " +InsertNameCustomLavoration.Text+ "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text+" VALUES('"+CustPercFase1.Text+"','"+CustPercFase2.Text+"','"+CustPercFase3.Text+"','"+CustPercFase4.Text+"','"+CustPercFase5.Text+"','"+CustPercFase6.Text+"','"+CustPercFase7.Text+"')";
+            string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text + " VALUES('" + CustPercFase1.Text + "','" + CustPercFase2.Text + "','" + CustPercFase3.Text + "','" + CustPercFase4.Text + "','" + CustPercFase5.Text + "','" + CustPercFase6.Text + "','" + CustPercFase7.Text + "')";
             executeQuery(query_saving_custom_lavoration);
             InsertNameCustomLavoration.Text = " ";
         }
@@ -115,5 +115,6 @@ namespace windows_form_app
         {
 
         }
+        /* cerco di creare un refresh ogni volta che viene premuto il pulsante save nella schermata di inserimento dati nel db */      
     }
 }
