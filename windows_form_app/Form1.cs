@@ -17,8 +17,8 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            FillCombo();            
-            
+            FillCombo();
+           
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -263,13 +263,27 @@ namespace windows_form_app
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
-            }
+            }         
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu 
         }
+
+        Timer myTimer;
+
+        void InitTimer()
+        {
+            myTimer = new Timer();
+            myTimer.Tick += new EventHandler(refreshEveryXSecond);
+            myTimer.Interval = 1000;
+            myTimer.Start();
+        }
+        void refreshEveryXSecond(object sender, EventArgs e)
+        {
+            FillCombo();
+        }    
     }
 }
 
