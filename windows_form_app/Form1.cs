@@ -263,27 +263,25 @@ namespace windows_form_app
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
-            }         
+            }
+            /*  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
+            Timer myTimer;
+            myTimer = new Timer();
+            myTimer.Tick += new EventHandler(refreshEveryXSecond);
+            myTimer.Interval = 1000;
+            myTimer.Start();
+            
+            void refreshEveryXSecond(object sender, EventArgs e)
+            {
+                FillCombo();
+            }
+            */            
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu 
-        }
-
-        Timer myTimer;
-
-        void InitTimer()
-        {
-            myTimer = new Timer();
-            myTimer.Tick += new EventHandler(refreshEveryXSecond);
-            myTimer.Interval = 1000;
-            myTimer.Start();
-        }
-        void refreshEveryXSecond(object sender, EventArgs e)
-        {
-            FillCombo();
-        }    
+        }  
     }
 }
 
