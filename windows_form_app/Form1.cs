@@ -17,10 +17,11 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            FillCombo();
+           // FillCombo();            
+            
         }
 
-        float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10}; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
+        float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
         float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni ferro
         float[] percents_lavorations_LP = { 17, 13, 7, 17, 19, 4, 23 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni plastica
 
@@ -114,11 +115,11 @@ namespace windows_form_app
             Result7Fase.Text = "Le ore per la settima fase sono: ";
         }
 
-        
+
 
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
-          // questo private void mi serve per 
+            // questo private void mi serve per 
         }
 
         private void calcolaOre_Click(object sender, EventArgs e)
@@ -145,7 +146,7 @@ namespace windows_form_app
         }
         private void ShowValues_Click(object sender, EventArgs e)
         {
-              // label con la scritta "Riusutati in ore" 
+            // label con la scritta "Riusutati in ore" 
         }
 
         private void Result1Fase_Click(object sender, EventArgs e)
@@ -162,8 +163,8 @@ namespace windows_form_app
 
         private void Result3Fase_Click(object sender, EventArgs e)
         {
-              /* in questo label printo attraverso la funzione CalculateHours_LL il valore delle ore
-              secondo le percentuali per ogni lavorazione */
+            /* in questo label printo attraverso la funzione CalculateHours_LL il valore delle ore
+            secondo le percentuali per ogni lavorazione */
         }
 
         private void Result4Fase_Click(object sender, EventArgs e)
@@ -199,7 +200,7 @@ namespace windows_form_app
         private void LavorazioneLentiRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             // radiobutton che mi serve per selezionare la lavorazione lenti
-            if (LavorazioneLentiRadioButton.Checked == true) 
+            if (LavorazioneLentiRadioButton.Checked == true)
             {
                 Clear(); /* funzione che mi pulisce i risultati 
                             quando cambio lavorazione con il radio button */
@@ -209,7 +210,7 @@ namespace windows_form_app
         private void LavorazioneFerroRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             // radiobutton che mi serve per selezionare la lavorazione ferro
-            if (LavorazioneFerroRadioButton.Checked == true) 
+            if (LavorazioneFerroRadioButton.Checked == true)
             {
                 Clear(); /* funzione che mi pulisce i risultati 
                             quando cambio lavorazione con il radio button */
@@ -241,13 +242,13 @@ namespace windows_form_app
         void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro, 
                             che alla fine non sono poi così molto diverse le due connesisoni usate */
         {
-
+             
             string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
             string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
             MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
             MySqlCommand command = new MySqlCommand(query, connect_to_DB);
             MySqlDataReader myReader;
-
+            
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
                 connect_to_DB.Open();
@@ -262,9 +263,9 @@ namespace windows_form_app
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
-            }           
+            }
         }
-        
+
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu 
