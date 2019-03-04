@@ -117,7 +117,7 @@
             // LavorazionePlasticaRadioButton
             // 
             this.LavorazionePlasticaRadioButton.AutoSize = true;
-            this.LavorazionePlasticaRadioButton.Location = new System.Drawing.Point(311, 45);
+            this.LavorazionePlasticaRadioButton.Location = new System.Drawing.Point(312, 45);
             this.LavorazionePlasticaRadioButton.Name = "LavorazionePlasticaRadioButton";
             this.LavorazionePlasticaRadioButton.Size = new System.Drawing.Size(160, 21);
             this.LavorazionePlasticaRadioButton.TabIndex = 14;
