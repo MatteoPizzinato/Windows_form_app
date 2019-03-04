@@ -17,7 +17,7 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-           // FillCombo();            
+            FillCombo();            
             
         }
 
