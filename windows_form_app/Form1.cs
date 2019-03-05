@@ -300,6 +300,7 @@ namespace windows_form_app
                 {
                     // non fa nulla
                     refreshConnection();
+                    myTimer.Stop();   // e se usassi un while ?????
                 }
                 else if (string.IsNullOrEmpty(ShowCustomLavorations.Text))
                 {                    
