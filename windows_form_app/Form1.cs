@@ -19,6 +19,7 @@ namespace windows_form_app
             InitializeComponent();
             FillCombo();
             refreshConnection();
+            checkIfEmptyOrNot();
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -282,39 +283,62 @@ namespace windows_form_app
                 closeConnection();              
             }
         }
+        // funzione si riconnette ogni tot secondi per refreshare le combobox delle lavorazioni personalizzate
+        // devo fare una funzione che controlli ogni secondo se la combobox è piena o vuota --> quasi assurdo
 
-        public void refreshConnection()
+        public void checkIfEmptyOrNot()
         {
             Timer myTimer;
             myTimer = new Timer();
-            
-            myTimer.Interval = 5000;
+            myTimer.Interval = 2000; // controllo ogni 2 secondi 
+            myTimer.Tick += new EventHandler(checkMenuBox);
+            myTimer.Start();
+
+            void checkMenuBox(object sender, EventArgs e)
+            { 
+                if (ShowCustomLavorations.SelectedItem == null)
+                {
+                    // non fa nulla
+                    refreshConnection();
+                }
+                else if (string.IsNullOrEmpty(ShowCustomLavorations.Text))
+                {                    
+                    myTimer.Stop();
+                  //  MessageBox.Show(ShowCustomLavorations.SelectedItem.ToString());
+                }
+            }
+
+        }
+
+        public void refreshConnection()
+        {
+            Timer myTimer_2;
+            myTimer_2 = new Timer();
+            myTimer_2.Interval = 5000; // controllo ogni 5 secondi
             
             if (ShowCustomLavorations.SelectedItem == null)
             {
-                myTimer.Tick += new EventHandler(refreshEveryXSecond);
-                myTimer.Start();
+                myTimer_2.Tick += new EventHandler(refreshEveryXSecond);
+                myTimer_2.Start();
+
                 void refreshEveryXSecond(object sender, EventArgs e)
                 {
                     FillCombo();
                 }
-            }
-            else if (ShowCustomLavorations.SelectedItem != null)
+            }            
+            else if (ShowCustomLavorations.SelectedIndex > -1)
             {
-                myTimer.Stop();
+               // myTimer_2.Stop();
+                FillCombo();
             }
             
+
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu                                    
-        }
-        
-        public void refreshingConnection_Click(object sender, EventArgs e)
-        {            
-           // FillCombo();            
-        }
+        }              
     }
 }
 

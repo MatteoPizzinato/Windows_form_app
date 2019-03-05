@@ -30,7 +30,6 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.refreshingConnection = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
             this.CreateCustomLavorations = new System.Windows.Forms.Button();
@@ -65,7 +64,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Controls.Add(this.refreshingConnection);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
             this.groupBox1.Controls.Add(this.CreateCustomLavorations);
@@ -90,16 +88,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
-            // 
-            // refreshingConnection
-            // 
-            this.refreshingConnection.Location = new System.Drawing.Point(495, 182);
-            this.refreshingConnection.Name = "refreshingConnection";
-            this.refreshingConnection.Size = new System.Drawing.Size(258, 34);
-            this.refreshingConnection.TabIndex = 18;
-            this.refreshingConnection.Text = "Refresh connessione";
-            this.refreshingConnection.UseVisualStyleBackColor = true;
-            this.refreshingConnection.Click += new System.EventHandler(this.refreshingConnection_Click);
             // 
             // label1
             // 
@@ -313,7 +301,6 @@
         private System.Windows.Forms.Button CreateCustomLavorations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
-        private System.Windows.Forms.Button refreshingConnection;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
