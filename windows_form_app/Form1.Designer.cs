@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.refreshingConnection = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
             this.CreateCustomLavorations = new System.Windows.Forms.Button();
@@ -47,8 +48,9 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.refreshingConnection = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // calcolaOre
@@ -62,6 +64,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.refreshingConnection);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
@@ -87,6 +90,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // refreshingConnection
+            // 
+            this.refreshingConnection.Location = new System.Drawing.Point(495, 182);
+            this.refreshingConnection.Name = "refreshingConnection";
+            this.refreshingConnection.Size = new System.Drawing.Size(258, 34);
+            this.refreshingConnection.TabIndex = 18;
+            this.refreshingConnection.Text = "Refresh connessione";
+            this.refreshingConnection.UseVisualStyleBackColor = true;
+            this.refreshingConnection.Click += new System.EventHandler(this.refreshingConnection_Click);
             // 
             // label1
             // 
@@ -256,15 +269,15 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // refreshingConnection
+            // pictureBox1
             // 
-            this.refreshingConnection.Location = new System.Drawing.Point(495, 182);
-            this.refreshingConnection.Name = "refreshingConnection";
-            this.refreshingConnection.Size = new System.Drawing.Size(258, 34);
-            this.refreshingConnection.TabIndex = 18;
-            this.refreshingConnection.Text = "Refresh connessione";
-            this.refreshingConnection.UseVisualStyleBackColor = true;
-            this.refreshingConnection.Click += new System.EventHandler(this.refreshingConnection_Click);
+            this.pictureBox1.Image = global::windows_form_app.Properties.Resources.L_S_logo;
+            this.pictureBox1.Location = new System.Drawing.Point(782, 459);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(137, 66);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -273,6 +286,7 @@
             this.Name = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,5 +314,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
         private System.Windows.Forms.Button refreshingConnection;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

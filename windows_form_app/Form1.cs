@@ -282,22 +282,28 @@ namespace windows_form_app
                 closeConnection();              
             }
         }
+
         public void refreshConnection()
         {
-            if (ShowCustomLavorations.Items == null)
-            {
-                MessageBox.Show("Zio santo");
-            }
-
             Timer myTimer;
             myTimer = new Timer();
-            myTimer.Tick += new EventHandler(refreshEveryXSecond);
+            
             myTimer.Interval = 5000;
-            myTimer.Start();
-            void refreshEveryXSecond(object sender, EventArgs e)
+            
+            if (ShowCustomLavorations.SelectedItem == null)
             {
-                FillCombo();
+                myTimer.Tick += new EventHandler(refreshEveryXSecond);
+                myTimer.Start();
+                void refreshEveryXSecond(object sender, EventArgs e)
+                {
+                    FillCombo();
+                }
             }
+            else if (ShowCustomLavorations.SelectedItem != null)
+            {
+                myTimer.Stop();
+            }
+            
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
