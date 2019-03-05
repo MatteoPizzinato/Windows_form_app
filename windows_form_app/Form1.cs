@@ -17,8 +17,7 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            FillCombo();
-           
+            FillCombo();                       
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -236,52 +235,79 @@ namespace windows_form_app
             createNewLavorations.Show();
         }
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
+        //  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
+        public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
+        {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
+        public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
+        {
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+        }
+        public void refreshConnection() {
+
+        Timer myTimer;
+        myTimer = new Timer();
+        myTimer.Tick += new EventHandler(refreshEveryXSecond);
+        myTimer.Interval = 5000;
+        myTimer.Start();
+
+            void refreshEveryXSecond(object sender, EventArgs e)
+            {
+                openConnection();
+                closeConnection();
+            }
+        }
 
         /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
-
         void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro, 
                             che alla fine non sono poi così molto diverse le due connesisoni usate */
         {
-             
-            string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
+            // string connection_string = "datasource=localhost;port=3306;username=root;password=ScatterpH8.41";
             string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
-            MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
-            MySqlCommand command = new MySqlCommand(query, connect_to_DB);
+            // MySqlConnection connect_to_DB = new MySqlConnection(connection_string);
+            MySqlCommand command = new MySqlCommand(query, connection);
             MySqlDataReader myReader;
-            
+
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                connect_to_DB.Open();
+                openConnection();
+                refreshConnection();
                 myReader = command.ExecuteReader();
 
                 while (myReader.Read())
                 {
                     string nameTable = myReader.GetString("TABLE_NAME");
+                    ShowCustomLavorations.Items.Remove(nameTable);
                     ShowCustomLavorations.Items.Add(nameTable);
+
                 }
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
             }
-            /*  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
-            Timer myTimer;
-            myTimer = new Timer();
-            myTimer.Tick += new EventHandler(refreshEveryXSecond);
-            myTimer.Interval = 1000;
-            myTimer.Start();
-            
-            void refreshEveryXSecond(object sender, EventArgs e)
+            finally
             {
-                FillCombo();
+                closeConnection();              
             }
-            */            
         }
-
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // serve per far funzionare il dropdwon menu 
-        }  
+            // serve per far funzionare il dropdwon menu                                    
+        }
+        
+        public void refreshingConnection_Click(object sender, EventArgs e)
+        {            
+           // FillCombo();            
+        }
     }
 }
 

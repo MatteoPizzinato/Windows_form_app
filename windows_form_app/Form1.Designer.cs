@@ -47,6 +47,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.refreshingConnection = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.refreshingConnection);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
             this.groupBox1.Controls.Add(this.CreateCustomLavorations);
@@ -254,6 +256,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
+            // refreshingConnection
+            // 
+            this.refreshingConnection.Location = new System.Drawing.Point(495, 182);
+            this.refreshingConnection.Name = "refreshingConnection";
+            this.refreshingConnection.Size = new System.Drawing.Size(258, 34);
+            this.refreshingConnection.TabIndex = 18;
+            this.refreshingConnection.Text = "Refresh connessione";
+            this.refreshingConnection.UseVisualStyleBackColor = true;
+            this.refreshingConnection.Click += new System.EventHandler(this.refreshingConnection_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -287,5 +299,6 @@
         private System.Windows.Forms.Button CreateCustomLavorations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
+        private System.Windows.Forms.Button refreshingConnection;
     }
 }
