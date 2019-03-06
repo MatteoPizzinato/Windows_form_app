@@ -94,13 +94,14 @@ namespace windows_form_app
                 }
             }
             catch (Exception ex) // prendo l'eccezione e la mostro
-            {
+            {   
                 MessageBox.Show(ex.Message);
             }
             finally
             {
                 closeConnection();
-            }           
+            }  
+            
         }
 
         public void SavingDataInMySQLDB_Click(object sender, EventArgs e)
@@ -108,8 +109,7 @@ namespace windows_form_app
 
             string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text + " VALUES('" + CustPercFase1.Text + "','" + CustPercFase2.Text + "','" + CustPercFase3.Text + "','" + CustPercFase4.Text + "','" + CustPercFase5.Text + "','" + CustPercFase6.Text + "','" + CustPercFase7.Text + "')";
             executeQuery(query_saving_custom_lavoration);
-            InsertNameCustomLavoration.Text = " ";
-
+            InsertNameCustomLavoration.Text = " ";            
         }
 
         private void CustomLavorations_Load(object sender, EventArgs e)

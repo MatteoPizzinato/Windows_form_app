@@ -17,9 +17,8 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            FillCombo();
             refreshConnection();
-            checkIfEmptyOrNot();
+            FillCombo();           
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -288,31 +287,38 @@ namespace windows_form_app
 
         public void checkIfEmptyOrNot()
         {
-            Timer myTimer;
-            myTimer = new Timer();
-            myTimer.Interval = 2000; // controllo ogni 2 secondi 
-            myTimer.Tick += new EventHandler(checkMenuBox);
-            myTimer.Start();
+            /*  Timer myTimer;
+              myTimer = new Timer();
+              myTimer.Interval = 2000; // controllo ogni 2 secondi 
+              myTimer.Tick += new EventHandler(checkMenuBox);
+              myTimer.Start();
 
-            void checkMenuBox(object sender, EventArgs e)
-            { 
-                if (ShowCustomLavorations.SelectedItem == null)
-                {
-                    // non fa nulla
-                    refreshConnection();
-                    myTimer.Stop();   // e se usassi un while ?????
-                }
-                else if (string.IsNullOrEmpty(ShowCustomLavorations.Text))
-                {                    
-                    myTimer.Stop();
-                  //  MessageBox.Show(ShowCustomLavorations.SelectedItem.ToString());
-                }
-            }
+              void checkMenuBox(object sender, EventArgs e)
+              {
 
+                  while (ShowCustomLavorations.SelectedItem == null)
+                  {
+                      checkIfEmptyOrNot();
+                  }
+
+                  /* if (ShowCustomLavorations.SelectedItem == null)
+                   {
+                       // non fa nulla
+
+                     //  myTimer.Stop();   // e se usassi un while ?????
+                   }
+                   else if (string.IsNullOrEmpty(ShowCustomLavorations.Text))
+                   {                    
+                     //  myTimer.Stop();
+                     //  MessageBox.Show(ShowCustomLavorations.SelectedItem.ToString());
+                   }
+              }
+*/
         }
-
+        
         public void refreshConnection()
         {
+            
             Timer myTimer_2;
             myTimer_2 = new Timer();
             myTimer_2.Interval = 5000; // controllo ogni 5 secondi
@@ -328,12 +334,15 @@ namespace windows_form_app
                 }
             }            
             else if (ShowCustomLavorations.SelectedIndex > -1)
+            { 
+                myTimer_2.Stop();
+                FillCombo();
+            }         
+
+            while (ShowCustomLavorations.SelectedItem == null)
             {
-               // myTimer_2.Stop();
                 FillCombo();
             }
-            
-
         }
 
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
