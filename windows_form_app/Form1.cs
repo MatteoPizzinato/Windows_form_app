@@ -281,13 +281,16 @@ namespace windows_form_app
             {
                 closeConnection();              
             }
+
+            string c = ShowCustomLavorations.Items.Count.ToString(); // posso usare il numero dei risultati per refreshare 
+            MessageBox.Show(c);
         }
         // funzione si riconnette ogni tot secondi per refreshare le combobox delle lavorazioni personalizzate
         // devo fare una funzione che controlli ogni secondo se la combobox è piena o vuota --> quasi assurdo
 
         public void checkIfEmptyOrNot()
         {
-            /*  Timer myTimer;
+          /*  Timer myTimer;
               myTimer = new Timer();
               myTimer.Interval = 2000; // controllo ogni 2 secondi 
               myTimer.Tick += new EventHandler(checkMenuBox);
@@ -313,12 +316,12 @@ namespace windows_form_app
                      //  MessageBox.Show(ShowCustomLavorations.SelectedItem.ToString());
                    }
               }
-*/
+          */
         }
         
         public void refreshConnection()
         {
-            
+            /*
             Timer myTimer_2;
             myTimer_2 = new Timer();
             myTimer_2.Interval = 5000; // controllo ogni 5 secondi
@@ -331,23 +334,19 @@ namespace windows_form_app
                 void refreshEveryXSecond(object sender, EventArgs e)
                 {
                     FillCombo();
+                    if (ShowCustomLavorations.SelectedIndex >= -1)
+                    {
+                        myTimer_2.Stop();
+                    }                   
                 }
-            }            
-            else if (ShowCustomLavorations.SelectedIndex > -1)
-            { 
-                myTimer_2.Stop();
-                FillCombo();
-            }         
-
-            while (ShowCustomLavorations.SelectedItem == null)
-            {
-                FillCombo();
-            }
+            }  
+            */                                
         }
-
+        
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // serve per far funzionare il dropdwon menu                                    
+            // serve per far funzionare il dropdwon menu  
+            
         }              
     }
 }
