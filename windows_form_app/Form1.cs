@@ -18,7 +18,8 @@ namespace windows_form_app
         {
             InitializeComponent();
             refreshConnection();
-            FillCombo();           
+            FillCombo();
+            countTables();
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -268,8 +269,7 @@ namespace windows_form_app
 
                 while (myReader.Read())
                 {
-                    string nameTable = myReader.GetString("TABLE_NAME");                   
-                    ShowCustomLavorations.Items.Remove(nameTable);
+                    string nameTable = myReader.GetString("TABLE_NAME");                                       
                     ShowCustomLavorations.Items.Add(nameTable);
                 }
             }
@@ -282,12 +282,60 @@ namespace windows_form_app
                 closeConnection();              
             }
 
-            string c = ShowCustomLavorations.Items.Count.ToString(); // posso usare il numero dei risultati per refreshare 
-            MessageBox.Show(c);
         }
+
+        public void countTables()
+        {
+            Timer myTimer;
+            myTimer = new Timer();
+            myTimer.Interval = 5000; // controllo ogni 2 secondi 
+            myTimer.Tick += new EventHandler(check);
+            myTimer.Start();
+
+            
+            void check(object sender, EventArgs e)
+            {
+                string query_2 = "USE lavorazioni_meccaniche; SELECT count(*) FROM information_schema.TABLES WHERE table_schema = database(); ";
+                MySqlCommand command = new MySqlCommand(query_2, connection);
+                MySqlDataReader myReader_2;
+                MySqlDataReader myReader_3;
+                string OldNumTable = "";
+                string NewNumTable = "";
+
+                try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
+                {
+                   
+                    openConnection();
+                    myReader_2 = command.ExecuteReader();
+                    
+                    while (myReader_2.Read())
+                    {
+                        OldNumTable = myReader_2.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                    }                   
+                    while (myReader_3.Read()) // da sistemare
+                    {
+                        NewNumTable = myReader_3.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                    }                    
+                }
+                catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    closeConnection();
+                }
+                if (OldNumTable != NewNumTable)
+                {
+                    // MessageBox.Show("i due count sono uguali, non c'è bisogno di refreshare la fillcombo");
+                    MessageBox.Show("NewNumTable vale: " + NewNumTable.ToString());
+                    MessageBox.Show("OldNumTable vale: " + OldNumTable.ToString());
+                }
+            }
+        }
+
         // funzione si riconnette ogni tot secondi per refreshare le combobox delle lavorazioni personalizzate
         // devo fare una funzione che controlli ogni secondo se la combobox è piena o vuota --> quasi assurdo
-
         public void checkIfEmptyOrNot()
         {
           /*  Timer myTimer;
@@ -345,8 +393,7 @@ namespace windows_form_app
         
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // serve per far funzionare il dropdwon menu  
-            
+            // serve per far funzionare il dropdwon menu           
         }              
     }
 }
