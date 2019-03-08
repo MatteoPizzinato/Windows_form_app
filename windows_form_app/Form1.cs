@@ -16,10 +16,9 @@ namespace windows_form_app
     {
         public Form1()
         {
-            InitializeComponent();
-            refreshConnection();
+            InitializeComponent();          
             FillCombo();
-            countTables();
+            countTables();           
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -239,11 +238,13 @@ namespace windows_form_app
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
         //  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
+        MySqlConnection connection_2 = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
         public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
         {
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
+                connection_2.Open();
             }
         }
         public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
@@ -251,6 +252,7 @@ namespace windows_form_app
             if (connection.State == ConnectionState.Open)
             {
                 connection.Close();
+                connection_2.Close();
             }
         }      
 
@@ -269,8 +271,9 @@ namespace windows_form_app
 
                 while (myReader.Read())
                 {
-                    string nameTable = myReader.GetString("TABLE_NAME");                                       
-                    ShowCustomLavorations.Items.Add(nameTable);
+                    string nameTable = myReader.GetString("TABLE_NAME");
+                    ShowCustomLavorations.Items.Remove(nameTable);
+                    ShowCustomLavorations.Items.Add(nameTable);                    
                 }
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
@@ -280,8 +283,7 @@ namespace windows_form_app
             finally
             {
                 closeConnection();              
-            }
-
+            }                     
         }
 
         public void countTables()
@@ -297,25 +299,20 @@ namespace windows_form_app
             {
                 string query_2 = "USE lavorazioni_meccaniche; SELECT count(*) FROM information_schema.TABLES WHERE table_schema = database(); ";
                 MySqlCommand command = new MySqlCommand(query_2, connection);
+               
                 MySqlDataReader myReader_2;
-                MySqlDataReader myReader_3;
-                string OldNumTable = "";
-                string NewNumTable = "";
 
+                string OldNumTable = "";
+                string countIndex = ShowCustomLavorations.Items.Count.ToString();
+                
                 try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
-                {
-                   
+                {                   
                     openConnection();
-                    myReader_2 = command.ExecuteReader();
-                    
+                    myReader_2 = command.ExecuteReader();                  
                     while (myReader_2.Read())
                     {
                         OldNumTable = myReader_2.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
-                    }                   
-                    while (myReader_3.Read()) // da sistemare
-                    {
-                        NewNumTable = myReader_3.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
-                    }                    
+                    }                                                           
                 }
                 catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
                 {
@@ -325,72 +322,12 @@ namespace windows_form_app
                 {
                     closeConnection();
                 }
-                if (OldNumTable != NewNumTable)
-                {
-                    // MessageBox.Show("i due count sono uguali, non c'è bisogno di refreshare la fillcombo");
-                    MessageBox.Show("NewNumTable vale: " + NewNumTable.ToString());
-                    MessageBox.Show("OldNumTable vale: " + OldNumTable.ToString());
-                }
-            }
-        }
-
-        // funzione si riconnette ogni tot secondi per refreshare le combobox delle lavorazioni personalizzate
-        // devo fare una funzione che controlli ogni secondo se la combobox è piena o vuota --> quasi assurdo
-        public void checkIfEmptyOrNot()
-        {
-          /*  Timer myTimer;
-              myTimer = new Timer();
-              myTimer.Interval = 2000; // controllo ogni 2 secondi 
-              myTimer.Tick += new EventHandler(checkMenuBox);
-              myTimer.Start();
-
-              void checkMenuBox(object sender, EventArgs e)
-              {
-
-                  while (ShowCustomLavorations.SelectedItem == null)
-                  {
-                      checkIfEmptyOrNot();
-                  }
-
-                  /* if (ShowCustomLavorations.SelectedItem == null)
-                   {
-                       // non fa nulla
-
-                     //  myTimer.Stop();   // e se usassi un while ?????
-                   }
-                   else if (string.IsNullOrEmpty(ShowCustomLavorations.Text))
-                   {                    
-                     //  myTimer.Stop();
-                     //  MessageBox.Show(ShowCustomLavorations.SelectedItem.ToString());
-                   }
-              }
-          */
-        }
-        
-        public void refreshConnection()
-        {
-            /*
-            Timer myTimer_2;
-            myTimer_2 = new Timer();
-            myTimer_2.Interval = 5000; // controllo ogni 5 secondi
-            
-            if (ShowCustomLavorations.SelectedItem == null)
-            {
-                myTimer_2.Tick += new EventHandler(refreshEveryXSecond);
-                myTimer_2.Start();
-
-                void refreshEveryXSecond(object sender, EventArgs e)
+                if (OldNumTable != countIndex)
                 {
                     FillCombo();
-                    if (ShowCustomLavorations.SelectedIndex >= -1)
-                    {
-                        myTimer_2.Stop();
-                    }                   
                 }
-            }  
-            */                                
-        }
-        
+            }           
+        }        
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu           
