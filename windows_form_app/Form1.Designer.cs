@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TEST_PROVVISORIO = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
@@ -48,7 +49,6 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.TEST_PROVVISORIO = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +90,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // TEST_PROVVISORIO
+            // 
+            this.TEST_PROVVISORIO.Location = new System.Drawing.Point(222, 502);
+            this.TEST_PROVVISORIO.Name = "TEST_PROVVISORIO";
+            this.TEST_PROVVISORIO.Size = new System.Drawing.Size(141, 23);
+            this.TEST_PROVVISORIO.TabIndex = 20;
+            this.TEST_PROVVISORIO.Text = "mostra nome tabella";
+            this.TEST_PROVVISORIO.Click += new System.EventHandler(this.TEST_PROVVISORIO_Click);
             // 
             // pictureBox1
             // 
@@ -268,15 +277,6 @@
             this.label2.Size = new System.Drawing.Size(144, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
-            // 
-            // TEST_PROVVISORIO
-            // 
-            this.TEST_PROVVISORIO.Location = new System.Drawing.Point(222, 502);
-            this.TEST_PROVVISORIO.Name = "TEST_PROVVISORIO";
-            this.TEST_PROVVISORIO.Size = new System.Drawing.Size(141, 23);
-            this.TEST_PROVVISORIO.TabIndex = 20;
-            this.TEST_PROVVISORIO.Text = "mostra nome tabella";
-            this.TEST_PROVVISORIO.Click += new System.EventHandler(this.TEST_PROVVISORIO_Click);
             // 
             // Form1
             // 

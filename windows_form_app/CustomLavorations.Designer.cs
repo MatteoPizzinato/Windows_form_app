@@ -89,7 +89,7 @@
             this.CustomLavorationContainer.Size = new System.Drawing.Size(721, 394);
             this.CustomLavorationContainer.TabIndex = 0;
             this.CustomLavorationContainer.TabStop = false;
-            this.CustomLavorationContainer.Text = "Lavorazione personalizzata";
+            this.CustomLavorationContainer.Text = "4";
             // 
             // label8
             // 

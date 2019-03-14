@@ -290,7 +290,7 @@ namespace windows_form_app
         {
             Timer myTimer;
             myTimer = new Timer();
-            myTimer.Interval = 5000; // controllo ogni 2 secondi 
+            myTimer.Interval = 5000; // controllo ogni 5 secondi 
             myTimer.Tick += new EventHandler(check);
             myTimer.Start();
 
@@ -322,9 +322,11 @@ namespace windows_form_app
                 {
                     closeConnection();
                 }
+
                 if (OldNumTable != countIndex)
                 {
                     FillCombo();
+                    myTimer.Stop();
                 }
             }
         }
@@ -333,33 +335,38 @@ namespace windows_form_app
             // serve per far funzionare il dropdwon menu           
         }
 
-
-
-        
-
-
-        
-
         public void elaborate()
         {
-            string table_name = ShowCustomLavorations.SelectedItem.ToString();
-            
-            string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase3 FROM test_1;";
+
+            string table_name = ShowCustomLavorations.SelectedItem.ToString(); // prendo il valore che seleziono nel dropdown menù e lo salvo in una variabile che uso come identificativo poi per prendere i valori relativi a quella tabella
+
+            string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase1, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7 FROM lavorazioni_meccaniche." + table_name + ";"; //, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7
             MySqlCommand command = new MySqlCommand(select_value, connection);
 
             MySqlDataReader myReader_getData;
 
-            float storage_data_1;
+            float storage_value_data_1;
+            float storage_value_data_2;
+            float storage_value_data_3;
+            float storage_value_data_4;
+            float storage_value_data_5;
+            float storage_value_data_6;
+            float storage_value_data_7;
+
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
                 openConnection();
                 myReader_getData = command.ExecuteReader();
                 while (myReader_getData.Read())
                 {
-                   storage_data_1 = myReader_getData.GetInt32("percentPhase3"); // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
-                   MessageBox.Show(storage_data_1.ToString()); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi
+                    storage_value_data_1 = myReader_getData.GetInt32("percentPhase1"); // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                    storage_value_data_2 = myReader_getData.GetInt32("percentPhase2");
+                    storage_value_data_3 = myReader_getData.GetInt32("percentPhase3");
+                    storage_value_data_4 = myReader_getData.GetInt32("percentPhase4");
+                    storage_value_data_5 = myReader_getData.GetInt32("percentPhase5");
+                    storage_value_data_6 = myReader_getData.GetInt32("percentPhase6");
+                    storage_value_data_7 = myReader_getData.GetInt32("percentPhase7"); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi                                                                        
                 }
-
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
@@ -371,69 +378,11 @@ namespace windows_form_app
             }
         }
 
-
         private void TEST_PROVVISORIO_Click(object sender, EventArgs e)
         {
             elaborate();
+            closeConnection();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    } 
+    }
 }
-
