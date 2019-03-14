@@ -16,9 +16,9 @@ namespace windows_form_app
     {
         public Form1()
         {
-            InitializeComponent();          
+            InitializeComponent();
             FillCombo();
-            countTables();           
+            countTables();
         }
 
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
@@ -254,15 +254,15 @@ namespace windows_form_app
                 connection.Close();
                 connection_2.Close();
             }
-        }      
+        }
 
         /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
         void FillCombo() /* Ho creato due modi differenti per effettuare una connessione perchè così vedo i pro ed i contro dell'effettuare le connessioni in un determinato modo piuttosto che un altro, 
                             che alla fine non sono poi così molto diverse le due connesisoni usate */
-        {           
-            string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";           
+        {
+            string query = "USE lavorazioni_meccaniche; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='lavorazioni_meccaniche';";
             MySqlCommand command = new MySqlCommand(query, connection);
-            MySqlDataReader myReader;           
+            MySqlDataReader myReader;
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
@@ -273,7 +273,7 @@ namespace windows_form_app
                 {
                     string nameTable = myReader.GetString("TABLE_NAME");
                     ShowCustomLavorations.Items.Remove(nameTable);
-                    ShowCustomLavorations.Items.Add(nameTable);                    
+                    ShowCustomLavorations.Items.Add(nameTable);
                 }
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
@@ -282,8 +282,8 @@ namespace windows_form_app
             }
             finally
             {
-                closeConnection();              
-            }                     
+                closeConnection();
+            }
         }
 
         public void countTables()
@@ -294,25 +294,25 @@ namespace windows_form_app
             myTimer.Tick += new EventHandler(check);
             myTimer.Start();
 
-            
+
             void check(object sender, EventArgs e)
             {
                 string query_2 = "USE lavorazioni_meccaniche; SELECT count(*) FROM information_schema.TABLES WHERE table_schema = database(); ";
                 MySqlCommand command = new MySqlCommand(query_2, connection);
-               
+
                 MySqlDataReader myReader_2;
 
                 string OldNumTable = "";
                 string countIndex = ShowCustomLavorations.Items.Count.ToString();
-                
+
                 try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
-                {                   
+                {
                     openConnection();
-                    myReader_2 = command.ExecuteReader();                  
+                    myReader_2 = command.ExecuteReader();
                     while (myReader_2.Read())
                     {
                         OldNumTable = myReader_2.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
-                    }                                                           
+                    }
                 }
                 catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
                 {
@@ -326,12 +326,114 @@ namespace windows_form_app
                 {
                     FillCombo();
                 }
-            }           
-        }        
+            }
+        }
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu           
-        }              
-    }
+        }
+
+
+
+        
+
+
+        
+
+        public void elaborate()
+        {
+            string table_name = ShowCustomLavorations.SelectedItem.ToString();
+            
+            string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase3 FROM test_1;";
+            MySqlCommand command = new MySqlCommand(select_value, connection);
+
+            MySqlDataReader myReader_getData;
+
+            float storage_data_1;
+            try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
+            {
+                openConnection();
+                myReader_getData = command.ExecuteReader();
+                while (myReader_getData.Read())
+                {
+                   storage_data_1 = myReader_getData.GetInt32("percentPhase3"); // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                   MessageBox.Show(storage_data_1.ToString()); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi
+                }
+
+            }
+            catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
+
+        private void TEST_PROVVISORIO_Click(object sender, EventArgs e)
+        {
+            elaborate();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    } 
 }
 

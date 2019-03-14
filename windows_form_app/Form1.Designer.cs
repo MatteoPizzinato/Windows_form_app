@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
             this.CreateCustomLavorations = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TEST_PROVVISORIO = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TEST_PROVVISORIO);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
@@ -88,6 +90,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::windows_form_app.Properties.Resources.L_S_logo;
+            this.pictureBox1.Location = new System.Drawing.Point(782, 459);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(137, 66);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 19;
+            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -257,15 +269,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // pictureBox1
+            // TEST_PROVVISORIO
             // 
-            this.pictureBox1.Image = global::windows_form_app.Properties.Resources.L_S_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(782, 459);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(137, 66);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
+            this.TEST_PROVVISORIO.Location = new System.Drawing.Point(222, 502);
+            this.TEST_PROVVISORIO.Name = "TEST_PROVVISORIO";
+            this.TEST_PROVVISORIO.Size = new System.Drawing.Size(141, 23);
+            this.TEST_PROVVISORIO.TabIndex = 20;
+            this.TEST_PROVVISORIO.Text = "mostra nome tabella";
+            this.TEST_PROVVISORIO.Click += new System.EventHandler(this.TEST_PROVVISORIO_Click);
             // 
             // Form1
             // 
@@ -302,5 +313,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button TEST_PROVVISORIO;
     }
 }
