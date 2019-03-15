@@ -30,7 +30,6 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TEST_PROVVISORIO = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
@@ -64,7 +63,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TEST_PROVVISORIO);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
@@ -90,15 +88,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
-            // 
-            // TEST_PROVVISORIO
-            // 
-            this.TEST_PROVVISORIO.Location = new System.Drawing.Point(222, 502);
-            this.TEST_PROVVISORIO.Name = "TEST_PROVVISORIO";
-            this.TEST_PROVVISORIO.Size = new System.Drawing.Size(141, 23);
-            this.TEST_PROVVISORIO.TabIndex = 20;
-            this.TEST_PROVVISORIO.Text = "mostra nome tabella";
-            this.TEST_PROVVISORIO.Click += new System.EventHandler(this.TEST_PROVVISORIO_Click);
             // 
             // pictureBox1
             // 
@@ -313,6 +302,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button TEST_PROVVISORIO;
     }
 }

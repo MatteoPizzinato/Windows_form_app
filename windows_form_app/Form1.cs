@@ -90,7 +90,7 @@ namespace windows_form_app
             float value = 0;
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
             var result_1 = (value * percents_lavorations_LP[0]) / 100; // risultato per le ore relative alla prima lavorazione
-            // MessageBox.Show("Le ore per la prima fase sono: " + result_1);
+            // adesso faccio i calcoli per la prima fase
             Result1Fase.Text = Result1Fase.Text + result_1;
             // adesso faccio i calcoli per seconda fase
             var result_2 = (value * percents_lavorations_LP[1]) / 100;
@@ -133,6 +133,10 @@ namespace windows_form_app
 
         private void calcolaOre_Click(object sender, EventArgs e)
         {
+
+             elaborate();
+             calculateCustomTimeWPL();
+
             /* per stampare un valore preso in input bisogna rischiamare direttamente la text box tramite
             il suo nome così verrà stampato il suo valore */
             if (LavorazioneLentiRadioButton.Checked == true)
@@ -317,7 +321,7 @@ namespace windows_form_app
                     myReader_2 = command.ExecuteReader();
                     while (myReader_2.Read())
                     {
-                        OldNumTable = myReader_2.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                        OldNumTable = myReader_2.GetString("count(*)");  // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
                     }
                 }
                 catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
@@ -365,8 +369,7 @@ namespace windows_form_app
                     storage_value_data_5 = myReader_getData.GetInt32("percentPhase5");
                     storage_value_data_6 = myReader_getData.GetInt32("percentPhase6");
                     storage_value_data_7 = myReader_getData.GetInt32("percentPhase7"); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi                                                                        
-                }
-                MessageBox.Show(storage_value_data_1.ToString());
+                }                
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
@@ -383,48 +386,48 @@ namespace windows_form_app
             float value = 0;
 
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+
+            // adesso faccio i calcoli per prima fase
             float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
-           
+            TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore 
+            string output_hours_1 = timespan_1.ToString("h\\:mm\\:ss"); // così visualizzo le ore, i minuti ed i secondi previsti per ogni fase
+            Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
 
-            TimeSpan timespan = TimeSpan.FromHours(result_1);
-            string output_hours_1 = timespan.ToString("h\\:mm\\:ss");
-            Result1Fase.Text = Result1Fase.Text + output_hours_1;    
-
-            /*
-
-
-            var result_2 = (value * storage_value_data_2) / 100;
-            Result2Fase.Text = Result2Fase.Text + result_2;
-          
+            // adesso faccio i calcoli per seconda fase
+            float result_2 = (value * storage_value_data_2) / 100;            
+            TimeSpan timespan_2 = TimeSpan.FromHours(result_2);
+            string output_hours_2 = timespan_2.ToString("h\\:mm\\:ss");
+            Result2Fase.Text = Result2Fase.Text + output_hours_2;
+            
             // adesso faccio i calcoli per terza fase
-            var result_3 = (value * storage_value_data_3) / 100;
-            Result3Fase.Text = Result3Fase.Text + result_3;
-            
+            float result_3 = (value * storage_value_data_3) / 100;            
+            TimeSpan timespan_3 = TimeSpan.FromHours(result_3); 
+            string output_hours_3 = timespan_3.ToString("h\\:mm\\:ss");
+            Result3Fase.Text = Result3Fase.Text + output_hours_3;
+
             // adesso faccio i calcoli per quarta fase
-            var result_4 = (value * storage_value_data_4) / 100;
-            Result4Fase.Text = Result4Fase.Text + result_4;
-            
+            float result_4 = (value * storage_value_data_4) / 100;
+            TimeSpan timespan_4 = TimeSpan.FromHours(result_4);
+            string output_hours_4 = timespan_4.ToString("h\\:mm\\:ss");
+            Result4Fase.Text = Result4Fase.Text + output_hours_4;
+
             // adesso faccio i calcoli per quinta fase
-            var result_5 = (value * storage_value_data_5) / 100;
-            Result5Fase.Text = Result5Fase.Text + result_5;
-            
+            float result_5 = (value * storage_value_data_5) / 100;
+            TimeSpan timespan_5 = TimeSpan.FromHours(result_5);
+            string output_hours_5 = timespan_5.ToString("h\\:mm\\:ss");
+            Result5Fase.Text = Result5Fase.Text + output_hours_5;
+
             // adesso faccio i calcoli per sesta fase
-            var result_6 = (value * storage_value_data_6) / 100;
-            Result6Fase.Text = Result6Fase.Text + result_6;
-            
+            float result_6 = (value * storage_value_data_6) / 100;
+            TimeSpan timespan_6 = TimeSpan.FromHours(result_6);
+            string output_hours_6 = timespan_6.ToString("h\\:mm\\:ss");
+            Result6Fase.Text = Result6Fase.Text + output_hours_6;
+
             // adesso faccio i calcoli per settima fase
-            var result_7 = (value * storage_value_data_7) / 100;
-            Result7Fase.Text = Result7Fase.Text + result_7;
-            */
+            float result_7 = (value * storage_value_data_7) / 100;
+            TimeSpan timespan_7 = TimeSpan.FromHours(result_7);
+            string output_hours_7 = timespan_7.ToString("h\\:mm\\:ss");
+            Result7Fase.Text = Result7Fase.Text + output_hours_7;
         }
-
-
-        private void TEST_PROVVISORIO_Click(object sender, EventArgs e)
-        {
-            elaborate();
-            closeConnection();
-            calculateCustomTimeWPL();
-        }
-
     }
 }

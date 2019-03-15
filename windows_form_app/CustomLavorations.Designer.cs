@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CustomLavorationContainer = new System.Windows.Forms.GroupBox();
+            this.SumPercentButton = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,42 +54,46 @@
             this.SavingDataInMySQLDB = new System.Windows.Forms.Button();
             this.InsertNameCustomLavoration = new System.Windows.Forms.TextBox();
             this.CustomLavorationName = new System.Windows.Forms.Label();
-            this.CustomLavorationContainer.SuspendLayout();
+            this.DisplaySumPercent = new System.Windows.Forms.Label();
+            this.CheckSumPercent = new System.Windows.Forms.Button();
+            this.SumPercentButton.SuspendLayout();
             this.SuspendLayout();
             // 
-            // CustomLavorationContainer
+            // SumPercentButton
             // 
-            this.CustomLavorationContainer.Controls.Add(this.label8);
-            this.CustomLavorationContainer.Controls.Add(this.label7);
-            this.CustomLavorationContainer.Controls.Add(this.label6);
-            this.CustomLavorationContainer.Controls.Add(this.label5);
-            this.CustomLavorationContainer.Controls.Add(this.label4);
-            this.CustomLavorationContainer.Controls.Add(this.label3);
-            this.CustomLavorationContainer.Controls.Add(this.label2);
-            this.CustomLavorationContainer.Controls.Add(this.label1);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase2);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase3);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase4);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase5);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase6);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase7);
-            this.CustomLavorationContainer.Controls.Add(this.CustPercFase1);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione7Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione6Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione5Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione4Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione3Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione2Custom);
-            this.CustomLavorationContainer.Controls.Add(this.Lavorazione1Custom);
-            this.CustomLavorationContainer.Controls.Add(this.SavingDataInMySQLDB);
-            this.CustomLavorationContainer.Controls.Add(this.InsertNameCustomLavoration);
-            this.CustomLavorationContainer.Controls.Add(this.CustomLavorationName);
-            this.CustomLavorationContainer.Location = new System.Drawing.Point(40, 17);
-            this.CustomLavorationContainer.Name = "CustomLavorationContainer";
-            this.CustomLavorationContainer.Size = new System.Drawing.Size(721, 394);
-            this.CustomLavorationContainer.TabIndex = 0;
-            this.CustomLavorationContainer.TabStop = false;
-            this.CustomLavorationContainer.Text = "4";
+            this.SumPercentButton.Controls.Add(this.CheckSumPercent);
+            this.SumPercentButton.Controls.Add(this.DisplaySumPercent);
+            this.SumPercentButton.Controls.Add(this.label8);
+            this.SumPercentButton.Controls.Add(this.label7);
+            this.SumPercentButton.Controls.Add(this.label6);
+            this.SumPercentButton.Controls.Add(this.label5);
+            this.SumPercentButton.Controls.Add(this.label4);
+            this.SumPercentButton.Controls.Add(this.label3);
+            this.SumPercentButton.Controls.Add(this.label2);
+            this.SumPercentButton.Controls.Add(this.label1);
+            this.SumPercentButton.Controls.Add(this.CustPercFase2);
+            this.SumPercentButton.Controls.Add(this.CustPercFase3);
+            this.SumPercentButton.Controls.Add(this.CustPercFase4);
+            this.SumPercentButton.Controls.Add(this.CustPercFase5);
+            this.SumPercentButton.Controls.Add(this.CustPercFase6);
+            this.SumPercentButton.Controls.Add(this.CustPercFase7);
+            this.SumPercentButton.Controls.Add(this.CustPercFase1);
+            this.SumPercentButton.Controls.Add(this.Lavorazione7Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione6Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione5Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione4Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione3Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione2Custom);
+            this.SumPercentButton.Controls.Add(this.Lavorazione1Custom);
+            this.SumPercentButton.Controls.Add(this.SavingDataInMySQLDB);
+            this.SumPercentButton.Controls.Add(this.InsertNameCustomLavoration);
+            this.SumPercentButton.Controls.Add(this.CustomLavorationName);
+            this.SumPercentButton.Location = new System.Drawing.Point(40, 17);
+            this.SumPercentButton.Name = "SumPercentButton";
+            this.SumPercentButton.Size = new System.Drawing.Size(721, 394);
+            this.SumPercentButton.TabIndex = 0;
+            this.SumPercentButton.TabStop = false;
+            this.SumPercentButton.Text = "Creazione lavorazione per Charter";
             // 
             // label8
             // 
@@ -310,24 +314,44 @@
             this.CustomLavorationName.TabIndex = 0;
             this.CustomLavorationName.Text = "Inserire il nome  della  lavorazione ";
             // 
+            // DisplaySumPercent
+            // 
+            this.DisplaySumPercent.AutoSize = true;
+            this.DisplaySumPercent.Location = new System.Drawing.Point(308, 165);
+            this.DisplaySumPercent.Name = "DisplaySumPercent";
+            this.DisplaySumPercent.Size = new System.Drawing.Size(201, 17);
+            this.DisplaySumPercent.TabIndex = 25;
+            this.DisplaySumPercent.Text = "La somma delle percentuali è: ";
+            this.DisplaySumPercent.Click += new System.EventHandler(this.DisplaySumPercent_Click);
+            // 
+            // CheckSumPercent
+            // 
+            this.CheckSumPercent.Location = new System.Drawing.Point(311, 130);
+            this.CheckSumPercent.Name = "CheckSumPercent";
+            this.CheckSumPercent.Size = new System.Drawing.Size(96, 32);
+            this.CheckSumPercent.TabIndex = 26;
+            this.CheckSumPercent.Text = "Check";
+            this.CheckSumPercent.UseVisualStyleBackColor = true;
+            this.CheckSumPercent.Click += new System.EventHandler(this.CheckSumPercent_Click);
+            // 
             // CustomLavorations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.CustomLavorationContainer);
+            this.Controls.Add(this.SumPercentButton);
             this.Name = "CustomLavorations";
             this.Text = "CustomLavorations";
             this.Load += new System.EventHandler(this.CustomLavorations_Load);
-            this.CustomLavorationContainer.ResumeLayout(false);
-            this.CustomLavorationContainer.PerformLayout();
+            this.SumPercentButton.ResumeLayout(false);
+            this.SumPercentButton.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox CustomLavorationContainer;
+        private System.Windows.Forms.GroupBox SumPercentButton;
         private System.Windows.Forms.TextBox InsertNameCustomLavoration;
         private System.Windows.Forms.Label CustomLavorationName;
         private System.Windows.Forms.Button SavingDataInMySQLDB;
@@ -353,5 +377,7 @@
         private System.Windows.Forms.TextBox CustPercFase6;
         private System.Windows.Forms.TextBox CustPercFase7;
         private System.Windows.Forms.TextBox CustPercFase1;
+        private System.Windows.Forms.Button CheckSumPercent;
+        private System.Windows.Forms.Label DisplaySumPercent;
     }
 }

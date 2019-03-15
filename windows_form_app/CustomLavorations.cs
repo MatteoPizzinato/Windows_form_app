@@ -14,9 +14,12 @@ namespace windows_form_app
 {
     public partial class CustomLavorations : Form
     {
+        
+
         public CustomLavorations()
         {
             InitializeComponent();
+            Application.EnableVisualStyles();
         }
 
         /*
@@ -114,8 +117,35 @@ namespace windows_form_app
 
         private void CustomLavorations_Load(object sender, EventArgs e)
         {
-
+            // serve per far funzionare il custom load
         }
-        /* cerco di creare un refresh ogni volta che viene premuto il pulsante save nella schermata di inserimento dati nel db */      
+        /* cerco di creare un refresh ogni volta che viene premuto il pulsante save nella schermata di inserimento dati nel db */
+        public void SumPercCustLav() // sum of the percent of every phase of a custom lavoration
+        {
+            int x = 100;
+            int result = int.Parse(CustPercFase1.Text) + int.Parse(CustPercFase2.Text) + int.Parse(CustPercFase3.Text) + int.Parse(CustPercFase4.Text) + int.Parse(CustPercFase5.Text) + int.Parse(CustPercFase6.Text) + int.Parse(CustPercFase7.Text);
+            DisplaySumPercent.Text = result.ToString();
+
+            if (x != result)
+            {
+                SavingDataInMySQLDB.Enabled = false; // if the sum of my phases of the lavoration isn't 100 I block the save button       
+                Color TextColor = Color.Red; /* DA FINIRE LA VISUALIZZAZIONE DI UN RISULTATO DIVERSO DA 100 IN ROSSO, TROVA IL MODO DI FARLO DINAMICO SENZA UN BUTTON IN CHECK */           
+                TextColor.ToString(result);
+                
+            }
+            else if(x == result)
+            {
+                SavingDataInMySQLDB.Enabled = true; // else the user have the permission of clicking the saving button
+            }
+        }       
+        private void CheckSumPercent_Click(object sender, EventArgs e)
+        {
+            SumPercCustLav();
+        }
+
+        private void DisplaySumPercent_Click(object sender, EventArgs e)
+        {
+            // show the result of the sum of the all phases in a custom lavoration
+        }
     }
 }
