@@ -20,7 +20,16 @@ namespace windows_form_app
             FillCombo();
             countTables();
         }
+        /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
+        float storage_value_data_1;
+        float storage_value_data_2;
+        float storage_value_data_3;
+        float storage_value_data_4;
+        float storage_value_data_5;
+        float storage_value_data_6;
+        float storage_value_data_7;
 
+        /* array che contiene i valori standard per le 3 lavorazioni di base più utilizzate */
         float[] percents_lavorations_LL = { 12, 9, 25, 36, 3, 5, 10 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni lenti
         float[] percents_lavorations_LF = { 14, 19, 2, 27, 9, 15, 14 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni ferro
         float[] percents_lavorations_LP = { 17, 13, 7, 17, 19, 4, 23 }; // qui tengo in memoria le percentuali relative alle lavorazioni per ogni fase delle levaorazioni plastica
@@ -238,21 +247,18 @@ namespace windows_form_app
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
         //  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
-        MySqlConnection connection_2 = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
         public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
         {
             if (connection.State == ConnectionState.Closed)
             {
-                connection.Open();
-                connection_2.Open();
+                connection.Open();                
             }
         }
         public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
         {
             if (connection.State == ConnectionState.Open)
             {
-                connection.Close();
-                connection_2.Close();
+                connection.Close();                
             }
         }
 
@@ -330,6 +336,7 @@ namespace windows_form_app
                 }
             }
         }
+
         public void ShowCustomLavorations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // serve per far funzionare il dropdwon menu           
@@ -343,15 +350,7 @@ namespace windows_form_app
             string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase1, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7 FROM lavorazioni_meccaniche." + table_name + ";"; //, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7
             MySqlCommand command = new MySqlCommand(select_value, connection);
 
-            MySqlDataReader myReader_getData;
-
-            float storage_value_data_1;
-            float storage_value_data_2;
-            float storage_value_data_3;
-            float storage_value_data_4;
-            float storage_value_data_5;
-            float storage_value_data_6;
-            float storage_value_data_7;
+            MySqlDataReader myReader_getData;                      
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
@@ -367,6 +366,7 @@ namespace windows_form_app
                     storage_value_data_6 = myReader_getData.GetInt32("percentPhase6");
                     storage_value_data_7 = myReader_getData.GetInt32("percentPhase7"); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi                                                                        
                 }
+                MessageBox.Show(storage_value_data_1.ToString());
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
@@ -375,13 +375,55 @@ namespace windows_form_app
             finally
             {
                 closeConnection();
-            }
+            }           
         }
+
+        public void calculateCustomTimeWPL() // calculate time with custom time with personal lavoration
+        {
+            float value = 0;
+
+            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+            float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
+           
+
+            TimeSpan timespan = TimeSpan.FromHours(result_1);
+            string output_hours_1 = timespan.ToString("h\\:mm\\:ss");
+            Result1Fase.Text = Result1Fase.Text + output_hours_1;    
+
+            /*
+
+
+            var result_2 = (value * storage_value_data_2) / 100;
+            Result2Fase.Text = Result2Fase.Text + result_2;
+          
+            // adesso faccio i calcoli per terza fase
+            var result_3 = (value * storage_value_data_3) / 100;
+            Result3Fase.Text = Result3Fase.Text + result_3;
+            
+            // adesso faccio i calcoli per quarta fase
+            var result_4 = (value * storage_value_data_4) / 100;
+            Result4Fase.Text = Result4Fase.Text + result_4;
+            
+            // adesso faccio i calcoli per quinta fase
+            var result_5 = (value * storage_value_data_5) / 100;
+            Result5Fase.Text = Result5Fase.Text + result_5;
+            
+            // adesso faccio i calcoli per sesta fase
+            var result_6 = (value * storage_value_data_6) / 100;
+            Result6Fase.Text = Result6Fase.Text + result_6;
+            
+            // adesso faccio i calcoli per settima fase
+            var result_7 = (value * storage_value_data_7) / 100;
+            Result7Fase.Text = Result7Fase.Text + result_7;
+            */
+        }
+
 
         private void TEST_PROVVISORIO_Click(object sender, EventArgs e)
         {
             elaborate();
             closeConnection();
+            calculateCustomTimeWPL();
         }
 
     }
