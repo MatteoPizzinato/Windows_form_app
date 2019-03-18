@@ -112,6 +112,7 @@
             // 
             // ShowCustomLavorations
             // 
+            this.ShowCustomLavorations.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ShowCustomLavorations.FormattingEnabled = true;
             this.ShowCustomLavorations.Location = new System.Drawing.Point(495, 117);
             this.ShowCustomLavorations.Name = "ShowCustomLavorations";
