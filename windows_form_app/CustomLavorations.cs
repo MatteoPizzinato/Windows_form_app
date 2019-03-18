@@ -19,7 +19,7 @@ namespace windows_form_app
         public CustomLavorations()
         {
             InitializeComponent();
-            Application.EnableVisualStyles();
+            Application.EnableVisualStyles();            
         }
 
         /*
@@ -91,7 +91,8 @@ namespace windows_form_app
                 if (command.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Query Executed");
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Query Not Executed");
                 }
@@ -125,18 +126,21 @@ namespace windows_form_app
             int x = 100;
             int result = int.Parse(CustPercFase1.Text) + int.Parse(CustPercFase2.Text) + int.Parse(CustPercFase3.Text) + int.Parse(CustPercFase4.Text) + int.Parse(CustPercFase5.Text) + int.Parse(CustPercFase6.Text) + int.Parse(CustPercFase7.Text);
             DisplaySumPercent.Text = result.ToString();
-
+            Color TextColor = Color.Black, FailedColor = Color.Red;
+            
             if (x != result)
             {
                 SavingDataInMySQLDB.Enabled = false; // if the sum of my phases of the lavoration isn't 100 I block the save button       
-                Color TextColor = Color.Red; /* DA FINIRE LA VISUALIZZAZIONE DI UN RISULTATO DIVERSO DA 100 IN ROSSO, TROVA IL MODO DI FARLO DINAMICO SENZA UN BUTTON IN CHECK */           
-                TextColor.ToString(result);
-                
+                /* DA FINIRE LA VISUALIZZAZIONE DI UN RISULTATO DIVERSO DA 100 IN ROSSO, TROVA IL MODO DI FARLO DINAMICO SENZA UN BUTTON IN CHECK */
+                DisplaySumPercent.ForeColor = FailedColor;
+                DisplaySumPercent.Text = DisplaySumPercent.Text + result;
             }
-            else if(x == result)
+            else if (x == result)
             {
                 SavingDataInMySQLDB.Enabled = true; // else the user have the permission of clicking the saving button
-            }
+                DisplaySumPercent.ForeColor = TextColor;
+                DisplaySumPercent.Text = DisplaySumPercent.Text + result;
+            }                      
         }       
         private void CheckSumPercent_Click(object sender, EventArgs e)
         {
@@ -146,6 +150,7 @@ namespace windows_form_app
         private void DisplaySumPercent_Click(object sender, EventArgs e)
         {
             // show the result of the sum of the all phases in a custom lavoration
+            SumPercCustLav();
         }
     }
 }
