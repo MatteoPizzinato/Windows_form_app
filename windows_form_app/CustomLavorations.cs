@@ -140,7 +140,7 @@ namespace windows_form_app
                 SavingDataInMySQLDB.Enabled = true; // else the user have the permission of clicking the saving button
 
                 DisplaySumPercent.ForeColor = TextColor;
-                DisplaySumPercent.Text = DisplaySumPercent.Text + result;
+                DisplaySumPercent.Text = "La somma delle percentuali è: " + result.ToString();
             }                      
         }       
         private void CheckSumPercent_Click(object sender, EventArgs e)
