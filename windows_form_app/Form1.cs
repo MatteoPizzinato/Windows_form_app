@@ -347,9 +347,8 @@ namespace windows_form_app
             // serve per far funzionare il dropdwon menu           
         }
 
-        public void elaborate()
+        public void elaborate() // function which I used for take the value of the phases of a custom lavoration and store it in variables
         {
-
             string table_name = ShowCustomLavorations.SelectedItem.ToString(); // prendo il valore che seleziono nel dropdown menù e lo salvo in una variabile che uso come identificativo poi per prendere i valori relativi a quella tabella
 
             string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase1, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7 FROM lavorazioni_meccaniche." + table_name + ";"; //, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7
@@ -456,3 +455,14 @@ namespace windows_form_app
         }
     }
 }
+
+
+
+/*
+*
+*
+* DA FARE: ELIMINARE LE LAVORAZIONI PIù FREQUENTI CON IL RADIOBUTTON E LE FUNZIONI RELATIVE AD ESSE, METTERE TUTTO NEL DATABASE E CERCARE UN MODO PER GENERARE IL 
+* FILE EXCEL CHE SARà LA COSA PIù ARDUA
+* 
+* 
+*/
