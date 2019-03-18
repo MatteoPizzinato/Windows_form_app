@@ -18,7 +18,7 @@ namespace windows_form_app
         {
             InitializeComponent();
             FillCombo();
-            countTables();
+            countTables();            
         }
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
         float storage_value_data_1;
@@ -378,7 +378,7 @@ namespace windows_form_app
             finally
             {
                 closeConnection();
-            }           
+            }   
         }
 
         public void calculateCustomTimeWPL() // calculate time with custom time with personal lavoration
@@ -428,6 +428,34 @@ namespace windows_form_app
             TimeSpan timespan_7 = TimeSpan.FromHours(result_7);
             string output_hours_7 = timespan_7.ToString("h\\:mm\\:ss");
             Result7Fase.Text = Result7Fase.Text + output_hours_7;
+        }
+
+        public void DeleteLavorationFromDB()
+        {                        
+            var delete_lavoration = ShowCustomLavorations.SelectedItem; // I save the name of the lavoration which I used later to delete that lavoration
+            string query_delete = "USE lavorazioni_meccaniche; DROP TABLE lavorazioni_meccaniche." + delete_lavoration + ";" ; // drop the selected table
+            MySqlCommand command_delete = new MySqlCommand(query_delete, connection);                        
+
+            try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
+            {
+                openConnection();
+                command_delete.ExecuteNonQuery();
+            }
+            catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                closeConnection();
+            }
+            countTables();
+            FillCombo();
+        }
+
+    private void DeleteFromMySQLDB_Click(object sender, EventArgs e)
+        {
+            DeleteLavorationFromDB();
         }
     }
 }

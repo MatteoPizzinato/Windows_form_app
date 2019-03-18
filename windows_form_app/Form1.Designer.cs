@@ -48,6 +48,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.DeleteFromMySQLDB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.DeleteFromMySQLDB);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
@@ -267,6 +269,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
+            // DeleteFromMySQLDB
+            // 
+            this.DeleteFromMySQLDB.Location = new System.Drawing.Point(759, 117);
+            this.DeleteFromMySQLDB.Name = "DeleteFromMySQLDB";
+            this.DeleteFromMySQLDB.Size = new System.Drawing.Size(160, 24);
+            this.DeleteFromMySQLDB.TabIndex = 20;
+            this.DeleteFromMySQLDB.Text = "Elimina Lavorazione";
+            this.DeleteFromMySQLDB.UseVisualStyleBackColor = true;
+            this.DeleteFromMySQLDB.Click += new System.EventHandler(this.DeleteFromMySQLDB_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 783);
@@ -302,5 +314,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button DeleteFromMySQLDB;
     }
 }

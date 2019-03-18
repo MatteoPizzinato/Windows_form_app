@@ -113,7 +113,7 @@ namespace windows_form_app
 
             string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text + " VALUES('" + CustPercFase1.Text + "','" + CustPercFase2.Text + "','" + CustPercFase3.Text + "','" + CustPercFase4.Text + "','" + CustPercFase5.Text + "','" + CustPercFase6.Text + "','" + CustPercFase7.Text + "')";
             executeQuery(query_saving_custom_lavoration);
-            InsertNameCustomLavoration.Text = " ";           
+            InsertNameCustomLavoration.Text = " ";     // with this method I put the query and the command for execute this in the "function" which control the button 
         }
 
         private void CustomLavorations_Load(object sender, EventArgs e)
