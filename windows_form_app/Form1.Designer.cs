@@ -30,6 +30,7 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SelectLavorationAlert = new System.Windows.Forms.Label();
             this.DeleteFromMySQLDB = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SelectLavorationAlert);
             this.groupBox1.Controls.Add(this.DeleteFromMySQLDB);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.label1);
@@ -84,6 +86,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // SelectLavorationAlert
+            // 
+            this.SelectLavorationAlert.AutoSize = true;
+            this.SelectLavorationAlert.Location = new System.Drawing.Point(492, 163);
+            this.SelectLavorationAlert.Name = "SelectLavorationAlert";
+            this.SelectLavorationAlert.Size = new System.Drawing.Size(147, 17);
+            this.SelectLavorationAlert.TabIndex = 21;
+            this.SelectLavorationAlert.Text = "Inserire la lavorazione";
+            this.SelectLavorationAlert.Click += new System.EventHandler(this.SelectLavorationAlert_Click);
             // 
             // DeleteFromMySQLDB
             // 
@@ -271,5 +283,6 @@
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button DeleteFromMySQLDB;
+        private System.Windows.Forms.Label SelectLavorationAlert;
     }
 }

@@ -17,9 +17,10 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            //FillCombo();
-            countTables();            
+            countTables();
+            blockInsertHours();
         }
+
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
         float storage_value_data_1;
         float storage_value_data_2;
@@ -30,7 +31,7 @@ namespace windows_form_app
         float storage_value_data_7;
 
         /* array che contiene i valori standard per le 3 lavorazioni di base più utilizzate */
-       
+
         public void Clear()
         {
             // voglio creare un metodo clear per eliminare i risultati in coda al label 
@@ -45,18 +46,17 @@ namespace windows_form_app
 
         private void oreMacchina_TextChanged(object sender, EventArgs e)
         {
-            // questo private void mi serve per ??
+            // questo private void mi serve per inserire le ore macchina            
         }
 
         private void calcolaOre_Click(object sender, EventArgs e)
         {
-
-             elaborate();
-             calculateCustomTimeWPL();
+            elaborate();
+            calculateCustomTimeWPL();
 
             /* per stampare un valore preso in input bisogna rischiamare direttamente la text box tramite
             il suo nome così verrà stampato il suo valore */
-            if(ShowCustomLavorations.SelectedItem.ToString() == null)
+            if (ShowCustomLavorations.SelectedItem.ToString() == null)
             {
                 MessageBox.Show("Prego selezionare la lavorazione");
             }
@@ -131,14 +131,14 @@ namespace windows_form_app
         {
             if (connection.State == ConnectionState.Closed)
             {
-                connection.Open();                
+                connection.Open();
             }
         }
         public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
         {
             if (connection.State == ConnectionState.Open)
             {
-                connection.Close();                
+                connection.Close();
             }
         }
 
@@ -211,7 +211,7 @@ namespace windows_form_app
 
                 if (OldNumTable != countIndex)
                 {
-                    FillCombo();                  
+                    FillCombo();
                 }
             }
         }
@@ -221,52 +221,41 @@ namespace windows_form_app
             // serve per far funzionare il dropdwon menu           
         }
 
+
         public void elaborate() // function which I used for take the value of the phases of a custom lavoration and store it in variables
         {
-             // prendo il valore che seleziono nel dropdown menù e lo salvo in una variabile che uso come identificativo poi per prendere i valori relativi a quella tabella
 
-            if (ShowCustomLavorations.SelectedItem == null) 
+            string table_name = ShowCustomLavorations.SelectedItem.ToString();  // prendo il valore che seleziono nel dropdown menù e lo salvo in una variabile che uso come identificativo poi per prendere i valori relativi a quella tabella
+
+            string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase1, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7 FROM lavorazioni_meccaniche." + table_name + ";"; //, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7
+            MySqlCommand command = new MySqlCommand(select_value, connection);
+
+            MySqlDataReader myReader_getData;
+
+            try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                throw new System.NullReferenceException();   // devo trovare il modo di gestire questa eccezione 
-            }            
-            try
-            {
-                string table_name = ShowCustomLavorations.SelectedItem.ToString();
-                string select_value = "USE lavorazioni_meccaniche; SELECT percentPhase1, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7 FROM lavorazioni_meccaniche." + table_name + ";"; //, percentPhase2, percentPhase3, percentPhase4, percentPhase5, percentPhase6, percentPhase7
-                MySqlCommand command = new MySqlCommand(select_value, connection);
-
-                MySqlDataReader myReader_getData;
-
-                try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
+                openConnection();
+                myReader_getData = command.ExecuteReader();
+                while (myReader_getData.Read())
                 {
-                    openConnection();
-                    myReader_getData = command.ExecuteReader();
-                    while (myReader_getData.Read())
-                    {
-                        storage_value_data_1 = myReader_getData.GetInt32("percentPhase1"); // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
-                        storage_value_data_2 = myReader_getData.GetInt32("percentPhase2");
-                        storage_value_data_3 = myReader_getData.GetInt32("percentPhase3");
-                        storage_value_data_4 = myReader_getData.GetInt32("percentPhase4");
-                        storage_value_data_5 = myReader_getData.GetInt32("percentPhase5");
-                        storage_value_data_6 = myReader_getData.GetInt32("percentPhase6");
-                        storage_value_data_7 = myReader_getData.GetInt32("percentPhase7"); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi                                                                        
-                    }
-                }
-                catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    closeConnection();
+                    storage_value_data_1 = myReader_getData.GetInt32("percentPhase1"); // scorta di punti esclamativi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                            
+                    storage_value_data_2 = myReader_getData.GetInt32("percentPhase2");
+                    storage_value_data_3 = myReader_getData.GetInt32("percentPhase3");
+                    storage_value_data_4 = myReader_getData.GetInt32("percentPhase4");
+                    storage_value_data_5 = myReader_getData.GetInt32("percentPhase5");
+                    storage_value_data_6 = myReader_getData.GetInt32("percentPhase6");
+                    storage_value_data_7 = myReader_getData.GetInt32("percentPhase7"); // riesco a prendere il valore contenuto nella colonna relativa alla lavorazione, e metterla in una variabile da adoperare poi                                                                        
                 }
             }
-            catch (NullReferenceException exception)
+            catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
-                MessageBox.Show(exception.Message);
-                MessageBox.Show("Inserire una lavorazione");
+                MessageBox.Show(ex.Message);
+                throw new System.NullReferenceException();
             }
-           
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public void calculateCustomTimeWPL() // calculate time with custom time with personal lavoration
@@ -282,14 +271,14 @@ namespace windows_form_app
             Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
 
             // adesso faccio i calcoli per seconda fase
-            float result_2 = (value * storage_value_data_2) / 100;            
+            float result_2 = (value * storage_value_data_2) / 100;
             TimeSpan timespan_2 = TimeSpan.FromHours(result_2);
             string output_hours_2 = timespan_2.ToString("hh\\:mm\\:ss");
             Result2Fase.Text = Result2Fase.Text + output_hours_2;
-            
+
             // adesso faccio i calcoli per terza fase
-            float result_3 = (value * storage_value_data_3) / 100;            
-            TimeSpan timespan_3 = TimeSpan.FromHours(result_3); 
+            float result_3 = (value * storage_value_data_3) / 100;
+            TimeSpan timespan_3 = TimeSpan.FromHours(result_3);
             string output_hours_3 = timespan_3.ToString("hh\\:mm\\:ss");
             Result3Fase.Text = Result3Fase.Text + output_hours_3;
 
@@ -319,27 +308,82 @@ namespace windows_form_app
         }
 
         public void DeleteLavorationFromDB()
-        {                        
+        {
             var delete_lavoration = ShowCustomLavorations.SelectedItem; // I save the name of the lavoration which I used later to delete that lavoration
-            string query_delete = "USE lavorazioni_meccaniche; DROP TABLE lavorazioni_meccaniche." + delete_lavoration + ";" ; // drop the selected table
-            MySqlCommand command_delete = new MySqlCommand(query_delete, connection);                        
+            string query_delete = "USE lavorazioni_meccaniche; DROP TABLE lavorazioni_meccaniche." + delete_lavoration + ";"; // drop the selected table
+            MySqlCommand command_delete = new MySqlCommand(query_delete, connection);
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
                 openConnection();
                 command_delete.ExecuteNonQuery();
                 ShowCustomLavorations.Items.Remove(delete_lavoration);
-
             }
             catch (Exception ex) // e se c'è un eccezione la prendo e la mostro
             {
                 MessageBox.Show(ex.Message);
-            }            
+            }
         }
 
-    private void DeleteFromMySQLDB_Click(object sender, EventArgs e)
+        private void DeleteFromMySQLDB_Click(object sender, EventArgs e)
         {
-            DeleteLavorationFromDB();            
+            DeleteLavorationFromDB();
+        }
+
+        public void blockInsertHours() // function which control every second if the user have selected a lavoration and block or allow the insertion of the hours
+        { // non ha assolutamente senso mettere un timer al posto di un while ma non so perchè col while non funziona mentre con il timer si
+
+            Timer myTimer;
+            myTimer = new Timer();
+            myTimer.Interval = 100; // controllo ogni 5 secondi 
+            myTimer.Tick += new EventHandler(blockOrAllow);
+            myTimer.Start();
+
+            void blockOrAllow(object sender, EventArgs e)
+            {
+                if (ShowCustomLavorations.SelectedIndex.ToString() == "-1")
+                {
+                    oreMacchina.Enabled = false;
+                    calcolaOre.Enabled = false;
+                }
+                else
+                {
+                    oreMacchina.Enabled = true;
+                    calcolaOre.Enabled = true;
+                }
+                showHiddenAlertLabel();
+
+            /*
+             * 
+            while(ShowCustomLavorations.SelectedIndex.ToString() == "-1")
+            {
+                oreMacchina.Enabled = false;
+                if (ShowCustomLavorations.SelectedIndex.ToString() != "-1")
+                {
+                    oreMacchina.Enabled = true;
+                }
+            }
+            
+            */
+
+            }
+        }
+        public void showHiddenAlertLabel()
+        {
+            Color FailedColor = Color.Red;
+            SelectLavorationAlert.ForeColor = FailedColor;
+            if (oreMacchina.Enabled == false && calcolaOre.Enabled == false)
+            {
+                SelectLavorationAlert.Visible = true;
+            }else
+            {
+                SelectLavorationAlert.Visible = false;
+            }
+
+        }
+        private void SelectLavorationAlert_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
@@ -348,8 +392,7 @@ namespace windows_form_app
 /*
 *
 *
-* DA FARE: ELIMINARE LE LAVORAZIONI PIù FREQUENTI CON IL RADIOBUTTON E LE FUNZIONI RELATIVE AD ESSE, METTERE TUTTO NEL DATABASE E CERCARE UN MODO PER GENERARE IL 
-* FILE EXCEL CHE SARà LA COSA PIù ARDUA
+* DA FARE: METTERE TUTTO NEL DATABASE E CERCARE UN MODO PER GENERARE IL FILE EXCEL CHE SARà LA COSA PIù ARDUA
 * 
 * 
 */
