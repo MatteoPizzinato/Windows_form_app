@@ -30,13 +30,11 @@
         {
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DeleteFromMySQLDB = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowCustomLavorations = new System.Windows.Forms.ComboBox();
             this.CreateCustomLavorations = new System.Windows.Forms.Button();
-            this.LavorazionePlasticaRadioButton = new System.Windows.Forms.RadioButton();
-            this.LavorazioneFerroRadioButton = new System.Windows.Forms.RadioButton();
-            this.LavorazioneLentiRadioButton = new System.Windows.Forms.RadioButton();
             this.ResetHours = new System.Windows.Forms.Button();
             this.Result7Fase = new System.Windows.Forms.Label();
             this.Result6Fase = new System.Windows.Forms.Label();
@@ -48,14 +46,13 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.DeleteFromMySQLDB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // calcolaOre
             // 
-            this.calcolaOre.Location = new System.Drawing.Point(12, 238);
+            this.calcolaOre.Location = new System.Drawing.Point(29, 133);
             this.calcolaOre.Name = "calcolaOre";
             this.calcolaOre.Size = new System.Drawing.Size(141, 23);
             this.calcolaOre.TabIndex = 2;
@@ -69,9 +66,6 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ShowCustomLavorations);
             this.groupBox1.Controls.Add(this.CreateCustomLavorations);
-            this.groupBox1.Controls.Add(this.LavorazionePlasticaRadioButton);
-            this.groupBox1.Controls.Add(this.LavorazioneFerroRadioButton);
-            this.groupBox1.Controls.Add(this.LavorazioneLentiRadioButton);
             this.groupBox1.Controls.Add(this.ResetHours);
             this.groupBox1.Controls.Add(this.Result7Fase);
             this.groupBox1.Controls.Add(this.Result6Fase);
@@ -90,6 +84,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // DeleteFromMySQLDB
+            // 
+            this.DeleteFromMySQLDB.Location = new System.Drawing.Point(759, 117);
+            this.DeleteFromMySQLDB.Name = "DeleteFromMySQLDB";
+            this.DeleteFromMySQLDB.Size = new System.Drawing.Size(160, 24);
+            this.DeleteFromMySQLDB.TabIndex = 20;
+            this.DeleteFromMySQLDB.Text = "Elimina Lavorazione";
+            this.DeleteFromMySQLDB.UseVisualStyleBackColor = true;
+            this.DeleteFromMySQLDB.Click += new System.EventHandler(this.DeleteFromMySQLDB_Click);
             // 
             // pictureBox1
             // 
@@ -130,45 +134,9 @@
             this.CreateCustomLavorations.UseVisualStyleBackColor = true;
             this.CreateCustomLavorations.Click += new System.EventHandler(this.CreateCustomLavorations_Click);
             // 
-            // LavorazionePlasticaRadioButton
-            // 
-            this.LavorazionePlasticaRadioButton.AutoSize = true;
-            this.LavorazionePlasticaRadioButton.Location = new System.Drawing.Point(312, 45);
-            this.LavorazionePlasticaRadioButton.Name = "LavorazionePlasticaRadioButton";
-            this.LavorazionePlasticaRadioButton.Size = new System.Drawing.Size(160, 21);
-            this.LavorazionePlasticaRadioButton.TabIndex = 14;
-            this.LavorazionePlasticaRadioButton.TabStop = true;
-            this.LavorazionePlasticaRadioButton.Text = "Lavorazione Plastica";
-            this.LavorazionePlasticaRadioButton.UseVisualStyleBackColor = true;
-            this.LavorazionePlasticaRadioButton.CheckedChanged += new System.EventHandler(this.LavorazionePlasticaRadioButton_CheckedChanged);
-            // 
-            // LavorazioneFerroRadioButton
-            // 
-            this.LavorazioneFerroRadioButton.AutoSize = true;
-            this.LavorazioneFerroRadioButton.Location = new System.Drawing.Point(160, 45);
-            this.LavorazioneFerroRadioButton.Name = "LavorazioneFerroRadioButton";
-            this.LavorazioneFerroRadioButton.Size = new System.Drawing.Size(145, 21);
-            this.LavorazioneFerroRadioButton.TabIndex = 13;
-            this.LavorazioneFerroRadioButton.TabStop = true;
-            this.LavorazioneFerroRadioButton.Text = "Lavorazione Ferro";
-            this.LavorazioneFerroRadioButton.UseVisualStyleBackColor = true;
-            this.LavorazioneFerroRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneFerroRadioButton_CheckedChanged);
-            // 
-            // LavorazioneLentiRadioButton
-            // 
-            this.LavorazioneLentiRadioButton.AutoSize = true;
-            this.LavorazioneLentiRadioButton.Location = new System.Drawing.Point(12, 45);
-            this.LavorazioneLentiRadioButton.Name = "LavorazioneLentiRadioButton";
-            this.LavorazioneLentiRadioButton.Size = new System.Drawing.Size(142, 21);
-            this.LavorazioneLentiRadioButton.TabIndex = 12;
-            this.LavorazioneLentiRadioButton.TabStop = true;
-            this.LavorazioneLentiRadioButton.Text = "Lavorazione Lenti";
-            this.LavorazioneLentiRadioButton.UseVisualStyleBackColor = true;
-            this.LavorazioneLentiRadioButton.CheckedChanged += new System.EventHandler(this.LavorazioneLentiRadioButton_CheckedChanged);
-            // 
             // ResetHours
             // 
-            this.ResetHours.Location = new System.Drawing.Point(12, 283);
+            this.ResetHours.Location = new System.Drawing.Point(29, 178);
             this.ResetHours.Name = "ResetHours";
             this.ResetHours.Size = new System.Drawing.Size(141, 23);
             this.ResetHours.TabIndex = 11;
@@ -178,7 +146,7 @@
             // Result7Fase
             // 
             this.Result7Fase.AutoSize = true;
-            this.Result7Fase.Location = new System.Drawing.Point(219, 337);
+            this.Result7Fase.Location = new System.Drawing.Point(225, 232);
             this.Result7Fase.Name = "Result7Fase";
             this.Result7Fase.Size = new System.Drawing.Size(212, 17);
             this.Result7Fase.TabIndex = 10;
@@ -187,7 +155,7 @@
             // Result6Fase
             // 
             this.Result6Fase.AutoSize = true;
-            this.Result6Fase.Location = new System.Drawing.Point(219, 310);
+            this.Result6Fase.Location = new System.Drawing.Point(225, 205);
             this.Result6Fase.Name = "Result6Fase";
             this.Result6Fase.Size = new System.Drawing.Size(201, 17);
             this.Result6Fase.TabIndex = 9;
@@ -197,7 +165,7 @@
             // Result4Fase
             // 
             this.Result4Fase.AutoSize = true;
-            this.Result4Fase.Location = new System.Drawing.Point(219, 254);
+            this.Result4Fase.Location = new System.Drawing.Point(225, 149);
             this.Result4Fase.Name = "Result4Fase";
             this.Result4Fase.Size = new System.Drawing.Size(208, 17);
             this.Result4Fase.TabIndex = 7;
@@ -207,7 +175,7 @@
             // Result5Fase
             // 
             this.Result5Fase.AutoSize = true;
-            this.Result5Fase.Location = new System.Drawing.Point(219, 283);
+            this.Result5Fase.Location = new System.Drawing.Point(225, 178);
             this.Result5Fase.Name = "Result5Fase";
             this.Result5Fase.Size = new System.Drawing.Size(206, 17);
             this.Result5Fase.TabIndex = 8;
@@ -217,7 +185,7 @@
             // Result3Fase
             // 
             this.Result3Fase.AutoSize = true;
-            this.Result3Fase.Location = new System.Drawing.Point(219, 225);
+            this.Result3Fase.Location = new System.Drawing.Point(225, 120);
             this.Result3Fase.Name = "Result3Fase";
             this.Result3Fase.Size = new System.Drawing.Size(199, 17);
             this.Result3Fase.TabIndex = 6;
@@ -227,7 +195,7 @@
             // Result2Fase
             // 
             this.Result2Fase.AutoSize = true;
-            this.Result2Fase.Location = new System.Drawing.Point(219, 199);
+            this.Result2Fase.Location = new System.Drawing.Point(225, 94);
             this.Result2Fase.Name = "Result2Fase";
             this.Result2Fase.Size = new System.Drawing.Size(221, 17);
             this.Result2Fase.TabIndex = 5;
@@ -237,7 +205,7 @@
             // Result1Fase
             // 
             this.Result1Fase.AutoSize = true;
-            this.Result1Fase.Location = new System.Drawing.Point(219, 172);
+            this.Result1Fase.Location = new System.Drawing.Point(225, 67);
             this.Result1Fase.Name = "Result1Fase";
             this.Result1Fase.Size = new System.Drawing.Size(202, 17);
             this.Result1Fase.TabIndex = 4;
@@ -247,7 +215,7 @@
             // ShowValues
             // 
             this.ShowValues.AutoSize = true;
-            this.ShowValues.Location = new System.Drawing.Point(219, 143);
+            this.ShowValues.Location = new System.Drawing.Point(225, 38);
             this.ShowValues.Name = "ShowValues";
             this.ShowValues.Size = new System.Drawing.Size(98, 17);
             this.ShowValues.TabIndex = 3;
@@ -256,7 +224,7 @@
             // 
             // oreMacchina
             // 
-            this.oreMacchina.Location = new System.Drawing.Point(12, 172);
+            this.oreMacchina.Location = new System.Drawing.Point(29, 67);
             this.oreMacchina.Name = "oreMacchina";
             this.oreMacchina.Size = new System.Drawing.Size(141, 22);
             this.oreMacchina.TabIndex = 0;
@@ -264,21 +232,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 143);
+            this.label2.Location = new System.Drawing.Point(26, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
-            // 
-            // DeleteFromMySQLDB
-            // 
-            this.DeleteFromMySQLDB.Location = new System.Drawing.Point(759, 117);
-            this.DeleteFromMySQLDB.Name = "DeleteFromMySQLDB";
-            this.DeleteFromMySQLDB.Size = new System.Drawing.Size(160, 24);
-            this.DeleteFromMySQLDB.TabIndex = 20;
-            this.DeleteFromMySQLDB.Text = "Elimina Lavorazione";
-            this.DeleteFromMySQLDB.UseVisualStyleBackColor = true;
-            this.DeleteFromMySQLDB.Click += new System.EventHandler(this.DeleteFromMySQLDB_Click);
             // 
             // Form1
             // 
@@ -308,9 +266,6 @@
         private System.Windows.Forms.Label Result2Fase;
         private System.Windows.Forms.Label Result7Fase;
         private System.Windows.Forms.Button ResetHours;
-        private System.Windows.Forms.RadioButton LavorazioneLentiRadioButton;
-        private System.Windows.Forms.RadioButton LavorazioneFerroRadioButton;
-        private System.Windows.Forms.RadioButton LavorazionePlasticaRadioButton;
         private System.Windows.Forms.Button CreateCustomLavorations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ShowCustomLavorations;
