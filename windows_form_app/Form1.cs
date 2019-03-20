@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
-using DocumentFormat.OpenXml;
-using System.Xml;
-using SpreadsheetLight;
+using DocumentFormat.OpenXml; // for manipulate xml file
+using System.Xml; // for manipulate xml file
+using SpreadsheetLight; // for manipulate xml file
+using System.Globalization; // manipulate and create a calendar
 
 namespace windows_form_app
 {
@@ -395,9 +396,7 @@ namespace windows_form_app
             // set a boolean at "A1"
             sl.SetCellValue("A1", true);
 
-            // set at row 2, columns 1 through 20, a value that's equal to the column index
-            for (int i = 1; i <= 20; ++i) sl.SetCellValue(2, i, i);
-
+           
             // set the value of PI
             sl.SetCellValue("B3", 3.14159);
 
@@ -444,7 +443,54 @@ namespace windows_form_app
 
             sl.SetCellValue(9, 6, "Perhaps a phenomenal growth in something?");
 
-            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_EXCEL.xlsx");
+
+            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
+            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
+
+            // Uses the default calendar of the InvariantCulture.
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
+            DisplayValues(myCal, myDT);
+
+            // Adds 5 to every component of the DateTime.
+            myDT = myCal.AddYears(myDT, 5);
+            myDT = myCal.AddMonths(myDT, 5);
+            myDT = myCal.AddWeeks(myDT, 5);
+            myDT = myCal.AddDays(myDT, 5);
+            myDT = myCal.AddHours(myDT, 5);
+            myDT = myCal.AddMinutes(myDT, 5);
+            myDT = myCal.AddSeconds(myDT, 5);
+            myDT = myCal.AddMilliseconds(myDT, 5);
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("After adding 5 to each component of the DateTime:");
+            DisplayValues(myCal, myDT);
+
+            // set current date
+            DateTime localDate = DateTime.Now;
+            DateTime utcDate = DateTime.UtcNow;
+
+            for (int i = 1; i <= 24; i++)
+            {
+                for (int j = 1; j <= 24; j++)
+                {
+                    sl.SetCellValue(17, i, localDate.AddMonths(j)); /* GUARDA STRUTTURE IN C# e cerca di creare la successione di settimane */
+                }                   
+            }
+
+            // set at row 2, columns 1 through 20, a value that's equal to the column index
+            for (int i = 1; i <= 20; i++)
+            {
+                sl.SetCellValue(2, i, i);
+                sl.SetCellValue(16, i, myCal.GetMonth(myDT));
+            }
+
+
+            sl.SetCellValue(1, 1, myCal.AddWeeks(myDT,5));
+
+            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL.xlsx");
 
             MessageBox.Show("File Created");
 
@@ -454,6 +500,84 @@ namespace windows_form_app
         {
             GenerateExcel();
         }
+
+
+        public static void DisplayValues(Calendar myCal, DateTime myDT)
+        {
+            Console.WriteLine("   Era:          {0}", myCal.GetEra(myDT));
+            Console.WriteLine("   Year:         {0}", myCal.GetYear(myDT));
+            Console.WriteLine("   Month:        {0}", myCal.GetMonth(myDT));
+            Console.WriteLine("   DayOfYear:    {0}", myCal.GetDayOfYear(myDT));
+            Console.WriteLine("   DayOfMonth:   {0}", myCal.GetDayOfMonth(myDT));
+            Console.WriteLine("   DayOfWeek:    {0}", myCal.GetDayOfWeek(myDT));
+            Console.WriteLine("   Hour:         {0}", myCal.GetHour(myDT));
+            Console.WriteLine("   Minute:       {0}", myCal.GetMinute(myDT));
+            Console.WriteLine("   Second:       {0}", myCal.GetSecond(myDT));
+            Console.WriteLine("   Milliseconds: {0}", myCal.GetMilliseconds(myDT));
+            Console.WriteLine();
+        }
+
+
+        /*
+         * 
+        This code produces the following output.
+
+        April 3, 2002 of the Gregorian calendar:
+           Era:          1
+           Year:         2002
+           Month:        4
+           DayOfYear:    93
+           DayOfMonth:   3
+           DayOfWeek:    Wednesday
+           Hour:         0
+           Minute:       0
+           Second:       0
+           Milliseconds: 0
+
+        After adding 5 to each component of the DateTime:
+           Era:          1
+           Year:         2007
+           Month:        10
+           DayOfYear:    286
+           DayOfMonth:   13
+           DayOfWeek:    Saturday
+           Hour:         5
+           Minute:       5
+           Second:       5
+           Milliseconds: 5
+
+        */
+
+        public void Calendar()
+        {
+            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
+            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
+
+            // Uses the default calendar of the InvariantCulture.
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
+            DisplayValues(myCal, myDT);
+
+            // Adds 5 to every component of the DateTime.
+            myDT = myCal.AddYears(myDT, 5);
+            myDT = myCal.AddMonths(myDT, 5);
+            myDT = myCal.AddWeeks(myDT, 5);
+            myDT = myCal.AddDays(myDT, 5);
+            myDT = myCal.AddHours(myDT, 5);
+            myDT = myCal.AddMinutes(myDT, 5);
+            myDT = myCal.AddSeconds(myDT, 5);
+            myDT = myCal.AddMilliseconds(myDT, 5);
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("After adding 5 to each component of the DateTime:");
+            DisplayValues(myCal, myDT);
+
+        }
+
+
+
     }
 }
 

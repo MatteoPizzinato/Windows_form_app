@@ -13,9 +13,7 @@ using MySql.Data.MySqlClient;
 namespace windows_form_app
 {
     public partial class CustomLavorations : Form
-    {
-        
-
+    {       
         public CustomLavorations()
         {
             InitializeComponent();
