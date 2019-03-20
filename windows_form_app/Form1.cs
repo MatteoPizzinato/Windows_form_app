@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
+using DocumentFormat.OpenXml;
+using System.Xml;
+using SpreadsheetLight;
 
 namespace windows_form_app
 {
@@ -17,8 +20,8 @@ namespace windows_form_app
         public Form1()
         {
             InitializeComponent();
-            countTables();
-            blockInsertHours();
+            CountTables();
+            BlockInsertHours();
         }
 
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
@@ -44,15 +47,15 @@ namespace windows_form_app
             Result7Fase.Text = "Le ore per la settima fase sono: ";
         }
 
-        private void oreMacchina_TextChanged(object sender, EventArgs e)
+        private void OreMacchina_TextChanged(object sender, EventArgs e)
         {
             // questo private void mi serve per inserire le ore macchina            
         }
 
-        private void calcolaOre_Click(object sender, EventArgs e)
+        private void CalcolaOre_Click(object sender, EventArgs e)
         {
-            elaborate();
-            calculateCustomTimeWPL();
+            Elaborate();
+            CalculateCustomTimeWPL();
 
             /* per stampare un valore preso in input bisogna rischiamare direttamente la text box tramite
             il suo nome così verrà stampato il suo valore */
@@ -127,14 +130,14 @@ namespace windows_form_app
         // riapro la connessione al database, mi serve per vedere le lavorazioni customizzate disponibili 
         //  Funzione Timer che pensavo fosse utile per refreshare i risulatati all'interno del DB 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
-        public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
+        public void OpenConnection() // con questa funzione apro la connessione se questa è chiusa 
         {
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
             }
         }
-        public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
+        public void CloseConnection() // con questa funzione chiudo la connessione se questa è aperta
         {
             if (connection.State == ConnectionState.Open)
             {
@@ -152,7 +155,7 @@ namespace windows_form_app
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                openConnection();
+                OpenConnection();
                 myReader = command.ExecuteReader();
 
                 while (myReader.Read())
@@ -168,11 +171,11 @@ namespace windows_form_app
             }
             finally
             {
-                closeConnection();
+                CloseConnection();
             }
         }
 
-        public void countTables()
+        public void CountTables()
         {
             Timer myTimer;
             myTimer = new Timer();
@@ -193,7 +196,7 @@ namespace windows_form_app
 
                 try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
                 {
-                    openConnection();
+                    OpenConnection();
                     myReader_2 = command.ExecuteReader();
                     while (myReader_2.Read())
                     {
@@ -206,7 +209,7 @@ namespace windows_form_app
                 }
                 finally
                 {
-                    closeConnection();
+                    CloseConnection();
                 }
 
                 if (OldNumTable != countIndex)
@@ -222,7 +225,7 @@ namespace windows_form_app
         }
 
 
-        public void elaborate() // function which I used for take the value of the phases of a custom lavoration and store it in variables
+        public void Elaborate() // function which I used for take the value of the phases of a custom lavoration and store it in variables
         {
 
             string table_name = ShowCustomLavorations.SelectedItem.ToString();  // prendo il valore che seleziono nel dropdown menù e lo salvo in una variabile che uso come identificativo poi per prendere i valori relativi a quella tabella
@@ -234,7 +237,7 @@ namespace windows_form_app
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                openConnection();
+                OpenConnection();
                 myReader_getData = command.ExecuteReader();
                 while (myReader_getData.Read())
                 {
@@ -254,11 +257,11 @@ namespace windows_form_app
             }
             finally
             {
-                closeConnection();
+                CloseConnection();
             }
         }
 
-        public void calculateCustomTimeWPL() // calculate time with custom time with personal lavoration
+        public void CalculateCustomTimeWPL() // calculate time with custom time with personal lavoration
         {
             float value = 0;
 
@@ -315,7 +318,7 @@ namespace windows_form_app
 
             try // provo ad eseguire il comando che dovrebbe ritornarmi il nome delle tabelle sul menù dropdown
             {
-                openConnection();
+                OpenConnection();
                 command_delete.ExecuteNonQuery();
                 ShowCustomLavorations.Items.Remove(delete_lavoration);
             }
@@ -330,7 +333,7 @@ namespace windows_form_app
             DeleteLavorationFromDB();
         }
 
-        public void blockInsertHours() // function which control every second if the user have selected a lavoration and block or allow the insertion of the hours
+        public void BlockInsertHours() // function which control every second if the user have selected a lavoration and block or allow the insertion of the hours
         { // non ha assolutamente senso mettere un timer al posto di un while ma non so perchè col while non funziona mentre con il timer si
 
             Timer myTimer;
@@ -351,31 +354,31 @@ namespace windows_form_app
                     oreMacchina.Enabled = true;
                     calcolaOre.Enabled = true;
                 }
-                showHiddenAlertLabel();
+                ShowHiddenAlertLabel();
 
-            /*
-             * 
-            while(ShowCustomLavorations.SelectedIndex.ToString() == "-1")
-            {
-                oreMacchina.Enabled = false;
-                if (ShowCustomLavorations.SelectedIndex.ToString() != "-1")
+                /*
+                 * 
+                while(ShowCustomLavorations.SelectedIndex.ToString() == "-1")
                 {
-                    oreMacchina.Enabled = true;
+                    oreMacchina.Enabled = false;
+                    if (ShowCustomLavorations.SelectedIndex.ToString() != "-1")
+                    {
+                        oreMacchina.Enabled = true;
+                    }
                 }
-            }
-            
-            */
+
+                */
 
             }
         }
-        public void showHiddenAlertLabel()
+        public void ShowHiddenAlertLabel()
         {
             Color FailedColor = Color.Red;
             SelectLavorationAlert.ForeColor = FailedColor;
             if (oreMacchina.Enabled == false && calcolaOre.Enabled == false)
             {
                 SelectLavorationAlert.Visible = true;
-            }else
+            } else
             {
                 SelectLavorationAlert.Visible = false;
             }
@@ -383,7 +386,73 @@ namespace windows_form_app
         }
         private void SelectLavorationAlert_Click(object sender, EventArgs e)
         {
-            
+            // make active the red alert if an user don't select first a lavoration    
+        }
+        public void GenerateExcel()
+        {
+            SLDocument sl = new SLDocument();
+
+            // set a boolean at "A1"
+            sl.SetCellValue("A1", true);
+
+            // set at row 2, columns 1 through 20, a value that's equal to the column index
+            for (int i = 1; i <= 20; ++i) sl.SetCellValue(2, i, i);
+
+            // set the value of PI
+            sl.SetCellValue("B3", 3.14159);
+
+            // set the value of PI at row 4, column 2 (or "B4") in string form.
+            // use this when you already have numeric data in string form and don't
+            // want to parse it to a double or float variable type
+            // and then set it as a value.
+            // Note that "3,14159" is invalid. Excel (or Open XML) stores numerals in
+            // invariant culture mode. Frankly, even "1,234,567.89" is invalid because
+            // of the comma. If you can assign it in code, then it's fine, like so:
+            // double fTemp = 1234567.89;
+            sl.SetCellValueNumeric(4, 2, "3.14159");
+
+            // normal string data
+            sl.SetCellValue("C6", "This is at C6!");
+
+            // typical XML-invalid characters are taken care of,
+            // in particular the & and < and >
+            sl.SetCellValue("I6", "Dinner & Dance costs < $10");
+
+            // this sets a cell formula
+            // Note that if you want to set a string that starts with the equal sign,
+            // but is not a formula, prepend a single quote.
+            // For example, "'==" will display 2 equal signs
+            sl.SetCellValue(7, 3, "=SUM(A2:T2)");
+
+            // if you need cell references and cell ranges *really* badly, consider the SLConvert class.
+            sl.SetCellValue(SLConvert.ToCellReference(7, 4), string.Format("=SUM({0})", SLConvert.ToCellRange(2, 1, 2, 20)));
+
+            // dates need the format code to be displayed as the typical date.
+            // Otherwise it just looks like a floating point number.
+            sl.SetCellValue("C8", new DateTime(3141, 5, 9));
+            SLStyle style = sl.CreateStyle();
+            style.FormatCode = "d-mmm-yyyy";
+            sl.SetCellStyle("C8", style);
+
+            sl.SetCellValue(8, 6, "I predict this to be a significant date. Why, I do not know...");
+
+            sl.SetCellValue(9, 4, 456.123789);
+            // we don't have to create a new SLStyle because
+            // we only used the FormatCode property
+            style.FormatCode = "0.000%";
+            sl.SetCellStyle(9, 4, style);
+
+            sl.SetCellValue(9, 6, "Perhaps a phenomenal growth in something?");
+
+            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_EXCEL.xlsx");
+
+            MessageBox.Show("File Created");
+
+        }
+
+        private void CreateExcel_Click(object sender, EventArgs e)
+        {
+            GenerateExcel();
         }
     }
 }

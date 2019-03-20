@@ -67,14 +67,14 @@ namespace windows_form_app
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=ScatterpH8.41");
         MySqlCommand command;
         /* adesso creo delle funzioni per gestire l'apertura e la chiusura della connessione in base alle esigenze */
-        public void openConnection() // con questa funzione apro la connessione se questa è chiusa 
+        public void OpenConnection() // con questa funzione apro la connessione se questa è chiusa 
         {
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
             }
         }
-        public void closeConnection() // con questa funzione chiudo la connessione se questa è aperta
+        public void CloseConnection() // con questa funzione chiudo la connessione se questa è aperta
         {
             if (connection.State == ConnectionState.Open)
             {
@@ -82,11 +82,11 @@ namespace windows_form_app
             }
         }
 
-        public void executeQuery(String query) // funzione che mi permette di creare una stringa per fare cose del database
+        public void EexecuteQuery(String query) // funzione che mi permette di creare una stringa per fare cose del database
         {
             try // provo ad aprire la connessione e generare un nuovo comando di query e di connessione 
             {
-                openConnection();
+                OpenConnection();
                 command = new MySqlCommand(query, connection);
                 if (command.ExecuteNonQuery() == 1)
                 {
@@ -103,7 +103,7 @@ namespace windows_form_app
             }
             finally
             {
-                closeConnection();
+                CloseConnection();
             }  
             
         }
@@ -112,7 +112,7 @@ namespace windows_form_app
         {
 
             string query_saving_custom_lavoration = "USE lavorazioni_meccaniche; CREATE TABLE " + InsertNameCustomLavoration.Text + "(percentPhase1 INT, percentPhase2 INT, percentPhase3 INT, percentPhase4 INT, percentPhase5 INT, percentPhase6 INT, percentPhase7 INT); INSERT INTO lavorazioni_meccaniche." + InsertNameCustomLavoration.Text + " VALUES('" + CustPercFase1.Text + "','" + CustPercFase2.Text + "','" + CustPercFase3.Text + "','" + CustPercFase4.Text + "','" + CustPercFase5.Text + "','" + CustPercFase6.Text + "','" + CustPercFase7.Text + "')";
-            executeQuery(query_saving_custom_lavoration);
+            EexecuteQuery(query_saving_custom_lavoration);
             InsertNameCustomLavoration.Text = " ";     // with this method I put the query and the command for execute this in the "function" which control the button 
         }
 

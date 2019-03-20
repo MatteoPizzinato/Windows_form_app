@@ -47,6 +47,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.CreateExcel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -58,10 +59,11 @@
             this.calcolaOre.Size = new System.Drawing.Size(141, 23);
             this.calcolaOre.TabIndex = 2;
             this.calcolaOre.Text = "Calcola Ore";
-            this.calcolaOre.Click += new System.EventHandler(this.calcolaOre_Click);
+            this.calcolaOre.Click += new System.EventHandler(this.CalcolaOre_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CreateExcel);
             this.groupBox1.Controls.Add(this.SelectLavorationAlert);
             this.groupBox1.Controls.Add(this.DeleteFromMySQLDB);
             this.groupBox1.Controls.Add(this.pictureBox1);
@@ -250,9 +252,18 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
+            // CreateExcel
+            // 
+            this.CreateExcel.Location = new System.Drawing.Point(29, 406);
+            this.CreateExcel.Name = "CreateExcel";
+            this.CreateExcel.Size = new System.Drawing.Size(141, 23);
+            this.CreateExcel.TabIndex = 22;
+            this.CreateExcel.Text = "Genera Excel";
+            this.CreateExcel.Click += new System.EventHandler(this.CreateExcel_Click);
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1030, 783);
+            this.ClientSize = new System.Drawing.Size(1030, 610);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.groupBox1.ResumeLayout(false);
@@ -284,5 +295,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button DeleteFromMySQLDB;
         private System.Windows.Forms.Label SelectLavorationAlert;
+        private System.Windows.Forms.Button CreateExcel;
     }
 }
