@@ -443,54 +443,70 @@ namespace windows_form_app
 
             sl.SetCellValue(9, 6, "Perhaps a phenomenal growth in something?");
 
+            sl.SetColumnWidth("A8", 20); // setta la larghezza di una colonna
 
-            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
-            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
 
-            // Uses the default calendar of the InvariantCulture.
+             /* TRY TO PRINT THE SEQUENCE OF THE WEEKS */
+            SLDocument sl_2 = new SLDocument();
+            SLStyle date_style = sl_2.CreateStyle();
+
+            string week = "W ";
+            sl_2.SetCellValue("B1", week);
+
+
+
+
+            
+            date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
+            // Alternatively, use the shortcut function:
+            // style.SetHorizontalAlignment(HorizontalAlignmentValues.Left);
+
+            // each indent is 3 spaces, so this is 15 spaces total
+            date_style.Alignment.Indent = 5;
+            date_style.Alignment.JustifyLastLine = true;
+            date_style.Alignment.ReadingOrder = SLAlignmentReadingOrderValues.RightToLeft;
+            date_style.Alignment.ShrinkToFit = true;
+            date_style.Alignment.TextRotation = 90;
+            date_style.Font.FontColor = System.Drawing.Color.Black;
+            date_style.Font.FontName = "Gill-Sans";
+            date_style.Font.FontSize = 12;
+            date_style.Font.Bold = true;
+
+
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+            DateTime localDateToday = DateTime.Today;
 
-            // Displays the values of the DateTime.
-            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
-            DisplayValues(myCal, myDT);
+            for (int i = 1; i <= 54; i++) // print the sequence of the weeks of a year
+            {               
+                sl_2.MergeWorksheetCells("B1", "H1");
+                sl_2.MergeWorksheetCells("I1", "P1");
+                
 
-            // Adds 5 to every component of the DateTime.
-            myDT = myCal.AddYears(myDT, 5);
-            myDT = myCal.AddMonths(myDT, 5);
-            myDT = myCal.AddWeeks(myDT, 5);
-            myDT = myCal.AddDays(myDT, 5);
-            myDT = myCal.AddHours(myDT, 5);
-            myDT = myCal.AddMinutes(myDT, 5);
-            myDT = myCal.AddSeconds(myDT, 5);
-            myDT = myCal.AddMilliseconds(myDT, 5);
-
-            // Displays the values of the DateTime.
-            Console.WriteLine("After adding 5 to each component of the DateTime:");
-            DisplayValues(myCal, myDT);
-
-            // set current date
-            DateTime localDate = DateTime.Now;
+                sl_2.SetCellStyle(2, i, date_style);
+                sl_2.SetCellValue(1, i, week + i);
+                sl_2.SetCellValue(2, i, (localDateToday.Day + i + "/" + localDateToday.Month + "/" + localDateToday.Year));                
+            }
+            
+            /*
+                for (int i = 1; i <= 20; i++)
+                {
+                    sl_2.SetCellValue(2, i, i);                
+                }
+            */
+            DateTime localDate = new DateTime();
             DateTime utcDate = DateTime.UtcNow;
 
-            for (int i = 1; i <= 24; i++)
-            {
-                for (int j = 1; j <= 24; j++)
-                {
-                    sl.SetCellValue(17, i, localDate.AddMonths(j)); /* GUARDA STRUTTURE IN C# e cerca di creare la successione di settimane */
-                }                   
-            }
-
-            // set at row 2, columns 1 through 20, a value that's equal to the column index
-            for (int i = 1; i <= 20; i++)
-            {
-                sl.SetCellValue(2, i, i);
-                sl.SetCellValue(16, i, myCal.GetMonth(myDT));
+            for (int i = 0; i <= 24; ++i)
+            {                              
+               sl_2.SetCellValue(3, i, localDate.Month + i);               
             }
 
 
-            sl.SetCellValue(1, 1, myCal.AddWeeks(myDT,5));
 
-            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL.xlsx");
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK.xlsx");
+            
+
+            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_2.xlsx");
 
             MessageBox.Show("File Created");
 
@@ -546,7 +562,7 @@ namespace windows_form_app
            Second:       5
            Milliseconds: 5
 
-        */
+      
 
         public void Calendar()
         {
@@ -574,11 +590,58 @@ namespace windows_form_app
             Console.WriteLine("After adding 5 to each component of the DateTime:");
             DisplayValues(myCal, myDT);
 
+
+            sl.SetCellValue(1, 1, myCal.AddWeeks(myDT, 5));
+            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
+            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
+
+            // Uses the default calendar of the InvariantCulture.
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
+            DisplayValues(myCal, myDT);
+
+            // Adds 5 to every component of the DateTime.
+            myDT = myCal.AddYears(myDT, 5);
+            myDT = myCal.AddMonths(myDT, 5);
+            myDT = myCal.AddWeeks(myDT, 5);
+            myDT = myCal.AddDays(myDT, 5);
+            myDT = myCal.AddHours(myDT, 5);
+            myDT = myCal.AddMinutes(myDT, 5);
+            myDT = myCal.AddSeconds(myDT, 5);
+            myDT = myCal.AddMilliseconds(myDT, 5);
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("After adding 5 to each component of the DateTime:");
+            DisplayValues(myCal, myDT);
+
+            // set current date
+            DateTime localDate = DateTime.Now;
+            DateTime utcDate = DateTime.UtcNow;
+
+            for (int i = 1; i <= 24; i++)
+            {
+                for (int j = 1; j <= 24; j++)
+                {
+                    sl.SetCellValue(17, i, localDate.AddMonths(j)); /* GUARDA STRUTTURE IN C# e cerca di creare la successione di settimane
+                }
+            }
+
+
+            // set at row 2, columns 1 through 20, a value that's equal to the column index
+            for (int i = 1; i <= 20; i++)
+            {
+                sl.SetCellValue(2, i, i);
+                sl.SetCellValue(16, i, myCal.GetMonth(myDT));
+            }
+
+
         }
 
+      */
 
-
-    }
+                }
 }
 
 
