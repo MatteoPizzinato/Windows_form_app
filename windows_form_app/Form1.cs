@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
+/* the depencies for using the xml properties and the Spreadsheet library */
 using DocumentFormat.OpenXml; // for manipulate xml file
 using System.Xml; // for manipulate xml file
 using SpreadsheetLight; // for manipulate xml file
@@ -450,13 +451,15 @@ namespace windows_form_app
             SLDocument sl_2 = new SLDocument();
             SLStyle date_style = sl_2.CreateStyle();
 
+            SLStyle week_style = sl_2.CreateStyle();
+
             string week = "W ";
             sl_2.SetCellValue("B1", week);
 
-
-
-
             
+
+
+
             date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
             // Alternatively, use the shortcut function:
             // style.SetHorizontalAlignment(HorizontalAlignmentValues.Left);
@@ -472,40 +475,43 @@ namespace windows_form_app
             date_style.Font.FontSize = 12;
             date_style.Font.Bold = true;
 
+            week_style.Alignment.Indent = 5;
+            week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
+
+            // sl_2.SetDefinedName("MySum", "sl_2!$B$1:$B$8");
+            // sl.SetCellValue(8, 2, "=SUM(MySum)");
+
+            // sl.SetDefinedName("MySum", "Sheet1!$B$2:$D$4");
+
 
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
             DateTime localDateToday = DateTime.Today;
 
-            for (int i = 1; i <= 54; i++) // print the sequence of the weeks of a year
-            {               
+            for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
+            {
+                
                 sl_2.MergeWorksheetCells("B1", "H1");
                 sl_2.MergeWorksheetCells("I1", "O1");
                 sl_2.MergeWorksheetCells("P1", "X1");
                 sl_2.MergeWorksheetCells("Y1", "AF1");
-
+                sl_2.MergeWorksheetCells("AG1", "AN1");
+                sl_2.MergeWorksheetCells("AO1", "AV1");
+                sl_2.MergeWorksheetCells("BC1", "BJ1");
+                sl_2.MergeWorksheetCells("BQ1", "BX1");
+                
+                sl_2.SetCellValue("B5", week + i);
+                sl_2.SetCellValue("I1", week + i);
+                sl_2.SetCellValue("P1", week + i);
+                sl_2.SetCellValue("Y1", week + i);
+                sl_2.SetCellValue("AG1", week + i);
+                sl_2.SetCellValue("AO1", week + i);
+                sl_2.SetCellValue("BC1", week + i);
+                sl_2.SetCellValue("BQ1", week + i);
 
                 sl_2.SetCellStyle(2, i, date_style);
-                sl_2.SetCellValue(1, i, week + i);
-               // sl_2.SetCellValue(2, i, (localDateToday.Day + i + "/" + localDateToday.Month + "/" + localDateToday.Year));
                 localDateToday = myCal.AddDays(localDateToday, + 1).Date;
                 sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
-            }
-            
-            /*
-                for (int i = 1; i <= 20; i++)
-                {
-                    sl_2.SetCellValue(2, i, i);                
-                }
-            */
-            DateTime localDate = new DateTime();
-            DateTime utcDate = DateTime.UtcNow;
-
-            for (int i = 0; i <= 24; ++i)
-            {                              
-               sl_2.SetCellValue(3, i, localDate.Month + i);               
-            }
-
-
+            }               
 
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK.xlsx");
             
@@ -519,6 +525,7 @@ namespace windows_form_app
         private void CreateExcel_Click(object sender, EventArgs e)
         {
             GenerateExcel();
+            // strobo(); funzione che colora le celle secondo una scala di colori
         }
 
 
@@ -643,9 +650,60 @@ namespace windows_form_app
 
         }
 
-      */
+     
 
+        public void strobo()
+        {
+            SLDocument sl = new SLDocument();
+
+            Random rand = new Random();
+            int i, j;
+            for (i = 1; i <= 20; ++i)
+            {
+                for (j = 1; j <= 10; ++j)
+                {
+                    sl.SetCellValue(i, j, 200 * rand.NextDouble());
                 }
+            }
+
+            SLConditionalFormatting cf;
+
+            cf = new SLConditionalFormatting("B2", "H5");
+            cf.SetColorScale(SLConditionalFormatColorScaleValues.RedYellowGreen);
+            sl.AddConditionalFormatting(cf);
+
+            cf = new SLConditionalFormatting("D7", "G12");
+            // the minimum color is GreenYellow for values at 20% or below
+            // (so it's <= 40 because our cell values range from 0 to 200)
+            // the maximum color is OrangeRed for values at 80% or above
+            // (so it's >= 160 because our cell values range from 0 to 200)
+            cf.SetCustom2ColorScale(SLConditionalFormatMinMaxValues.Percent, "20", System.Drawing.Color.GreenYellow,
+                SLConditionalFormatMinMaxValues.Percent, "80", System.Drawing.Color.OrangeRed);
+            sl.AddConditionalFormatting(cf);
+
+            cf = new SLConditionalFormatting("C15", "J18");
+            // the minimum is colored with accent 1 color that's lightened 20%
+            // the midpoint is at the 35th percentile, colored with accent 3 color that's darkened 10%
+            // the maximum is colored with accent 6 color that's lightened 50%
+            cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
+                SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
+                SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
+            sl.AddConditionalFormatting(cf);
+
+            sl.SaveAs("ConditionalFormatColorScale.xlsx");
+
+            Console.WriteLine("End of program");
+            Console.ReadLine();
+
+
+        }
+         */
+
+
+
+
+
+    }
 }
 
 

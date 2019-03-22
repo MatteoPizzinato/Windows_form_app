@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.SumPercentButton = new System.Windows.Forms.GroupBox();
+            this.CheckSumPercent = new System.Windows.Forms.Button();
+            this.DisplaySumPercent = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,8 +56,6 @@
             this.SavingDataInMySQLDB = new System.Windows.Forms.Button();
             this.InsertNameCustomLavoration = new System.Windows.Forms.TextBox();
             this.CustomLavorationName = new System.Windows.Forms.Label();
-            this.DisplaySumPercent = new System.Windows.Forms.Label();
-            this.CheckSumPercent = new System.Windows.Forms.Button();
             this.SumPercentButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +94,26 @@
             this.SumPercentButton.TabIndex = 0;
             this.SumPercentButton.TabStop = false;
             this.SumPercentButton.Text = "Creazione lavorazione per Charter";
+            // 
+            // CheckSumPercent
+            // 
+            this.CheckSumPercent.Location = new System.Drawing.Point(311, 130);
+            this.CheckSumPercent.Name = "CheckSumPercent";
+            this.CheckSumPercent.Size = new System.Drawing.Size(96, 32);
+            this.CheckSumPercent.TabIndex = 26;
+            this.CheckSumPercent.Text = "Check";
+            this.CheckSumPercent.UseVisualStyleBackColor = true;
+            this.CheckSumPercent.Click += new System.EventHandler(this.CheckSumPercent_Click);
+            // 
+            // DisplaySumPercent
+            // 
+            this.DisplaySumPercent.AutoSize = true;
+            this.DisplaySumPercent.Location = new System.Drawing.Point(308, 165);
+            this.DisplaySumPercent.Name = "DisplaySumPercent";
+            this.DisplaySumPercent.Size = new System.Drawing.Size(201, 17);
+            this.DisplaySumPercent.TabIndex = 25;
+            this.DisplaySumPercent.Text = "La somma delle percentuali è: ";
+            this.DisplaySumPercent.Click += new System.EventHandler(this.DisplaySumPercent_Click);
             // 
             // label8
             // 
@@ -314,26 +334,6 @@
             this.CustomLavorationName.TabIndex = 0;
             this.CustomLavorationName.Text = "Inserire il nome  della  lavorazione ";
             // 
-            // DisplaySumPercent
-            // 
-            this.DisplaySumPercent.AutoSize = true;
-            this.DisplaySumPercent.Location = new System.Drawing.Point(308, 165);
-            this.DisplaySumPercent.Name = "DisplaySumPercent";
-            this.DisplaySumPercent.Size = new System.Drawing.Size(201, 17);
-            this.DisplaySumPercent.TabIndex = 25;
-            this.DisplaySumPercent.Text = "La somma delle percentuali è: ";
-            this.DisplaySumPercent.Click += new System.EventHandler(this.DisplaySumPercent_Click);
-            // 
-            // CheckSumPercent
-            // 
-            this.CheckSumPercent.Location = new System.Drawing.Point(311, 130);
-            this.CheckSumPercent.Name = "CheckSumPercent";
-            this.CheckSumPercent.Size = new System.Drawing.Size(96, 32);
-            this.CheckSumPercent.TabIndex = 26;
-            this.CheckSumPercent.Text = "Check";
-            this.CheckSumPercent.UseVisualStyleBackColor = true;
-            this.CheckSumPercent.Click += new System.EventHandler(this.CheckSumPercent_Click);
-            // 
             // CustomLavorations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -341,7 +341,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.SumPercentButton);
             this.Name = "CustomLavorations";
-            this.Text = "CustomLavorations";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.CustomLavorations_Load);
             this.SumPercentButton.ResumeLayout(false);
             this.SumPercentButton.PerformLayout();
