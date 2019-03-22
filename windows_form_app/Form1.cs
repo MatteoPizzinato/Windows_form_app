@@ -479,12 +479,16 @@ namespace windows_form_app
             for (int i = 1; i <= 54; i++) // print the sequence of the weeks of a year
             {               
                 sl_2.MergeWorksheetCells("B1", "H1");
-                sl_2.MergeWorksheetCells("I1", "P1");
-                
+                sl_2.MergeWorksheetCells("I1", "O1");
+                sl_2.MergeWorksheetCells("P1", "X1");
+                sl_2.MergeWorksheetCells("Y1", "AF1");
+
 
                 sl_2.SetCellStyle(2, i, date_style);
                 sl_2.SetCellValue(1, i, week + i);
-                sl_2.SetCellValue(2, i, (localDateToday.Day + i + "/" + localDateToday.Month + "/" + localDateToday.Year));                
+               // sl_2.SetCellValue(2, i, (localDateToday.Day + i + "/" + localDateToday.Month + "/" + localDateToday.Year));
+                localDateToday = myCal.AddDays(localDateToday, + 1).Date;
+                sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
             }
             
             /*
@@ -506,7 +510,7 @@ namespace windows_form_app
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK.xlsx");
             
 
-            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_2.xlsx");
+            //  sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_2.xlsx");
 
             MessageBox.Show("File Created");
 
