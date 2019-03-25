@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LocalDateHours = new System.Windows.Forms.Label();
+            this.CreateExcel = new System.Windows.Forms.Button();
             this.SelectLavorationAlert = new System.Windows.Forms.Label();
             this.DeleteFromMySQLDB = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -47,7 +50,7 @@
             this.ShowValues = new System.Windows.Forms.Label();
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CreateExcel = new System.Windows.Forms.Button();
+            this.TikTakClock = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +66,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LocalDateHours);
             this.groupBox1.Controls.Add(this.CreateExcel);
             this.groupBox1.Controls.Add(this.SelectLavorationAlert);
             this.groupBox1.Controls.Add(this.DeleteFromMySQLDB);
@@ -88,6 +92,25 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
+            // 
+            // LocalDateHours
+            // 
+            this.LocalDateHours.AutoSize = true;
+            this.LocalDateHours.Location = new System.Drawing.Point(707, 406);
+            this.LocalDateHours.Name = "LocalDateHours";
+            this.LocalDateHours.Size = new System.Drawing.Size(64, 17);
+            this.LocalDateHours.TabIndex = 23;
+            this.LocalDateHours.Text = "Sono le: ";
+            this.LocalDateHours.Click += new System.EventHandler(this.LocalDateHours_Click);
+            // 
+            // CreateExcel
+            // 
+            this.CreateExcel.Location = new System.Drawing.Point(29, 406);
+            this.CreateExcel.Name = "CreateExcel";
+            this.CreateExcel.Size = new System.Drawing.Size(141, 23);
+            this.CreateExcel.TabIndex = 22;
+            this.CreateExcel.Text = "Genera Excel";
+            this.CreateExcel.Click += new System.EventHandler(this.CreateExcel_Click);
             // 
             // SelectLavorationAlert
             // 
@@ -252,14 +275,9 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Inserire ore macchina";
             // 
-            // CreateExcel
+            // TikTakClock
             // 
-            this.CreateExcel.Location = new System.Drawing.Point(29, 406);
-            this.CreateExcel.Name = "CreateExcel";
-            this.CreateExcel.Size = new System.Drawing.Size(141, 23);
-            this.CreateExcel.TabIndex = 22;
-            this.CreateExcel.Text = "Genera Excel";
-            this.CreateExcel.Click += new System.EventHandler(this.CreateExcel_Click);
+            this.TikTakClock.Tick += new System.EventHandler(this.TikTakClock_Tick);
             // 
             // Form1
             // 
@@ -296,5 +314,7 @@
         private System.Windows.Forms.Button DeleteFromMySQLDB;
         private System.Windows.Forms.Label SelectLavorationAlert;
         private System.Windows.Forms.Button CreateExcel;
+        private System.Windows.Forms.Label LocalDateHours;
+        private System.Windows.Forms.Timer TikTakClock;
     }
 }

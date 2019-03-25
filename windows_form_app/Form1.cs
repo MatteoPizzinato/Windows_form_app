@@ -489,24 +489,30 @@ namespace windows_form_app
 
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
-                
+
                 sl_2.MergeWorksheetCells("B1", "H1");
                 sl_2.MergeWorksheetCells("I1", "O1");
-                sl_2.MergeWorksheetCells("P1", "X1");
-                sl_2.MergeWorksheetCells("Y1", "AF1");
-                sl_2.MergeWorksheetCells("AG1", "AN1");
-                sl_2.MergeWorksheetCells("AO1", "AV1");
-                sl_2.MergeWorksheetCells("BC1", "BJ1");
-                sl_2.MergeWorksheetCells("BQ1", "BX1");
-                
-                sl_2.SetCellValue("B5", week + i);
-                sl_2.SetCellValue("I1", week + i);
-                sl_2.SetCellValue("P1", week + i);
-                sl_2.SetCellValue("Y1", week + i);
-                sl_2.SetCellValue("AG1", week + i);
-                sl_2.SetCellValue("AO1", week + i);
-                sl_2.SetCellValue("BC1", week + i);
-                sl_2.SetCellValue("BQ1", week + i);
+                sl_2.MergeWorksheetCells("P1", "V1");
+                sl_2.MergeWorksheetCells("W1", "AC1");
+                sl_2.MergeWorksheetCells("AD1", "AJ1");
+                sl_2.MergeWorksheetCells("AK1", "AQ1");
+                sl_2.MergeWorksheetCells("AR1", "AX1");
+                sl_2.MergeWorksheetCells("AY1", "BE1");
+                // create the 54 weeks --> manually....
+
+                for (int j = 0; j < 54; j++)
+                {
+                    int f = 0;
+                    sl_2.SetCellValue("B5", week + f++);
+                    sl_2.SetCellValue("I1", week + f++);
+                    sl_2.SetCellValue("P1", week + f++);
+                    sl_2.SetCellValue("W1", week + f++);
+                    sl_2.SetCellValue("AD1", week + f++);
+                    sl_2.SetCellValue("AK1", week + f++);
+                    sl_2.SetCellValue("AR1", week + f++);
+                    sl_2.SetCellValue("AY1", week + f++);
+                }
+               
 
                 sl_2.SetCellStyle(2, i, date_style);
                 localDateToday = myCal.AddDays(localDateToday, + 1).Date;
@@ -542,6 +548,17 @@ namespace windows_form_app
             Console.WriteLine("   Second:       {0}", myCal.GetSecond(myDT));
             Console.WriteLine("   Milliseconds: {0}", myCal.GetMilliseconds(myDT));
             Console.WriteLine();
+        }
+
+        private void LocalDateHours_Click(object sender, EventArgs e)
+        {
+            LocalDateHours.Text = LocalDateHours.Text + " " + DateTime.Now.ToString();
+        }
+
+        private void TikTakClock_Tick(object sender, EventArgs e)
+        {
+            LocalDateHours.Text = LocalDateHours.Text + " " + DateTime.Now.ToString();
+            TikTakClock.Start();
         }
 
 
