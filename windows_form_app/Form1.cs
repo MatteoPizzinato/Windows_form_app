@@ -14,6 +14,7 @@ using DocumentFormat.OpenXml; // for manipulate xml file
 using System.Xml; // for manipulate xml file
 using SpreadsheetLight; // for manipulate xml file
 using System.Globalization; // manipulate and create a calendar
+using DocumentFormat.OpenXml.Drawing;
 
 namespace windows_form_app
 {
@@ -459,7 +460,7 @@ namespace windows_form_app
             
 
 
-
+            
             date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
             // Alternatively, use the shortcut function:
             // style.SetHorizontalAlignment(HorizontalAlignmentValues.Left);
@@ -474,9 +475,23 @@ namespace windows_form_app
             date_style.Font.FontName = "Gill-Sans";
             date_style.Font.FontSize = 12;
             date_style.Font.Bold = true;
+            date_style.SetBottomBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            date_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            date_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            date_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+
+            /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
 
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
+            week_style.Font.FontColor = System.Drawing.Color.Blue;
+            
+            week_style.SetBottomBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            week_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            week_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            
+            
 
             // sl_2.SetDefinedName("MySum", "sl_2!$B$1:$B$8");
             // sl.SetCellValue(8, 2, "=SUM(MySum)");
@@ -486,10 +501,11 @@ namespace windows_form_app
 
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
             DateTime localDateToday = DateTime.Today;
+            
 
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
-
+                
                 sl_2.MergeWorksheetCells("B1", "H1");
                 sl_2.MergeWorksheetCells("I1", "O1");
                 sl_2.MergeWorksheetCells("P1", "V1");
@@ -499,27 +515,27 @@ namespace windows_form_app
                 sl_2.MergeWorksheetCells("AR1", "AX1");
                 sl_2.MergeWorksheetCells("AY1", "BE1");
                 // create the 54 weeks --> manually....
-
-                for (int j = 0; j < 54; j++)
-                {
-                    int f = 0;
-                    sl_2.SetCellValue("B5", week + f++);
-                    sl_2.SetCellValue("I1", week + f++);
-                    sl_2.SetCellValue("P1", week + f++);
-                    sl_2.SetCellValue("W1", week + f++);
-                    sl_2.SetCellValue("AD1", week + f++);
-                    sl_2.SetCellValue("AK1", week + f++);
-                    sl_2.SetCellValue("AR1", week + f++);
-                    sl_2.SetCellValue("AY1", week + f++);
-                }
-               
+              
+                int f = 0;
+                sl_2.SetCellValue("B5", week + f++);
+                sl_2.SetCellValue("I1", week + f++);
+                sl_2.SetCellValue("P1", week + f++);
+                sl_2.SetCellValue("W1", week + f++);
+                sl_2.SetCellValue("AD1", week + f++);
+                sl_2.SetCellValue("AK1", week + f++);
+                sl_2.SetCellValue("AR1", week + f++);
+                sl_2.SetCellValue("AY1", week + f++);
 
                 sl_2.SetCellStyle(2, i, date_style);
+                sl_2.SetCellStyle(1, i, week_style);
+
                 localDateToday = myCal.AddDays(localDateToday, + 1).Date;
                 sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
-            }               
 
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK.xlsx");
+            }
+            
+
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx");
             
 
             //  sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_2.xlsx");
@@ -531,7 +547,8 @@ namespace windows_form_app
         private void CreateExcel_Click(object sender, EventArgs e)
         {
             GenerateExcel();
-            // strobo(); funzione che colora le celle secondo una scala di colori
+            color(); // funzione che colora le celle secondo una scala di colori
+
         }
 
 
@@ -563,7 +580,8 @@ namespace windows_form_app
 
 
         /*
-         * 
+          
+         
         This code produces the following output.
 
         April 3, 2002 of the Gregorian calendar:
@@ -666,11 +684,12 @@ namespace windows_form_app
 
 
         }
+     */
 
-     
 
-        public void strobo()
-        {
+
+         public void color()
+         {
             SLDocument sl = new SLDocument();
 
             Random rand = new Random();
@@ -707,14 +726,12 @@ namespace windows_form_app
                 SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
             sl.AddConditionalFormatting(cf);
 
-            sl.SaveAs("ConditionalFormatColorScale.xlsx");
+            sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/ConditionalFormatColorScale.xlsx");
 
             Console.WriteLine("End of program");
             Console.ReadLine();
 
-
-        }
-         */
+         }
 
 
 
