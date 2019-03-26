@@ -448,24 +448,10 @@ namespace windows_form_app
             sl.SetColumnWidth("A8", 20); // setta la larghezza di una colonna
 
 
-             /* TRY TO PRINT THE SEQUENCE OF THE WEEKS */
+            /* TRY TO PRINT THE SEQUENCE OF THE WEEKS */
             SLDocument sl_2 = new SLDocument();
             SLStyle date_style = sl_2.CreateStyle();
-
-            SLStyle week_style = sl_2.CreateStyle();
-
-            string week = "W ";
-            sl_2.SetCellValue("B1", week);
-
-            
-
-
-            
-            date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
-            // Alternatively, use the shortcut function:
-            // style.SetHorizontalAlignment(HorizontalAlignmentValues.Left);
-
-            // each indent is 3 spaces, so this is 15 spaces total
+            /* Date_style is the style which must have the date's cells */
             date_style.Alignment.Indent = 5;
             date_style.Alignment.JustifyLastLine = true;
             date_style.Alignment.ReadingOrder = SLAlignmentReadingOrderValues.RightToLeft;
@@ -476,36 +462,45 @@ namespace windows_form_app
             date_style.Font.FontSize = 12;
             date_style.Font.Bold = true;
             date_style.SetBottomBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            date_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            date_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            date_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
 
+            /* Style for separating weeks with a column left and a column right colored in blue */
+            SLStyle date_column_left_style = sl_2.CreateStyle();
+            SLStyle date_column_right_style = sl_2.CreateStyle();
+            /* Style for the weeks */
+
+            SLStyle week_style = sl_2.CreateStyle();
+            date_column_left_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            date_column_right_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+            /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
+            string week = "W ";
+            sl_2.SetCellValue("B1", week);
+            sl_2.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks
+            sl_2.SetCellStyle("H2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("O2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("V2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("AC2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("AQ2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("AX2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("BE2", date_column_right_style); // put the column for divide weeks
+
+           
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
 
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
             week_style.Font.FontColor = System.Drawing.Color.Blue;
             
-            week_style.SetBottomBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
+           
             week_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             week_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            
-            
-
-            // sl_2.SetDefinedName("MySum", "sl_2!$B$1:$B$8");
-            // sl.SetCellValue(8, 2, "=SUM(MySum)");
-
-            // sl.SetDefinedName("MySum", "Sheet1!$B$2:$D$4");
-
+            week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);           
 
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
             DateTime localDateToday = DateTime.Today;
             
-
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
-                
                 sl_2.MergeWorksheetCells("B1", "H1");
                 sl_2.MergeWorksheetCells("I1", "O1");
                 sl_2.MergeWorksheetCells("P1", "V1");
@@ -525,15 +520,17 @@ namespace windows_form_app
                 sl_2.SetCellValue("AK1", week + f++);
                 sl_2.SetCellValue("AR1", week + f++);
                 sl_2.SetCellValue("AY1", week + f++);
+                
 
                 sl_2.SetCellStyle(2, i, date_style);
                 sl_2.SetCellStyle(1, i, week_style);
-
-                localDateToday = myCal.AddDays(localDateToday, + 1).Date;
-                sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
-
+                
+                var PrintDays = sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
+                PrintDays = sl_2.SetCellStyle("B1", date_style);
             }
-            
+
+            localDateToday = myCal.AddDays(localDateToday, +1).Date;
+
 
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx");
             
@@ -548,7 +545,6 @@ namespace windows_form_app
         {
             GenerateExcel();
             color(); // funzione che colora le celle secondo una scala di colori
-
         }
 
 
@@ -579,9 +575,10 @@ namespace windows_form_app
         }
 
 
+
+
         /*
-          
-         
+                   
         This code produces the following output.
 
         April 3, 2002 of the Gregorian calendar:
