@@ -563,9 +563,22 @@ namespace windows_form_app
             Console.WriteLine();
         }
 
+
+
+
+
+
+
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
             LocalDateHours.Text = LocalDateHours.Text + " " + DateTime.Now.ToString();
+
+
+
+            // DA FINIRE LA VISUALIZZAZIONE DELL'ORA 
+
+
+
         }
 
         private void TikTakClock_Tick(object sender, EventArgs e)
@@ -736,12 +749,3 @@ namespace windows_form_app
 
     }
 }
-
-
-/*
-*
-*
-* DA FARE: METTERE TUTTO NEL DATABASE E CERCARE UN MODO PER GENERARE IL FILE EXCEL CHE SARà LA COSA PIù ARDUA
-* 
-* 
-*/
