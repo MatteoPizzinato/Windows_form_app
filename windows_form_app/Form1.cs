@@ -391,6 +391,7 @@ namespace windows_form_app
         {
             // make active the red alert if an user don't select first a lavoration    
         }
+        
         public void GenerateExcel()
         {
             SLDocument sl = new SLDocument();
@@ -475,16 +476,28 @@ namespace windows_form_app
             /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
             string week = "W ";
             sl_2.SetCellValue("B1", week);
-            sl_2.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks
+            /* divide coòumn from January to the end of April */
+            sl_2.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks            
             sl_2.SetCellStyle("H2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("O2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("V2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("AC2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("AJ2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("AQ2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("AX2", date_column_right_style); // put the column for divide weeks
             sl_2.SetCellStyle("BE2", date_column_right_style); // put the column for divide weeks
 
-           
+            sl_2.SetCellStyle("BL2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("BS2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("BZ2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("CG2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("CN2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("CU2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("DB2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("DI2", date_column_right_style); // put the column for divide weeks
+            sl_2.SetCellStyle("DP2", date_column_right_style); // put the column for divide weeks
+
+
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
 
             week_style.Alignment.Indent = 5;
@@ -498,9 +511,12 @@ namespace windows_form_app
 
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
             DateTime localDateToday = DateTime.Today;
-            
+                       
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
+                int f = 0;
+
+                /* Print from January to the end of April */
                 sl_2.MergeWorksheetCells("B1", "H1");
                 sl_2.MergeWorksheetCells("I1", "O1");
                 sl_2.MergeWorksheetCells("P1", "V1");
@@ -509,10 +525,19 @@ namespace windows_form_app
                 sl_2.MergeWorksheetCells("AK1", "AQ1");
                 sl_2.MergeWorksheetCells("AR1", "AX1");
                 sl_2.MergeWorksheetCells("AY1", "BE1");
-                // create the 54 weeks --> manually....
-              
-                int f = 0;
-                sl_2.SetCellValue("B5", week + f++);
+                sl_2.MergeWorksheetCells("BF1", "BL1");
+                sl_2.MergeWorksheetCells("BM1", "BS1");
+                sl_2.MergeWorksheetCells("BT1", "BZ1");
+                sl_2.MergeWorksheetCells("CA1", "CG1");
+                sl_2.MergeWorksheetCells("CH1", "CN1");
+                sl_2.MergeWorksheetCells("CO1", "CU1");
+                sl_2.MergeWorksheetCells("CV1", "DB1");
+                sl_2.MergeWorksheetCells("DC1", "DI1");
+                sl_2.MergeWorksheetCells("DJ1", "DP1");
+
+
+                /* Print the numbered weeks from January to the end of April */
+                sl_2.SetCellValue("B1", week + f++);
                 sl_2.SetCellValue("I1", week + f++);
                 sl_2.SetCellValue("P1", week + f++);
                 sl_2.SetCellValue("W1", week + f++);
@@ -520,14 +545,28 @@ namespace windows_form_app
                 sl_2.SetCellValue("AK1", week + f++);
                 sl_2.SetCellValue("AR1", week + f++);
                 sl_2.SetCellValue("AY1", week + f++);
-                
+                sl_2.SetCellValue("BF1", week + f++);
+                sl_2.SetCellValue("BM1", week + f++);
+                sl_2.SetCellValue("BT1", week + f++);
+                sl_2.SetCellValue("CA1", week + f++);
+                sl_2.SetCellValue("CH1", week + f++);
+                sl_2.SetCellValue("CO1", week + f++);
+                sl_2.SetCellValue("CV1", week + f++);
+                sl_2.SetCellValue("DC1", week + f++);
+                sl_2.SetCellValue("DI1", week + f++);
+
 
                 sl_2.SetCellStyle(2, i, date_style);
                 sl_2.SetCellStyle(1, i, week_style);
-                
-                var PrintDays = sl_2.SetCellValue(2, i, localDateToday.Day + "/" + localDateToday.Month + "/" + localDateToday.Year);
+
+                DateTime myDT = new DateTime(localDateToday.Year, 1, 1, new GregorianCalendar()); // for show the complete current year
+
+                myDT = myCal.AddDays(myDT, i);           
+
+                var PrintDays = sl_2.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
                 PrintDays = sl_2.SetCellStyle("B1", date_style);
             }
+            
 
             localDateToday = myCal.AddDays(localDateToday, +1).Date;
 
@@ -695,9 +734,7 @@ namespace windows_form_app
 
         }
      */
-
-
-
+           
          public void color()
          {
             SLDocument sl = new SLDocument();
