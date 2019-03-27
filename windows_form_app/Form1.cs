@@ -394,62 +394,7 @@ namespace windows_form_app
         
         public void GenerateExcel()
         {
-            SLDocument sl = new SLDocument();
-
-            // set a boolean at "A1"
-            sl.SetCellValue("A1", true);
-
-           
-            // set the value of PI
-            sl.SetCellValue("B3", 3.14159);
-
-            // set the value of PI at row 4, column 2 (or "B4") in string form.
-            // use this when you already have numeric data in string form and don't
-            // want to parse it to a double or float variable type
-            // and then set it as a value.
-            // Note that "3,14159" is invalid. Excel (or Open XML) stores numerals in
-            // invariant culture mode. Frankly, even "1,234,567.89" is invalid because
-            // of the comma. If you can assign it in code, then it's fine, like so:
-            // double fTemp = 1234567.89;
-            sl.SetCellValueNumeric(4, 2, "3.14159");
-
-            // normal string data
-            sl.SetCellValue("C6", "This is at C6!");
-
-            // typical XML-invalid characters are taken care of,
-            // in particular the & and < and >
-            sl.SetCellValue("I6", "Dinner & Dance costs < $10");
-
-            // this sets a cell formula
-            // Note that if you want to set a string that starts with the equal sign,
-            // but is not a formula, prepend a single quote.
-            // For example, "'==" will display 2 equal signs
-            sl.SetCellValue(7, 3, "=SUM(A2:T2)");
-
-            // if you need cell references and cell ranges *really* badly, consider the SLConvert class.
-            sl.SetCellValue(SLConvert.ToCellReference(7, 4), string.Format("=SUM({0})", SLConvert.ToCellRange(2, 1, 2, 20)));
-
-            // dates need the format code to be displayed as the typical date.
-            // Otherwise it just looks like a floating point number.
-            sl.SetCellValue("C8", new DateTime(3141, 5, 9));
-            SLStyle style = sl.CreateStyle();
-            style.FormatCode = "d-mmm-yyyy";
-            sl.SetCellStyle("C8", style);
-
-            sl.SetCellValue(8, 6, "I predict this to be a significant date. Why, I do not know...");
-
-            sl.SetCellValue(9, 4, 456.123789);
-            // we don't have to create a new SLStyle because
-            // we only used the FormatCode property
-            style.FormatCode = "0.000%";
-            sl.SetCellStyle(9, 4, style);
-
-            sl.SetCellValue(9, 6, "Perhaps a phenomenal growth in something?");
-
-            sl.SetColumnWidth("A8", 20); // setta la larghezza di una colonna
-
-
-            /* TRY TO PRINT THE SEQUENCE OF THE WEEKS */
+            
             SLDocument sl_2 = new SLDocument();
             SLStyle date_style = sl_2.CreateStyle();
             /* Date_style is the style which must have the date's cells */
@@ -514,6 +459,7 @@ namespace windows_form_app
                        
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
+
                 int f = 0;
 
                 /* Print from January to the end of April */
@@ -536,6 +482,26 @@ namespace windows_form_app
                 sl_2.MergeWorksheetCells("DJ1", "DP1");
 
 
+
+
+
+
+
+
+                CENTRA VISUALIZZAZIONE SETTIMANE SOPRA IL QUARTO GIORNO DELLA SETTIMANA, SE SI RIESCE
+
+
+
+
+
+
+
+
+
+
+
+
+
                 /* Print the numbered weeks from January to the end of April */
                 sl_2.SetCellValue("B1", week + f++);
                 sl_2.SetCellValue("I1", week + f++);
@@ -553,7 +519,8 @@ namespace windows_form_app
                 sl_2.SetCellValue("CO1", week + f++);
                 sl_2.SetCellValue("CV1", week + f++);
                 sl_2.SetCellValue("DC1", week + f++);
-                sl_2.SetCellValue("DI1", week + f++);
+                sl_2.SetCellValue("DJ1", week + f++);
+                
 
 
                 sl_2.SetCellStyle(2, i, date_style);
