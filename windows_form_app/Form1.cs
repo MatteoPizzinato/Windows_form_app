@@ -391,12 +391,10 @@ namespace windows_form_app
         {
             // make active the red alert if an user don't select first a lavoration    
         }
-        
-        public void GenerateExcel()
+
+        public void CreateCalendar(SLDocument document)
         {
-            
-            SLDocument sl_2 = new SLDocument();
-            SLStyle date_style = sl_2.CreateStyle();
+            SLStyle date_style = document.CreateStyle();
             /* Date_style is the style which must have the date's cells */
             date_style.Alignment.Indent = 5;
             date_style.Alignment.JustifyLastLine = true;
@@ -411,138 +409,120 @@ namespace windows_form_app
             date_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
 
             /* Style for separating weeks with a column left and a column right colored in blue */
-            SLStyle date_column_left_style = sl_2.CreateStyle();
-            SLStyle date_column_right_style = sl_2.CreateStyle();
+            SLStyle date_column_left_style = document.CreateStyle();
+            SLStyle date_column_right_style = document.CreateStyle();
             /* Style for the weeks */
 
-            SLStyle week_style = sl_2.CreateStyle();
+            SLStyle week_style = document.CreateStyle();
             date_column_left_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             date_column_right_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
-            string week = "W ";
-            sl_2.SetCellValue("B1", week);
-            /* divide coòumn from January to the end of April */
-            sl_2.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks            
-            sl_2.SetCellStyle("H2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("O2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("V2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("AC2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("AJ2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("AQ2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("AX2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("BE2", date_column_right_style); // put the column for divide weeks
+           
 
-            sl_2.SetCellStyle("BL2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("BS2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("BZ2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("CG2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("CN2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("CU2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("DB2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("DI2", date_column_right_style); // put the column for divide weeks
-            sl_2.SetCellStyle("DP2", date_column_right_style); // put the column for divide weeks
+            /* divide column from January to the end of April */
+            document.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks            
+            document.SetCellStyle("H2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("O2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("V2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("AC2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("AJ2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("AQ2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("AX2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("BE2", date_column_right_style); // put the column for divide weeks
 
+            document.SetCellStyle("BL2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("BS2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("BZ2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("CG2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("CN2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("CU2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("DB2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("DI2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("DP2", date_column_right_style); // put the column for divide weeks
 
-            /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
-
+            /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
-            week_style.Font.FontColor = System.Drawing.Color.Blue;
-            
-           
+            week_style.Font.FontColor = System.Drawing.Color.Blue;           
             week_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             week_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
-            week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);           
+            week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
 
+            /* Creation of a calendar which is putted in the sheet */
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
             DateTime localDateToday = DateTime.Today;
-                       
+
+            string week = "W ";
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
 
                 int f = 0;
 
                 /* Print from January to the end of April */
-                sl_2.MergeWorksheetCells("B1", "H1");
-                sl_2.MergeWorksheetCells("I1", "O1");
-                sl_2.MergeWorksheetCells("P1", "V1");
-                sl_2.MergeWorksheetCells("W1", "AC1");
-                sl_2.MergeWorksheetCells("AD1", "AJ1");
-                sl_2.MergeWorksheetCells("AK1", "AQ1");
-                sl_2.MergeWorksheetCells("AR1", "AX1");
-                sl_2.MergeWorksheetCells("AY1", "BE1");
-                sl_2.MergeWorksheetCells("BF1", "BL1");
-                sl_2.MergeWorksheetCells("BM1", "BS1");
-                sl_2.MergeWorksheetCells("BT1", "BZ1");
-                sl_2.MergeWorksheetCells("CA1", "CG1");
-                sl_2.MergeWorksheetCells("CH1", "CN1");
-                sl_2.MergeWorksheetCells("CO1", "CU1");
-                sl_2.MergeWorksheetCells("CV1", "DB1");
-                sl_2.MergeWorksheetCells("DC1", "DI1");
-                sl_2.MergeWorksheetCells("DJ1", "DP1");
-
-
-
-
-
-
-
-
-                CENTRA VISUALIZZAZIONE SETTIMANE SOPRA IL QUARTO GIORNO DELLA SETTIMANA, SE SI RIESCE
-
-
-
-
-
-
-
-
-
-
-
-
+                document.MergeWorksheetCells("B1", "H1");
+                document.MergeWorksheetCells("I1", "O1");
+                document.MergeWorksheetCells("P1", "V1");
+                document.MergeWorksheetCells("W1", "AC1");
+                document.MergeWorksheetCells("AD1", "AJ1");
+                document.MergeWorksheetCells("AK1", "AQ1");
+                document.MergeWorksheetCells("AR1", "AX1");
+                document.MergeWorksheetCells("AY1", "BE1");
+                document.MergeWorksheetCells("BF1", "BL1");
+                document.MergeWorksheetCells("BM1", "BS1");
+                document.MergeWorksheetCells("BT1", "BZ1");
+                document.MergeWorksheetCells("CA1", "CG1");
+                document.MergeWorksheetCells("CH1", "CN1");
+                document.MergeWorksheetCells("CO1", "CU1");
+                document.MergeWorksheetCells("CV1", "DB1");
+                document.MergeWorksheetCells("DC1", "DI1");
+                document.MergeWorksheetCells("DJ1", "DP1");
 
                 /* Print the numbered weeks from January to the end of April */
-                sl_2.SetCellValue("B1", week + f++);
-                sl_2.SetCellValue("I1", week + f++);
-                sl_2.SetCellValue("P1", week + f++);
-                sl_2.SetCellValue("W1", week + f++);
-                sl_2.SetCellValue("AD1", week + f++);
-                sl_2.SetCellValue("AK1", week + f++);
-                sl_2.SetCellValue("AR1", week + f++);
-                sl_2.SetCellValue("AY1", week + f++);
-                sl_2.SetCellValue("BF1", week + f++);
-                sl_2.SetCellValue("BM1", week + f++);
-                sl_2.SetCellValue("BT1", week + f++);
-                sl_2.SetCellValue("CA1", week + f++);
-                sl_2.SetCellValue("CH1", week + f++);
-                sl_2.SetCellValue("CO1", week + f++);
-                sl_2.SetCellValue("CV1", week + f++);
-                sl_2.SetCellValue("DC1", week + f++);
-                sl_2.SetCellValue("DJ1", week + f++);
+                document.SetCellValue("B1", week + f++);
+                document.SetCellValue("I1", week + f++);
+                document.SetCellValue("P1", week + f++);
+                document.SetCellValue("W1", week + f++);
+                document.SetCellValue("AD1", week + f++);
+                document.SetCellValue("AK1", week + f++);
+                document.SetCellValue("AR1", week + f++);
+                document.SetCellValue("AY1", week + f++);
+                document.SetCellValue("BF1", week + f++);
+                document.SetCellValue("BM1", week + f++);
+                document.SetCellValue("BT1", week + f++);
+                document.SetCellValue("CA1", week + f++);
+                document.SetCellValue("CH1", week + f++);
+                document.SetCellValue("CO1", week + f++);
+                document.SetCellValue("CV1", week + f++);
+                document.SetCellValue("DC1", week + f++);
+                document.SetCellValue("DJ1", week + f++);
+
+                DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
+                // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
+
+                document.SetCellStyle(2, i, date_style);
+                document.SetCellStyle(1, i, week_style);
+                document.SetCellValue("A2", " ");
+                myDT = myCal.AddDays(myDT, i);
+
+                var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
+                PrintDays = document.SetCellValue("B1", i);
                 
-
-
-                sl_2.SetCellStyle(2, i, date_style);
-                sl_2.SetCellStyle(1, i, week_style);
-
-                DateTime myDT = new DateTime(localDateToday.Year, 1, 1, new GregorianCalendar()); // for show the complete current year
-
-                myDT = myCal.AddDays(myDT, i);           
-
-                var PrintDays = sl_2.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
-                PrintDays = sl_2.SetCellStyle("B1", date_style);
             }
+
+            localDateToday = myCal.AddDays(localDateToday, +1).Date;    
+        }
+        
+
+        public void GenerateExcel()
+        {
             
-
-            localDateToday = myCal.AddDays(localDateToday, +1).Date;
-
-
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx");
+            SLDocument sl_2 = new SLDocument();
             
+            CreateCalendar(sl_2);
 
-            //  sl.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_2.xlsx");
-
+            /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx"); // savin my excel file
+            
             MessageBox.Show("File Created");
 
         }
@@ -568,12 +548,6 @@ namespace windows_form_app
             Console.WriteLine("   Milliseconds: {0}", myCal.GetMilliseconds(myDT));
             Console.WriteLine();
         }
-
-
-
-
-
-
 
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
