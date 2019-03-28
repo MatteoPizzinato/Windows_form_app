@@ -551,19 +551,13 @@ namespace windows_form_app
 
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
-            LocalDateHours.Text = LocalDateHours.Text + " " + DateTime.Now.ToString();
-
-
-
-            // DA FINIRE LA VISUALIZZAZIONE DELL'ORA 
-
-
-
+            TikTakClock.Start();
+            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
         }
 
         private void TikTakClock_Tick(object sender, EventArgs e)
         {
-            LocalDateHours.Text = LocalDateHours.Text + " " + DateTime.Now.ToString();
+            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
         }
 
