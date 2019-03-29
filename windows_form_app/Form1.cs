@@ -384,9 +384,9 @@ namespace windows_form_app
             } else
             {
                 SelectLavorationAlert.Visible = false;
-            }
-
+            }           
         }
+
         private void SelectLavorationAlert_Click(object sender, EventArgs e)
         {
             // make active the red alert if an user don't select first a lavoration    
@@ -429,7 +429,6 @@ namespace windows_form_app
             document.SetCellStyle("AQ2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("AX2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("BE2", date_column_right_style); // put the column for divide weeks
-
             document.SetCellStyle("BL2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("BS2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("BZ2", date_column_right_style); // put the column for divide weeks
@@ -439,6 +438,22 @@ namespace windows_form_app
             document.SetCellStyle("DB2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("DI2", date_column_right_style); // put the column for divide weeks
             document.SetCellStyle("DP2", date_column_right_style); // put the column for divide weeks
+
+            /* divide column from May to the end of July */
+            document.SetCellStyle("DQ2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("DX2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("EE2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("EL2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("ES2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("EZ2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("FG2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("FN2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("FU2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("GB2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("GI2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("GP2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("GW2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("HD2", date_column_left_style); // put the column for divide weeks
 
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
@@ -453,12 +468,13 @@ namespace windows_form_app
             DateTime localDateToday = DateTime.Today;
 
             string week = "W ";
+            
             for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
             {
 
-                int f = 0;
+                int f = 1;
 
-                /* Print from January to the end of April */
+                /* Print days from January to the end of April */
                 document.MergeWorksheetCells("B1", "H1");
                 document.MergeWorksheetCells("I1", "O1");
                 document.MergeWorksheetCells("P1", "V1");
@@ -496,6 +512,81 @@ namespace windows_form_app
                 document.SetCellValue("DC1", week + f++);
                 document.SetCellValue("DJ1", week + f++);
 
+                /* Print days from May to the end of July */
+                document.MergeWorksheetCells("DQ1", "DW1");
+                document.MergeWorksheetCells("DX1", "ED1");
+                document.MergeWorksheetCells("EE1", "EK1");
+                document.MergeWorksheetCells("EL1", "ER1");
+                document.MergeWorksheetCells("ES1", "EY1");
+                document.MergeWorksheetCells("EZ1", "FF1");
+                document.MergeWorksheetCells("FG1", "FM1");
+                document.MergeWorksheetCells("FN1", "FT1");
+                document.MergeWorksheetCells("FU1", "GA1");
+                document.MergeWorksheetCells("GB1", "GH1");
+                document.MergeWorksheetCells("GI1", "GO1");
+                document.MergeWorksheetCells("GP1", "GV1");
+                document.MergeWorksheetCells("GW1", "HC1");
+                document.MergeWorksheetCells("HD1", "HJ1");
+
+                /* Print the numbered weeks from May to the end of July */               
+                document.SetCellValue("DQ1", week + f++);
+                document.SetCellValue("DX1", week + f++);
+                document.SetCellValue("EE1", week + f++);
+                document.SetCellValue("EL1", week + f++);
+                document.SetCellValue("ES1", week + f++);
+                document.SetCellValue("EZ1", week + f++);
+                document.SetCellValue("FG1", week + f++);
+                document.SetCellValue("FN1", week + f++);
+                document.SetCellValue("FU1", week + f++);
+                document.SetCellValue("GB1", week + f++);
+                document.SetCellValue("GI1", week + f++);
+                document.SetCellValue("GP1", week + f++);
+                document.SetCellValue("GW1", week + f++);
+                document.SetCellValue("HD1", week + f++);
+
+                /* Print days from August to the end of November */
+                document.MergeWorksheetCells("HK1", "HQ1");
+                document.MergeWorksheetCells("HR1", "HX1");
+                document.MergeWorksheetCells("HY1", "IE1");
+                document.MergeWorksheetCells("IF1", "IL1");
+                document.MergeWorksheetCells("IM1", "IS1");
+                document.MergeWorksheetCells("IT1", "IZ1");
+                document.MergeWorksheetCells("JA1", "JG1");
+                document.MergeWorksheetCells("JH1", "JN1");
+                document.MergeWorksheetCells("JO1", "JU1");
+                document.MergeWorksheetCells("JV1", "KB1");
+                document.MergeWorksheetCells("KC1", "KI1");
+                document.MergeWorksheetCells("KJ1", "KP1");
+                document.MergeWorksheetCells("KQ1", "KW1");
+                document.MergeWorksheetCells("KX1", "LD1");
+                document.MergeWorksheetCells("LE1", "LK1");
+                document.MergeWorksheetCells("LL1", "LR1");
+                document.MergeWorksheetCells("LS1", "LY1");
+
+                /* Print the numbered weeks from August to the end of November */
+                document.SetCellValue("HK1", week + f++);
+                document.SetCellValue("HR1", week + f++);
+                document.SetCellValue("HY1", week + f++);
+                document.SetCellValue("IF1", week + f++);
+                document.SetCellValue("IM1", week + f++);
+                document.SetCellValue("IT1", week + f++);
+                document.SetCellValue("JA1", week + f++);
+                document.SetCellValue("JH1", week + f++);
+                document.SetCellValue("JO1", week + f++);
+                document.SetCellValue("JV1", week + f++);
+                document.SetCellValue("KC1", week + f++);
+                document.SetCellValue("KJ1", week + f++);
+                document.SetCellValue("KQ1", week + f++);
+                document.SetCellValue("KX1", week + f++);
+                document.SetCellValue("LE1", week + f++);
+                document.SetCellValue("LL1", week + f++);
+                document.SetCellValue("LS1", week + f++);
+
+                /* Print daysof December */
+                
+
+
+
                 DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
                 // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
 
@@ -504,9 +595,7 @@ namespace windows_form_app
                 document.SetCellValue("A2", " ");
                 myDT = myCal.AddDays(myDT, i);
 
-                var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
-                PrintDays = document.SetCellValue("B1", i);
-                
+                var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);                
             }
 
             localDateToday = myCal.AddDays(localDateToday, +1).Date;    
@@ -532,23 +621,7 @@ namespace windows_form_app
             GenerateExcel();
             color(); // funzione che colora le celle secondo una scala di colori
         }
-
-
-        public static void DisplayValues(Calendar myCal, DateTime myDT)
-        {
-            Console.WriteLine("   Era:          {0}", myCal.GetEra(myDT));
-            Console.WriteLine("   Year:         {0}", myCal.GetYear(myDT));
-            Console.WriteLine("   Month:        {0}", myCal.GetMonth(myDT));
-            Console.WriteLine("   DayOfYear:    {0}", myCal.GetDayOfYear(myDT));
-            Console.WriteLine("   DayOfMonth:   {0}", myCal.GetDayOfMonth(myDT));
-            Console.WriteLine("   DayOfWeek:    {0}", myCal.GetDayOfWeek(myDT));
-            Console.WriteLine("   Hour:         {0}", myCal.GetHour(myDT));
-            Console.WriteLine("   Minute:       {0}", myCal.GetMinute(myDT));
-            Console.WriteLine("   Second:       {0}", myCal.GetSecond(myDT));
-            Console.WriteLine("   Milliseconds: {0}", myCal.GetMilliseconds(myDT));
-            Console.WriteLine();
-        }
-
+        
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
             TikTakClock.Start();
