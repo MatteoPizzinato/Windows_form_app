@@ -455,6 +455,26 @@ namespace windows_form_app
             document.SetCellStyle("GW2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("HD2", date_column_left_style); // put the column for divide weeks
 
+            /* divide column from August to the end of November */
+            document.SetCellStyle("HK2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("HR2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("HY2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("IF2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("IM2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("IT2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("JA2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("JH2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("JO2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("JV2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("KC2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("KJ2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("KQ2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("KX2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("LE2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("LL2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("LS2", date_column_left_style); // put the column for divide weeks            
+            
+
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
@@ -583,9 +603,12 @@ namespace windows_form_app
                 document.SetCellValue("LS1", week + f++);
 
                 /* Print daysof December */
-                
-
-
+                /*
+                document.MergeWorksheetCells("HK1", "HQ1");
+                document.MergeWorksheetCells("HR1", "HX1");
+                document.MergeWorksheetCells("HY1", "IE1");
+                document.MergeWorksheetCells("IF1", "IL1");
+                */
 
                 DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
                 // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
