@@ -472,9 +472,14 @@ namespace windows_form_app
             document.SetCellStyle("KX2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("LE2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("LL2", date_column_left_style); // put the column for divide weeks
-            document.SetCellStyle("LS2", date_column_left_style); // put the column for divide weeks            
-            
+            document.SetCellStyle("LS2", date_column_left_style); // put the column for divide weeks      
 
+            /* divide column of December */
+            document.SetCellStyle("LZ2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("MG2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("MN2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("MU2", date_column_left_style); // put the column for divide weeks            
+            document.SetCellStyle("NB2", date_column_left_style); // put the column for divide weeks
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
@@ -489,7 +494,7 @@ namespace windows_form_app
 
             string week = "W ";
             
-            for (int i = 1; i <= 365; i++) // print the sequence of the weeks of a year
+            for (int i = 1; i <= 366; i++) // print the sequence of the weeks of a year
             {
 
                 int f = 1;
@@ -602,13 +607,38 @@ namespace windows_form_app
                 document.SetCellValue("LL1", week + f++);
                 document.SetCellValue("LS1", week + f++);
 
-                /* Print daysof December */
-                /*
-                document.MergeWorksheetCells("HK1", "HQ1");
-                document.MergeWorksheetCells("HR1", "HX1");
-                document.MergeWorksheetCells("HY1", "IE1");
-                document.MergeWorksheetCells("IF1", "IL1");
-                */
+                /* Print days of December */                
+                document.MergeWorksheetCells("LZ1", "MF1");
+                document.MergeWorksheetCells("MG1", "MM1");
+                document.MergeWorksheetCells("MN1", "MT1");
+                document.MergeWorksheetCells("MU1", "NB1");
+
+                /* Print the numbered weeks of December */
+                document.SetCellValue("LZ1", week + f++);
+                document.SetCellValue("MG1", week + f++);
+                document.SetCellValue("MN1", week + f++);
+                document.SetCellValue("MU1", week + f++);
+
+
+                Random rand = new Random();
+                int z, j;
+                for (z = 1; z <= 20; ++z
+                {
+                    for (j = 1; j <= 10; ++j)
+                    {
+                        document.SetCellValue(z, j, 200 * rand.NextDouble());
+                    }
+                }
+
+
+                SLConditionalFormatting cf;
+                cf = new SLConditionalFormatting("B4", "H5");
+                cf.SetColorScale(SLConditionalFormatColorScaleValues.RedYellowGreen);
+                document.AddConditionalFormatting(cf);
+
+
+
+
 
                 DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
                 // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
@@ -616,7 +646,7 @@ namespace windows_form_app
                 document.SetCellStyle(2, i, date_style);
                 document.SetCellStyle(1, i, week_style);
                 document.SetCellValue("A2", " ");
-                myDT = myCal.AddDays(myDT, i);
+                myDT = myCal.AddDays(myDT, i);            
 
                 var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);                
             }
@@ -656,8 +686,6 @@ namespace windows_form_app
             LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
         }
-
-
 
 
         /*

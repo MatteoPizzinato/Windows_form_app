@@ -88,9 +88,9 @@
             this.SumPercentButton.Controls.Add(this.SavingDataInMySQLDB);
             this.SumPercentButton.Controls.Add(this.InsertNameCustomLavoration);
             this.SumPercentButton.Controls.Add(this.CustomLavorationName);
-            this.SumPercentButton.Location = new System.Drawing.Point(40, 17);
+            this.SumPercentButton.Location = new System.Drawing.Point(40, 12);
             this.SumPercentButton.Name = "SumPercentButton";
-            this.SumPercentButton.Size = new System.Drawing.Size(721, 394);
+            this.SumPercentButton.Size = new System.Drawing.Size(721, 399);
             this.SumPercentButton.TabIndex = 0;
             this.SumPercentButton.TabStop = false;
             this.SumPercentButton.Text = "Creazione lavorazione per Charter";
