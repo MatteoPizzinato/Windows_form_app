@@ -25,12 +25,7 @@ namespace windows_form_app
             InitializeComponent();
             CountTables();
             BlockInsertHours();
-
-            TikTakClock.Start();
-            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
-            Date.Text = DateTime.Today.ToLongDateString();
-
-        }        
+        }
 
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
         float storage_value_data_1;
@@ -125,6 +120,7 @@ namespace windows_form_app
             Clear();
             oreMacchina.Text = " "; // cancello automaticamente le ore inserite in precedenza
         }
+
 
         private void CreateCustomLavorations_Click(object sender, EventArgs e)
         {
@@ -310,7 +306,11 @@ namespace windows_form_app
             string output_hours_6 = timespan_6.ToString("hh\\:mm\\:ss");
             Result6Fase.Text = Result6Fase.Text + output_hours_6;
 
-            // adesso faccio i calcoli per settima fase                      
+            // adesso faccio i calcoli per settima fase
+            float result_7 = (value * storage_value_data_7) / 100;
+            TimeSpan timespan_7 = TimeSpan.FromHours(result_7);
+            string output_hours_7 = timespan_7.ToString("hh\\:mm\\:ss");
+            Result7Fase.Text = Result7Fase.Text + output_hours_7;
         }
 
         public void DeleteLavorationFromDB()
@@ -479,7 +479,7 @@ namespace windows_form_app
             document.SetCellStyle("MG2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MN2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MU2", date_column_left_style); // put the column for divide weeks            
-            document.SetCellStyle("NB2", date_column_right_style); // put the column for divide weeks
+            document.SetCellStyle("NB2", date_column_left_style); // put the column for divide weeks
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
@@ -496,7 +496,7 @@ namespace windows_form_app
             
             for (int i = 1; i <= 366; i++) // print the sequence of the weeks of a year
             {
-            
+
                 int f = 1;
 
                 /* Print days from January to the end of April */
@@ -519,7 +519,7 @@ namespace windows_form_app
                 document.MergeWorksheetCells("DJ1", "DP1");
 
                 /* Print the numbered weeks from January to the end of April */
-                document.SetCellValue("B1", week + f++);                
+                document.SetCellValue("B1", week + f++);
                 document.SetCellValue("I1", week + f++);
                 document.SetCellValue("P1", week + f++);
                 document.SetCellValue("W1", week + f++);
@@ -620,6 +620,25 @@ namespace windows_form_app
                 document.SetCellValue("MU1", week + f++);
 
 
+                Random rand = new Random();
+                int z, j;
+                for (z = 1; z <= 20; ++z)
+                {
+                    for (j = 1; j <= 10; ++j)
+                    {
+                        document.SetCellValue(z, j, 200 * rand.NextDouble());
+                    }
+                }
+
+
+                SLConditionalFormatting cf;
+                cf = new SLConditionalFormatting("B4", "H5");
+                cf.SetColorScale(SLConditionalFormatColorScaleValues.RedYellowGreen);
+                document.AddConditionalFormatting(cf);
+
+
+
+
 
                 DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
                 // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
@@ -642,7 +661,6 @@ namespace windows_form_app
             SLDocument sl_2 = new SLDocument();
             
             CreateCalendar(sl_2);
-            DataBinding(sl_2);
 
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx"); // savin my excel file
@@ -650,55 +668,6 @@ namespace windows_form_app
             MessageBox.Show("File Created");
 
         }
-
-
-
-
-
-
-
-
-
-
-
-        public void DataBinding(SLDocument document)
-        {
-
-            float value = 0;
-
-            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
-
-            // adesso faccio i calcoli per prima fase
-            float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
-            TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore 
-            string output_hours_1 = timespan_1.ToString("hh\\:mm\\:ss"); // così visualizzo le ore, i minuti ed i secondi previsti per ogni fase
-            Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
-
-
-            for (int i = 1; i <= 366; i++) // print the sequence of the weeks of a year
-            {
-                document.SetCellValue("A4", result_1);
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void CreateExcel_Click(object sender, EventArgs e)
         {
@@ -708,11 +677,8 @@ namespace windows_form_app
         
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
-           // serve per far funzionare la visualizzazione dell'ora 
-        }
-        private void Date_Click(object sender, EventArgs e)
-        {
-            // serve per far funzionare la visualizzazione della data 
+            TikTakClock.Start();
+            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
         }
 
         private void TikTakClock_Tick(object sender, EventArgs e)
@@ -721,8 +687,115 @@ namespace windows_form_app
             TikTakClock.Start();
         }
 
-        public void color()
+
+        /*
+                   
+        This code produces the following output.
+
+        April 3, 2002 of the Gregorian calendar:
+           Era:          1
+           Year:         2002
+           Month:        4
+           DayOfYear:    93
+           DayOfMonth:   3
+           DayOfWeek:    Wednesday
+           Hour:         0
+           Minute:       0
+           Second:       0
+           Milliseconds: 0
+
+        After adding 5 to each component of the DateTime:
+           Era:          1
+           Year:         2007
+           Month:        10
+           DayOfYear:    286
+           DayOfMonth:   13
+           DayOfWeek:    Saturday
+           Hour:         5
+           Minute:       5
+           Second:       5
+           Milliseconds: 5
+
+      
+
+        public void Calendar()
         {
+            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
+            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
+
+            // Uses the default calendar of the InvariantCulture.
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
+            DisplayValues(myCal, myDT);
+
+            // Adds 5 to every component of the DateTime.
+            myDT = myCal.AddYears(myDT, 5);
+            myDT = myCal.AddMonths(myDT, 5);
+            myDT = myCal.AddWeeks(myDT, 5);
+            myDT = myCal.AddDays(myDT, 5);
+            myDT = myCal.AddHours(myDT, 5);
+            myDT = myCal.AddMinutes(myDT, 5);
+            myDT = myCal.AddSeconds(myDT, 5);
+            myDT = myCal.AddMilliseconds(myDT, 5);
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("After adding 5 to each component of the DateTime:");
+            DisplayValues(myCal, myDT);
+
+
+            sl.SetCellValue(1, 1, myCal.AddWeeks(myDT, 5));
+            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
+            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
+
+            // Uses the default calendar of the InvariantCulture.
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
+            DisplayValues(myCal, myDT);
+
+            // Adds 5 to every component of the DateTime.
+            myDT = myCal.AddYears(myDT, 5);
+            myDT = myCal.AddMonths(myDT, 5);
+            myDT = myCal.AddWeeks(myDT, 5);
+            myDT = myCal.AddDays(myDT, 5);
+            myDT = myCal.AddHours(myDT, 5);
+            myDT = myCal.AddMinutes(myDT, 5);
+            myDT = myCal.AddSeconds(myDT, 5);
+            myDT = myCal.AddMilliseconds(myDT, 5);
+
+            // Displays the values of the DateTime.
+            Console.WriteLine("After adding 5 to each component of the DateTime:");
+            DisplayValues(myCal, myDT);
+
+            // set current date
+            DateTime localDate = DateTime.Now;
+            DateTime utcDate = DateTime.UtcNow;
+
+            for (int i = 1; i <= 24; i++)
+            {
+                for (int j = 1; j <= 24; j++)
+                {
+                    sl.SetCellValue(17, i, localDate.AddMonths(j)); /* GUARDA STRUTTURE IN C# e cerca di creare la successione di settimane
+                }
+            }
+
+
+            // set at row 2, columns 1 through 20, a value that's equal to the column index
+            for (int i = 1; i <= 20; i++)
+            {
+                sl.SetCellValue(2, i, i);
+                sl.SetCellValue(16, i, myCal.GetMonth(myDT));
+            }
+
+
+        }
+     */
+           
+         public void color()
+         {
             SLDocument sl = new SLDocument();
 
             Random rand = new Random();
@@ -764,8 +837,11 @@ namespace windows_form_app
             Console.WriteLine("End of program");
             Console.ReadLine();
 
-        }
+         }
 
-       
+
+
+
+
     }
 }
