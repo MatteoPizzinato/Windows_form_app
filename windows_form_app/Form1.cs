@@ -384,7 +384,7 @@ namespace windows_form_app
             } else
             {
                 SelectLavorationAlert.Visible = false;
-            }           
+            }
         }
 
         private void SelectLavorationAlert_Click(object sender, EventArgs e)
@@ -417,7 +417,7 @@ namespace windows_form_app
             date_column_left_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             date_column_right_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
-           
+
 
             /* divide column from January to the end of April */
             document.SetCellStyle("B2", date_column_left_style); // put the column for divide weeks            
@@ -483,7 +483,7 @@ namespace windows_form_app
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
-            week_style.Font.FontColor = System.Drawing.Color.Blue;           
+            week_style.Font.FontColor = System.Drawing.Color.Blue;
             week_style.SetTopBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             week_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             week_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
@@ -493,7 +493,7 @@ namespace windows_form_app
             DateTime localDateToday = DateTime.Today;
 
             string week = "W ";
-            
+
             for (int i = 1; i <= 366; i++) // print the sequence of the weeks of a year
             {
 
@@ -553,7 +553,7 @@ namespace windows_form_app
                 document.MergeWorksheetCells("GW1", "HC1");
                 document.MergeWorksheetCells("HD1", "HJ1");
 
-                /* Print the numbered weeks from May to the end of July */               
+                /* Print the numbered weeks from May to the end of July */
                 document.SetCellValue("DQ1", week + f++);
                 document.SetCellValue("DX1", week + f++);
                 document.SetCellValue("EE1", week + f++);
@@ -607,7 +607,7 @@ namespace windows_form_app
                 document.SetCellValue("LL1", week + f++);
                 document.SetCellValue("LS1", week + f++);
 
-                /* Print days of December */                
+                /* Print days of December */
                 document.MergeWorksheetCells("LZ1", "MF1");
                 document.MergeWorksheetCells("MG1", "MM1");
                 document.MergeWorksheetCells("MN1", "MT1");
@@ -620,40 +620,67 @@ namespace windows_form_app
                 document.SetCellValue("MU1", week + f++);
 
 
-                Random rand = new Random();
-                int z, j;
-                for (z = 1; z <= 20; ++z)
-                {
-                    for (j = 1; j <= 10; ++j)
-                    {
-                        document.SetCellValue(z, j, 200 * rand.NextDouble());
-                    }
-                }
-
-
-                SLConditionalFormatting cf;
-                cf = new SLConditionalFormatting("B4", "H5");
-                cf.SetColorScale(SLConditionalFormatColorScaleValues.RedYellowGreen);
-                document.AddConditionalFormatting(cf);
-
-
-
-
-
                 DateTime myDT = new DateTime(localDateToday.Year - 1, 12, 30, new GregorianCalendar()); // for show the complete current year   
                 // IDK why if I want to show the first of january on cell B2 I must set calendar two day before ???
 
                 document.SetCellStyle(2, i, date_style);
                 document.SetCellStyle(1, i, week_style);
                 document.SetCellValue("A2", " ");
-                myDT = myCal.AddDays(myDT, i);            
+                myDT = myCal.AddDays(myDT, i);
 
-                var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);                
+                var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
             }
 
-            localDateToday = myCal.AddDays(localDateToday, +1).Date;    
+            localDateToday = myCal.AddDays(localDateToday, +1).Date;
         }
-        
+
+
+
+
+
+        public void ColorCells(SLDocument document)
+        {
+            float value = 0;
+
+            float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+
+            // adesso faccio i calcoli per prima fase
+            float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
+            TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore 
+            string output_hours_1 = timespan_1.ToString("hh\\:mm\\:ss"); // così visualizzo le ore, i minuti ed i secondi previsti per ogni fase
+            Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
+
+            // method which don't respect the DRY guide line
+
+            SLConditionalFormatting cf; // I need this for color
+            int i, j;
+            
+            for (i = 4; i < 5; ++i) // control and set the value of the cell
+            {
+                cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells 
+
+                for (j = 1; j < 7; ++j) // control and set the value of the cell
+                {
+                    if (result_1 > 16)
+                    {
+                        cf = new SLConditionalFormatting("B4", "H4" +1); // control the color of the cells 
+                    }
+                    document.SetCellValue(i, j, result_1);
+                    
+
+                    
+                    cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
+                        SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
+                        SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
+                    document.AddConditionalFormatting(cf);
+
+                }
+            }
+           
+            //cf = new SLConditionalFormatting("A4", "D9"); // control the color of the cells 
+
+        }
+
 
         public void GenerateExcel()
         {
@@ -661,12 +688,13 @@ namespace windows_form_app
             SLDocument sl_2 = new SLDocument();
             
             CreateCalendar(sl_2);
-
+            ColorCells(sl_2);
+        
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE.xlsx"); // savin my excel file
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
             
             MessageBox.Show("File Created");
-
+        
         }
 
         private void CreateExcel_Click(object sender, EventArgs e)
@@ -685,124 +713,21 @@ namespace windows_form_app
         {
             LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
-        }
+        }        
+        
+        
 
 
-        /*
-                   
-        This code produces the following output.
-
-        April 3, 2002 of the Gregorian calendar:
-           Era:          1
-           Year:         2002
-           Month:        4
-           DayOfYear:    93
-           DayOfMonth:   3
-           DayOfWeek:    Wednesday
-           Hour:         0
-           Minute:       0
-           Second:       0
-           Milliseconds: 0
-
-        After adding 5 to each component of the DateTime:
-           Era:          1
-           Year:         2007
-           Month:        10
-           DayOfYear:    286
-           DayOfMonth:   13
-           DayOfWeek:    Saturday
-           Hour:         5
-           Minute:       5
-           Second:       5
-           Milliseconds: 5
-
-      
-
-        public void Calendar()
+        public void color()
         {
-            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
-            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
 
-            // Uses the default calendar of the InvariantCulture.
-            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
-
-            // Displays the values of the DateTime.
-            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
-            DisplayValues(myCal, myDT);
-
-            // Adds 5 to every component of the DateTime.
-            myDT = myCal.AddYears(myDT, 5);
-            myDT = myCal.AddMonths(myDT, 5);
-            myDT = myCal.AddWeeks(myDT, 5);
-            myDT = myCal.AddDays(myDT, 5);
-            myDT = myCal.AddHours(myDT, 5);
-            myDT = myCal.AddMinutes(myDT, 5);
-            myDT = myCal.AddSeconds(myDT, 5);
-            myDT = myCal.AddMilliseconds(myDT, 5);
-
-            // Displays the values of the DateTime.
-            Console.WriteLine("After adding 5 to each component of the DateTime:");
-            DisplayValues(myCal, myDT);
-
-
-            sl.SetCellValue(1, 1, myCal.AddWeeks(myDT, 5));
-            // Sets a DateTime to April 3, 2002 of the Gregorian calendar.
-            DateTime myDT = new DateTime(2002, 4, 3, new GregorianCalendar());
-
-            // Uses the default calendar of the InvariantCulture.
-            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
-
-            // Displays the values of the DateTime.
-            Console.WriteLine("April 3, 2002 of the Gregorian calendar:");
-            DisplayValues(myCal, myDT);
-
-            // Adds 5 to every component of the DateTime.
-            myDT = myCal.AddYears(myDT, 5);
-            myDT = myCal.AddMonths(myDT, 5);
-            myDT = myCal.AddWeeks(myDT, 5);
-            myDT = myCal.AddDays(myDT, 5);
-            myDT = myCal.AddHours(myDT, 5);
-            myDT = myCal.AddMinutes(myDT, 5);
-            myDT = myCal.AddSeconds(myDT, 5);
-            myDT = myCal.AddMilliseconds(myDT, 5);
-
-            // Displays the values of the DateTime.
-            Console.WriteLine("After adding 5 to each component of the DateTime:");
-            DisplayValues(myCal, myDT);
-
-            // set current date
-            DateTime localDate = DateTime.Now;
-            DateTime utcDate = DateTime.UtcNow;
-
-            for (int i = 1; i <= 24; i++)
-            {
-                for (int j = 1; j <= 24; j++)
-                {
-                    sl.SetCellValue(17, i, localDate.AddMonths(j)); /* GUARDA STRUTTURE IN C# e cerca di creare la successione di settimane
-                }
-            }
-
-
-            // set at row 2, columns 1 through 20, a value that's equal to the column index
-            for (int i = 1; i <= 20; i++)
-            {
-                sl.SetCellValue(2, i, i);
-                sl.SetCellValue(16, i, myCal.GetMonth(myDT));
-            }
-
-
-        }
-     */
-           
-         public void color()
-         {
             SLDocument sl = new SLDocument();
 
             Random rand = new Random();
             int i, j;
-            for (i = 1; i <= 20; ++i)
+            for (i = 5; i <= 2; i++)
             {
-                for (j = 1; j <= 10; ++j)
+                for (j = 1; j <= 2; j++)
                 {
                     sl.SetCellValue(i, j, 200 * rand.NextDouble());
                 }
@@ -837,7 +762,7 @@ namespace windows_form_app
             Console.WriteLine("End of program");
             Console.ReadLine();
 
-         }
+        }
 
 
 
