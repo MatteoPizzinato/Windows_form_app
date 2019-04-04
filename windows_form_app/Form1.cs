@@ -25,6 +25,8 @@ namespace windows_form_app
             InitializeComponent();
             CountTables();
             BlockInsertHours();
+            TikTakClock.Start();
+            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
         }
 
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
@@ -657,15 +659,15 @@ namespace windows_form_app
             
             for (i = 4; i < 5; ++i) // control and set the value of the cell
             {
-                cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells 
-
+                cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells                 
+                
                 for (j = 1; j < 7; ++j) // control and set the value of the cell
                 {
                     if (result_1 > 16)
                     {
-                        cf = new SLConditionalFormatting("B4", "H4" +1); // control the color of the cells 
+                        cf = new SLConditionalFormatting("B4", "H4" + 8); // control the color of the cells                        
                     }
-                    document.SetCellValue(i, j, result_1);
+                    document.SetCellValue(i, j, 7);
                     
 
                     
@@ -694,7 +696,7 @@ namespace windows_form_app
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
             
             MessageBox.Show("File Created");
-        
+            
         }
 
         private void CreateExcel_Click(object sender, EventArgs e)
@@ -705,8 +707,7 @@ namespace windows_form_app
         
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
-            TikTakClock.Start();
-            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
+           
         }
 
         private void TikTakClock_Tick(object sender, EventArgs e)
