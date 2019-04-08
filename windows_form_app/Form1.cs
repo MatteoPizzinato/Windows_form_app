@@ -26,7 +26,8 @@ namespace windows_form_app
             CountTables();
             BlockInsertHours();
             TikTakClock.Start();
-            LocalDateHours.Text = DateTime.Now.ToLongTimeString();
+            LocalDateHours.Text = DateTime.Now.ToLongTimeString(); // show the local hour
+            Today.Text = DateTime.Today.ToLongDateString(); // show the current date
         }
 
         /* Variabili per lo storage dei valori da usare durante i calcoli delle ore con una lavorazione personalizzata */
@@ -481,7 +482,7 @@ namespace windows_form_app
             document.SetCellStyle("MG2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MN2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MU2", date_column_left_style); // put the column for divide weeks            
-            document.SetCellStyle("NB2", date_column_left_style); // put the column for divide weeks
+            document.SetCellStyle("NB2", date_column_right_style); // put the column for divide weeks
             /* Style for displaing the weeks */
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
@@ -630,15 +631,15 @@ namespace windows_form_app
                 document.SetCellValue("A2", " ");
                 myDT = myCal.AddDays(myDT, i);
 
+                DateTime today_from = new DateTime();
+                today_from = DateTime.Today;
+                document.SetCellValue("C3", today_from.ToString());
+
                 var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
             }
 
             localDateToday = myCal.AddDays(localDateToday, +1).Date;
         }
-
-
-
-
 
         public void ColorCells(SLDocument document)
         {
@@ -653,7 +654,7 @@ namespace windows_form_app
             Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
 
             // method which don't respect the DRY guide line
-
+            
             SLConditionalFormatting cf; // I need this for color
             int i, j;
             
@@ -665,12 +666,11 @@ namespace windows_form_app
                 {
                     if (result_1 > 16)
                     {
-                        cf = new SLConditionalFormatting("B4", "H4" + 8); // control the color of the cells                        
+                        cf = new SLConditionalFormatting("B4", "H4");  // control the color of the cells                        
                     }
-                    document.SetCellValue(i, j, 7);
-                    
+                    document.SetCellValue(i, j, result_1);                   
 
-                    
+                    // set a custom color for 
                     cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
                         SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
                         SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
@@ -702,12 +702,17 @@ namespace windows_form_app
         private void CreateExcel_Click(object sender, EventArgs e)
         {
             GenerateExcel();
-            color(); // funzione che colora le celle secondo una scala di colori
+           // color(); // funzione che colora le celle secondo una scala di colori
         }
         
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
-           
+            /// fa funzionare il display dell'ora  
+        }
+
+        private void Today_Click(object sender, EventArgs e)
+        {
+            // fa funzionare il display del giorno corrente 
         }
 
         private void TikTakClock_Tick(object sender, EventArgs e)
@@ -717,7 +722,7 @@ namespace windows_form_app
         }        
         
         
-
+        /*
 
         public void color()
         {
@@ -762,12 +767,10 @@ namespace windows_form_app
 
             Console.WriteLine("End of program");
             Console.ReadLine();
-
-        }
-
-
+            */
 
 
 
     }
 }
+

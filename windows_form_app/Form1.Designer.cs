@@ -51,6 +51,7 @@
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TikTakClock = new System.Windows.Forms.Timer(this.components);
+            this.Today = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Today);
             this.groupBox1.Controls.Add(this.LocalDateHours);
             this.groupBox1.Controls.Add(this.CreateExcel);
             this.groupBox1.Controls.Add(this.SelectLavorationAlert);
@@ -279,6 +281,16 @@
             // 
             this.TikTakClock.Tick += new System.EventHandler(this.TikTakClock_Tick);
             // 
+            // Today
+            // 
+            this.Today.AutoSize = true;
+            this.Today.Location = new System.Drawing.Point(707, 437);
+            this.Today.Name = "Today";
+            this.Today.Size = new System.Drawing.Size(64, 17);
+            this.Today.TabIndex = 24;
+            this.Today.Text = "Sono le: ";
+            this.Today.Click += new System.EventHandler(this.Today_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1030, 610);
@@ -316,5 +328,6 @@
         private System.Windows.Forms.Button CreateExcel;
         private System.Windows.Forms.Label LocalDateHours;
         private System.Windows.Forms.Timer TikTakClock;
+        private System.Windows.Forms.Label Today;
     }
 }
