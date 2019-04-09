@@ -629,11 +629,7 @@ namespace windows_form_app
                 document.SetCellStyle(2, i, date_style);
                 document.SetCellStyle(1, i, week_style);
                 document.SetCellValue("A2", " ");
-                myDT = myCal.AddDays(myDT, i);
-
-                DateTime today_from = new DateTime();
-                today_from = DateTime.Today;
-                document.SetCellValue("C3", today_from.ToString());
+                myDT = myCal.AddDays(myDT, i);               
 
                 var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
             }
@@ -645,7 +641,54 @@ namespace windows_form_app
         {
             float value = 0;
 
+            DateTime today_from = new DateTime();
+            today_from = DateTime.Today;
+            document.SetCellValue("C3", today_from.ToString());
+
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+
+
+
+            var ciao = new List<string>();
+
+            SLWorksheetStatistics stats = document.GetWorksheetStatistics();
+            int endColumnIndex = stats.EndColumnIndex;
+
+            var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
+            var sl = new SLDocument(fileName);
+          
+            foreach (var sheetName in sl.GetWorksheetNames())
+            {
+                SLDocument sheet = new SLDocument(fileName, sheetName);
+                sheet.SetCellValue("A1", "foo");
+                sheet.SetCellValue("D1", "bar");
+               
+
+                for (int z = 1; z <= endColumnIndex; z++)
+                {
+                    ciao.Add(sheet.GetCellValueAsString(2, z));
+                }
+
+                /*
+                foreach (var column in ciao)
+                {
+                    MessageBox.Show(column);
+                }   
+                */
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
 
             // adesso faccio i calcoli per prima fase
             float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
@@ -653,35 +696,42 @@ namespace windows_form_app
             string output_hours_1 = timespan_1.ToString("hh\\:mm\\:ss"); // così visualizzo le ore, i minuti ed i secondi previsti per ogni fase
             Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
 
-            // method which don't respect the DRY guide line
             
+            
+            
+            
+            
+            // method which don't respect the DRY guide line
+
+
+
             SLConditionalFormatting cf; // I need this for color
             int i, j;
-            
-            for (i = 4; i < 5; ++i) // control and set the value of the cell
-            {
-                cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells                 
+
+            for (i = today_from.Day; i < 5; ++i) // control and set the value of the cell
+            { 
+            cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells                 
                 
-                for (j = 1; j < 7; ++j) // control and set the value of the cell
+            for (j = 1; j < 7; ++j) // control and set the value of the cell
+            {
+                if (result_1 > 16)
                 {
-                    if (result_1 > 16)
-                    {
-                        cf = new SLConditionalFormatting("B4", "H4");  // control the color of the cells                        
-                    }
-                    document.SetCellValue(i, j, result_1);                   
-
-                    // set a custom color for 
-                    cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
-                        SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
-                        SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
-                    document.AddConditionalFormatting(cf);
-
+                    cf = new SLConditionalFormatting("B4", "H4");  // control the color of the cells                        
                 }
+                document.SetCellValue(i, j, result_1);                   
+
+                // set a custom color for 
+                cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
+                    SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
+                    SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
+                document.AddConditionalFormatting(cf);
+
             }
+        }
            
             //cf = new SLConditionalFormatting("A4", "D9"); // control the color of the cells 
 
-        }
+    }
 
 
         public void GenerateExcel()
@@ -694,7 +744,7 @@ namespace windows_form_app
         
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
             sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
-            
+
             MessageBox.Show("File Created");
             
         }
