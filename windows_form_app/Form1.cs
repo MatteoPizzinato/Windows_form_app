@@ -522,23 +522,23 @@ namespace windows_form_app
                 document.MergeWorksheetCells("DJ1", "DP1");
 
                 /* Print the numbered weeks from January to the end of April */
-                document.SetCellValue("B1", week + f++);
-                document.SetCellValue("I1", week + f++);
-                document.SetCellValue("P1", week + f++);
-                document.SetCellValue("W1", week + f++);
-                document.SetCellValue("AD1", week + f++);
-                document.SetCellValue("AK1", week + f++);
-                document.SetCellValue("AR1", week + f++);
-                document.SetCellValue("AY1", week + f++);
-                document.SetCellValue("BF1", week + f++);
-                document.SetCellValue("BM1", week + f++);
-                document.SetCellValue("BT1", week + f++);
-                document.SetCellValue("CA1", week + f++);
-                document.SetCellValue("CH1", week + f++);
-                document.SetCellValue("CO1", week + f++);
-                document.SetCellValue("CV1", week + f++);
-                document.SetCellValue("DC1", week + f++);
-                document.SetCellValue("DJ1", week + f++);
+                document.SetCellValue("B1", week + f++.ToString());
+                document.SetCellValue("I1", week + f++.ToString());
+                document.SetCellValue("P1", week + f++.ToString());
+                document.SetCellValue("W1", week + f++.ToString());
+                document.SetCellValue("AD1", week + f++.ToString());
+                document.SetCellValue("AK1", week + f++.ToString());
+                document.SetCellValue("AR1", week + f++.ToString());
+                document.SetCellValue("AY1", week + f++.ToString());
+                document.SetCellValue("BF1", week + f++.ToString());
+                document.SetCellValue("BM1", week + f++.ToString());
+                document.SetCellValue("BT1", week + f++.ToString());
+                document.SetCellValue("CA1", week + f++.ToString());
+                document.SetCellValue("CH1", week + f++.ToString());
+                document.SetCellValue("CO1", week + f++.ToString());
+                document.SetCellValue("CV1", week + f++.ToString());
+                document.SetCellValue("DC1", week + f++.ToString());
+                document.SetCellValue("DJ1", week + f++.ToString());
 
                 /* Print days from May to the end of July */
                 document.MergeWorksheetCells("DQ1", "DW1");
@@ -629,7 +629,7 @@ namespace windows_form_app
                 document.SetCellStyle(2, i, date_style);
                 document.SetCellStyle(1, i, week_style);
                 document.SetCellValue("A2", " ");
-                myDT = myCal.AddDays(myDT, i);               
+                myDT = myCal.AddDays(myDT, i);      
 
                 var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
             }
@@ -643,12 +643,15 @@ namespace windows_form_app
 
             DateTime today_from = new DateTime();
             today_from = DateTime.Today;
-            document.SetCellValue("C3", today_from.ToString());
+
+            DateTime current_date = new DateTime(today_from.Year, today_from.Month, today_from.Day, new GregorianCalendar());
+
+            var print_current_day = document.SetCellValue("D3", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
+
+
 
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
-
-
-
+            
             var ciao = new List<string>();
 
             SLWorksheetStatistics stats = document.GetWorksheetStatistics();
@@ -656,24 +659,41 @@ namespace windows_form_app
 
             var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
             var sl = new SLDocument(fileName);
-          
+
+
             foreach (var sheetName in sl.GetWorksheetNames())
             {
                 SLDocument sheet = new SLDocument(fileName, sheetName);
                 sheet.SetCellValue("A1", "foo");
-                sheet.SetCellValue("D1", "bar");
-               
+                sheet.SetCellValue("D1", "bar");               
 
+                // with this for I read data as string in the second row of the excel sheet
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
-                    ciao.Add(sheet.GetCellValueAsString(2, z));
+                    ciao.Add(sheet.GetCellValueAsString(3, z));
+                    
+                                        
+                    if (document.GetCellValueAsString(2, z) == print_current_day)
+                    {
+                        MessageBox.Show("Ho trovato la data odierna");
+                    }                    
+                    
+
                 }
 
+             
+
+
+
                 /*
+                 * 
+                 * 
                 foreach (var column in ciao)
                 {
-                    MessageBox.Show(column);
-                }   
+
+                }
+                *
+                * 
                 */
 
             }
