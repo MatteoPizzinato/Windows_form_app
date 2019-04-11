@@ -413,10 +413,7 @@ namespace windows_form_app
 
             /* Style for separating weeks with a column left and a column right colored in blue */
             SLStyle date_column_left_style = document.CreateStyle();
-            SLStyle date_column_right_style = document.CreateStyle();
-            /* Style for the weeks */
-
-            SLStyle week_style = document.CreateStyle();
+            SLStyle date_column_right_style = document.CreateStyle();            
             date_column_left_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             date_column_right_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
@@ -483,7 +480,9 @@ namespace windows_form_app
             document.SetCellStyle("MN2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MU2", date_column_left_style); // put the column for divide weeks            
             document.SetCellStyle("NB2", date_column_right_style); // put the column for divide weeks
+            
             /* Style for displaing the weeks */
+            SLStyle week_style = document.CreateStyle();
             week_style.Alignment.Indent = 5;
             week_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
             week_style.Font.FontColor = System.Drawing.Color.Blue;
@@ -646,8 +645,7 @@ namespace windows_form_app
 
             DateTime current_date = new DateTime(today_from.Year, today_from.Month, today_from.Day, new GregorianCalendar());
 
-            var print_current_day = document.SetCellValue("D3", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
-
+           
 
 
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
@@ -661,27 +659,47 @@ namespace windows_form_app
             var sl = new SLDocument(fileName);
 
 
+
+
+
+            
+            var print_current_day = document.SetCellValue("D3", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
+
+            
+
+
             foreach (var sheetName in sl.GetWorksheetNames())
             {
-                SLDocument sheet = new SLDocument(fileName, sheetName);
-                sheet.SetCellValue("A1", "foo");
-                sheet.SetCellValue("D1", "bar");               
+                SLDocument sheet = new SLDocument(fileName, sheetName);                       
 
                 // with this for I read data as string in the second row of the excel sheet
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
-                    ciao.Add(sheet.GetCellValueAsString(3, z));
-                    
-                                        
-                    if (document.GetCellValueAsString(2, z) == print_current_day)
-                    {
-                        MessageBox.Show("Ho trovato la data odierna");
-                    }                    
-                    
 
+                    ciao.Add(sheet.GetCellValueAsString(3, z));    
+                    
                 }
 
-             
+
+
+                /*
+                int y = 366;
+                if (document.GetCellValueAsString(2, y--) != print_current_day) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
+                {
+                    MessageBox.Show("Non ho trovato la data odierna");
+                }
+                */
+
+
+
+                var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
+                var print_current_day_test_2_cell = document.SetCellValue("F4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
+
+                if (document.GetCellValueAsString("D3") == print_current_day_test_2_cell)
+                {
+                    MessageBox.Show("Ho trovato due celle uguali");
+                }
+                
 
 
 
@@ -700,26 +718,9 @@ namespace windows_form_app
 
 
 
-
-
-
-
-
-
-
-
-
-
             // adesso faccio i calcoli per prima fase
             float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
-            TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore 
-            string output_hours_1 = timespan_1.ToString("hh\\:mm\\:ss"); // così visualizzo le ore, i minuti ed i secondi previsti per ogni fase
-            Result1Fase.Text = Result1Fase.Text + output_hours_1; // stampo nello spazio giusto i valori
-
-            
-            
-            
-            
+            TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore                                             
             
             // method which don't respect the DRY guide line
 
