@@ -676,9 +676,10 @@ namespace windows_form_app
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
 
-                    ciao.Add(sheet.GetCellValueAsString(3, z));    
+                    ciao.Add(sheet.GetCellValueAsString(3, z));
                     
                 }
+
 
 
 
@@ -700,9 +701,6 @@ namespace windows_form_app
                     MessageBox.Show("Ho trovato due celle uguali");
                 }
                 
-
-
-
                 /*
                  * 
                  * 
