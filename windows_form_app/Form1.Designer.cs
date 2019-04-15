@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.calcolaOre = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Today = new System.Windows.Forms.Label();
             this.LocalDateHours = new System.Windows.Forms.Label();
             this.CreateExcel = new System.Windows.Forms.Button();
             this.SelectLavorationAlert = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.oreMacchina = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.TikTakClock = new System.Windows.Forms.Timer(this.components);
-            this.Today = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +95,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Welcome User";
             // 
+            // Today
+            // 
+            this.Today.AutoSize = true;
+            this.Today.Location = new System.Drawing.Point(707, 437);
+            this.Today.Name = "Today";
+            this.Today.Size = new System.Drawing.Size(64, 17);
+            this.Today.TabIndex = 24;
+            this.Today.Text = "Sono le: ";
+            this.Today.Click += new System.EventHandler(this.Today_Click);
+            // 
             // LocalDateHours
             // 
             this.LocalDateHours.AutoSize = true;
@@ -117,7 +127,7 @@
             // SelectLavorationAlert
             // 
             this.SelectLavorationAlert.AutoSize = true;
-            this.SelectLavorationAlert.Location = new System.Drawing.Point(492, 163);
+            this.SelectLavorationAlert.Location = new System.Drawing.Point(492, 169);
             this.SelectLavorationAlert.Name = "SelectLavorationAlert";
             this.SelectLavorationAlert.Size = new System.Drawing.Size(147, 17);
             this.SelectLavorationAlert.TabIndex = 21;
@@ -280,16 +290,6 @@
             // TikTakClock
             // 
             this.TikTakClock.Tick += new System.EventHandler(this.TikTakClock_Tick);
-            // 
-            // Today
-            // 
-            this.Today.AutoSize = true;
-            this.Today.Location = new System.Drawing.Point(707, 437);
-            this.Today.Name = "Today";
-            this.Today.Size = new System.Drawing.Size(64, 17);
-            this.Today.TabIndex = 24;
-            this.Today.Text = "Sono le: ";
-            this.Today.Click += new System.EventHandler(this.Today_Click);
             // 
             // Form1
             // 
