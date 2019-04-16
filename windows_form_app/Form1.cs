@@ -363,7 +363,7 @@ namespace windows_form_app
                 ShowHiddenAlertLabel();
 
                 /*
-                 * 
+                                   
                 while(ShowCustomLavorations.SelectedIndex.ToString() == "-1")
                 {
                     oreMacchina.Enabled = false;
@@ -372,11 +372,11 @@ namespace windows_form_app
                         oreMacchina.Enabled = true;
                     }
                 }
-
-                */
-
+                
+                 */
             }
         }
+
         public void ShowHiddenAlertLabel()
         {
             Color FailedColor = Color.Red;
@@ -384,7 +384,8 @@ namespace windows_form_app
             if (oreMacchina.Enabled == false && calcolaOre.Enabled == false)
             {
                 SelectLavorationAlert.Visible = true;
-            } else
+            }
+            else
             {
                 SelectLavorationAlert.Visible = false;
             }
@@ -413,7 +414,7 @@ namespace windows_form_app
 
             /* Style for separating weeks with a column left and a column right colored in blue */
             SLStyle date_column_left_style = document.CreateStyle();
-            SLStyle date_column_right_style = document.CreateStyle();            
+            SLStyle date_column_right_style = document.CreateStyle();
             date_column_left_style.SetLeftBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             date_column_right_style.SetRightBorder(DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thick, System.Drawing.Color.Blue);
             /* Now I separe the weeks with blue colums, calling the date_column_left_style and the date_column_right_style */
@@ -480,7 +481,7 @@ namespace windows_form_app
             document.SetCellStyle("MN2", date_column_left_style); // put the column for divide weeks
             document.SetCellStyle("MU2", date_column_left_style); // put the column for divide weeks            
             document.SetCellStyle("NB2", date_column_right_style); // put the column for divide weeks
-            
+
             /* Style for displaing the weeks */
             SLStyle week_style = document.CreateStyle();
             week_style.Alignment.Indent = 5;
@@ -628,13 +629,15 @@ namespace windows_form_app
                 document.SetCellStyle(2, i, date_style);
                 document.SetCellStyle(1, i, week_style);
                 document.SetCellValue("A2", " ");
-                myDT = myCal.AddDays(myDT, i);      
+                myDT = myCal.AddDays(myDT, i);
 
                 var PrintDays = document.SetCellValue(2, i, myDT.Day + "/" + myDT.Month + "/" + myDT.Year);
             }
 
             localDateToday = myCal.AddDays(localDateToday, +1).Date;
         }
+
+
 
         public void ColorCells(SLDocument document)
         {
@@ -645,11 +648,7 @@ namespace windows_form_app
 
             DateTime current_date = new DateTime(today_from.Year, today_from.Month, today_from.Day, new GregorianCalendar());
 
-           
-
-
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
-            
             var ciao = new List<string>();
 
             SLWorksheetStatistics stats = document.GetWorksheetStatistics();
@@ -657,70 +656,19 @@ namespace windows_form_app
 
             var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
             var sl = new SLDocument(fileName);
-
-
-
-
-
             
-            var print_current_day = document.SetCellValue("D3", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
-
-            
-
-
-            foreach (var sheetName in sl.GetWorksheetNames())
-            {
-                SLDocument sheet = new SLDocument(fileName, sheetName);                       
-
-                // with this for I read data as string in the second row of the excel sheet
-                for (int z = 1; z <= endColumnIndex; z++)
-                {
-
-                    ciao.Add(sheet.GetCellValueAsString(3, z));
-                    
-                }
-
-
-
-
-                /*
-                int y = 366;
-                if (document.GetCellValueAsString(2, y--) != print_current_day) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
-                {
-                    MessageBox.Show("Non ho trovato la data odierna");
-                }
-                */
-
-
-
-                var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
-                var print_current_day_test_2_cell = document.SetCellValue("F4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year).ToString();
-
-                if (document.GetCellValueAsString("D3") == print_current_day_test_2_cell)
-                {
-                    MessageBox.Show("Ho trovato due celle uguali");
-                }
-                
-                /*
-                 * 
-                 * 
-                foreach (var column in ciao)
-                {
-
-                }
-                *
-                * 
-                */
-
-            }
-
-
-
             // adesso faccio i calcoli per prima fase
             float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
             TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore                                             
-            
+
             // method which don't respect the DRY guide line
+
+
+
+
+
+
+
 
 
 
@@ -728,52 +676,81 @@ namespace windows_form_app
             int i, j;
 
             for (i = today_from.Day; i < 5; ++i) // control and set the value of the cell
-            { 
-            cf = new SLConditionalFormatting("B4", "H4"); // control the color of the cells                 
-                
-            for (j = 1; j < 7; ++j) // control and set the value of the cell
             {
-                if (result_1 > 16)
+                cf = new SLConditionalFormatting("B5", "H5"); // control the color of the cells                 
+
+                for (j = 1; j < 7; ++j) // control and set the value of the cell
                 {
-                    cf = new SLConditionalFormatting("B4", "H4");  // control the color of the cells                        
+                    if (result_1 > 16)
+                    {
+                        cf = new SLConditionalFormatting("B5", "H5");  // control the color of the cells                        
+                    }
+                    document.SetCellValue(i, j, result_1);
+
+                    // set a custom color for 
+                    cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
+                        SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
+                        SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
+                    document.AddConditionalFormatting(cf);
+
                 }
-                document.SetCellValue(i, j, result_1);                   
-
-                // set a custom color for 
-                cf.SetCustom3ColorScale(SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent1Color, 0.2,
-                    SLConditionalFormatRangeValues.Percentile, "35", SLThemeColorIndexValues.Accent3Color, -0.1,
-                    SLConditionalFormatMinMaxValues.Value, "0", SLThemeColorIndexValues.Accent6Color, 0.5);
-                document.AddConditionalFormatting(cf);
-
             }
-        }
-           
-            //cf = new SLConditionalFormatting("A4", "D9"); // control the color of the cells 
 
-    }
+
+
+
+
+
+
+
+
+
+
+            foreach (var sheetName in sl.GetWorksheetNames())
+            {
+                SLDocument sheet = new SLDocument(fileName, sheetName);
+
+                // with this for I read data as string in the second row of the excel sheet
+                for (int z = 1; z <= endColumnIndex; z++)
+                {
+                    ciao.Add(sheet.GetCellValueAsString(3, z));
+                }
+
+                var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year);
+
+                if (document.GetCellValueAsDateTime("2") == document.GetCellValueAsDateTime("D4")) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
+                {
+                    // works with the dateTime if was stored in a cell but if I try to get the cell value and compare it with DateTime.Today or current_date it doesn't work
+                    // MessageBox.Show("Ho trovato la data odierna");                    
+                    // document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
+
+                    cf = new SLConditionalFormatting("A5", "D9"); // control the color of the cells 
+                }
+            }            
+        }
 
 
         public void GenerateExcel()
         {
-            
+
             SLDocument sl_2 = new SLDocument();
-            
+
             CreateCalendar(sl_2);
             ColorCells(sl_2);
-        
+
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_COLOR.xlsx"); // savin my excel file
 
             MessageBox.Show("File Created");
-            
+
         }
 
         private void CreateExcel_Click(object sender, EventArgs e)
         {
             GenerateExcel();
-           // color(); // funzione che colora le celle secondo una scala di colori
+            // color(); // funzione che colora le celle secondo una scala di colori
         }
-        
+
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
             /// fa funzionare il display dell'ora  
@@ -788,11 +765,13 @@ namespace windows_form_app
         {
             LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
-        }        
+        }
+        
         
         
         /*
-
+         * 
+         * 
         public void color()
         {
 
@@ -836,10 +815,10 @@ namespace windows_form_app
 
             Console.WriteLine("End of program");
             Console.ReadLine();
-            */
 
-
-
+        } 
+        *
+        *
+        */
     }
 }
-
