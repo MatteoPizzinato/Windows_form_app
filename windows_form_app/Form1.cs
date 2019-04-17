@@ -637,8 +637,6 @@ namespace windows_form_app
             localDateToday = myCal.AddDays(localDateToday, +1).Date;
         }
 
-
-
         public void ColorCells(SLDocument document)
         {
             float value = 0;
@@ -652,25 +650,13 @@ namespace windows_form_app
             var ciao = new List<string>();
 
             SLWorksheetStatistics stats = document.GetWorksheetStatistics();
-            int endColumnIndex = stats.EndColumnIndex;
-
-            var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
-            var sl = new SLDocument(fileName);
+            int endColumnIndex = stats.EndColumnIndex;           
             
             // adesso faccio i calcoli per prima fase
             float result_1 = (value * storage_value_data_1) / 100; // risultato per le ore relative alla prima lavorazione            
             TimeSpan timespan_1 = TimeSpan.FromHours(result_1); // con il timespan converto i decimali in ore                                             
 
             // method which don't respect the DRY guide line
-
-
-
-
-
-
-
-
-
 
             SLConditionalFormatting cf; // I need this for color
             int i, j;
@@ -696,24 +682,14 @@ namespace windows_form_app
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
-            foreach (var sheetName in sl.GetWorksheetNames())
+            foreach (var sheetName in document.GetWorksheetNames())
             {
-                SLDocument sheet = new SLDocument(fileName, sheetName);
+              
 
                 // with this for I read data as string in the second row of the excel sheet
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
-                    ciao.Add(sheet.GetCellValueAsString(3, z));
+                    ciao.Add(document.GetCellValueAsString(3, z));
                 }
 
                 var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year);
@@ -721,7 +697,7 @@ namespace windows_form_app
                 if (document.GetCellValueAsDateTime("2") == document.GetCellValueAsDateTime("D4")) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
                 {
                     // works with the dateTime if was stored in a cell but if I try to get the cell value and compare it with DateTime.Today or current_date it doesn't work
-                    // MessageBox.Show("Ho trovato la data odierna");                    
+                    MessageBox.Show("Ho trovato la data odierna");                    
                     // document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
 
                     cf = new SLConditionalFormatting("A5", "D9"); // control the color of the cells 
@@ -736,10 +712,12 @@ namespace windows_form_app
             SLDocument sl_2 = new SLDocument();
 
             CreateCalendar(sl_2);
+            TemplateCommesse(sl_2);
             ColorCells(sl_2);
+            GetInformation(sl_2);
 
             /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_COLOR.xlsx"); // savin my excel file
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
 
             MessageBox.Show("File Created");
 
@@ -748,12 +726,12 @@ namespace windows_form_app
         private void CreateExcel_Click(object sender, EventArgs e)
         {
             GenerateExcel();
-            // color(); // funzione che colora le celle secondo una scala di colori
+            // color();  // funzione che colora le celle secondo una scala di colori
         }
 
         private void LocalDateHours_Click(object sender, EventArgs e)
         {
-            /// fa funzionare il display dell'ora  
+            // fa funzionare il display dell'ora  
         }
 
         private void Today_Click(object sender, EventArgs e)
@@ -766,8 +744,36 @@ namespace windows_form_app
             LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
         }
-        
-        
+
+
+        public void GetInformation(SLDocument document)
+        {
+           // var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
+            
+
+            if (ShowCustomLavorations.SelectedIndex >= 0)
+            {
+                document.SetCellValue("A6", ShowCustomLavorations.SelectedItem.ToString());
+            }
+        }
+        public static void TemplateCommesse(SLDocument document)
+        {
+
+            SLStyle commessa_style = document.CreateStyle();
+            /* Date_style is the style which must have the date's cells */
+            commessa_style.Alignment.Indent = 5;
+            commessa_style.Alignment.JustifyLastLine = true;                                
+            commessa_style.Font.FontColor = System.Drawing.Color.Blue;
+            commessa_style.Font.FontName = "Gill-Sans";
+            commessa_style.Font.FontSize = 12;
+            commessa_style.Font.Bold = true;            
+            commessa_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
+
+            document.SetColumnWidth("A1", 22);
+            document.SetCellValue("A1", "COMMESSA");
+            document.SetCellStyle("A1", commessa_style);
+        }
+     
         
         /*
          * 
