@@ -197,18 +197,18 @@
             this.Result7Fase.AutoSize = true;
             this.Result7Fase.Location = new System.Drawing.Point(225, 232);
             this.Result7Fase.Name = "Result7Fase";
-            this.Result7Fase.Size = new System.Drawing.Size(212, 17);
+            this.Result7Fase.Size = new System.Drawing.Size(91, 17);
             this.Result7Fase.TabIndex = 10;
-            this.Result7Fase.Text = "Le ore per la settima fase sono: ";
+            this.Result7Fase.Text = "Ore 1° Prova";
             // 
             // Result6Fase
             // 
             this.Result6Fase.AutoSize = true;
             this.Result6Fase.Location = new System.Drawing.Point(225, 205);
             this.Result6Fase.Name = "Result6Fase";
-            this.Result6Fase.Size = new System.Drawing.Size(201, 17);
+            this.Result6Fase.Size = new System.Drawing.Size(124, 17);
             this.Result6Fase.TabIndex = 9;
-            this.Result6Fase.Text = "Le ore per la sesta fase sono: ";
+            this.Result6Fase.Text = "Ore Assemblaggio";
             this.Result6Fase.Click += new System.EventHandler(this.Result6Fase_Click);
             // 
             // Result4Fase
@@ -216,9 +216,9 @@
             this.Result4Fase.AutoSize = true;
             this.Result4Fase.Location = new System.Drawing.Point(225, 149);
             this.Result4Fase.Name = "Result4Fase";
-            this.Result4Fase.Size = new System.Drawing.Size(208, 17);
+            this.Result4Fase.Size = new System.Drawing.Size(97, 17);
             this.Result4Fase.TabIndex = 7;
-            this.Result4Fase.Text = "Le ore per la quarta fase sono: ";
+            this.Result4Fase.Text = "Ore Fresatura";
             this.Result4Fase.Click += new System.EventHandler(this.Result4Fase_Click);
             // 
             // Result5Fase
@@ -226,9 +226,9 @@
             this.Result5Fase.AutoSize = true;
             this.Result5Fase.Location = new System.Drawing.Point(225, 178);
             this.Result5Fase.Name = "Result5Fase";
-            this.Result5Fase.Size = new System.Drawing.Size(206, 17);
+            this.Result5Fase.Size = new System.Drawing.Size(132, 17);
             this.Result5Fase.TabIndex = 8;
-            this.Result5Fase.Text = "Le ore per la quinta fase sono: ";
+            this.Result5Fase.Text = "Ore Elettroerosione";
             this.Result5Fase.Click += new System.EventHandler(this.Result5Fase_Click);
             // 
             // Result3Fase
@@ -236,9 +236,9 @@
             this.Result3Fase.AutoSize = true;
             this.Result3Fase.Location = new System.Drawing.Point(225, 120);
             this.Result3Fase.Name = "Result3Fase";
-            this.Result3Fase.Size = new System.Drawing.Size(199, 17);
+            this.Result3Fase.Size = new System.Drawing.Size(64, 17);
             this.Result3Fase.TabIndex = 6;
-            this.Result3Fase.Text = "Le ore per la terza fase sono: ";
+            this.Result3Fase.Text = "Ore Cam";
             this.Result3Fase.Click += new System.EventHandler(this.Result3Fase_Click);
             // 
             // Result2Fase
@@ -246,9 +246,9 @@
             this.Result2Fase.AutoSize = true;
             this.Result2Fase.Location = new System.Drawing.Point(225, 94);
             this.Result2Fase.Name = "Result2Fase";
-            this.Result2Fase.Size = new System.Drawing.Size(221, 17);
+            this.Result2Fase.Size = new System.Drawing.Size(122, 17);
             this.Result2Fase.TabIndex = 5;
-            this.Result2Fase.Text = "Le ore per la seconda fase sono: ";
+            this.Result2Fase.Text = "Ore Arrivo Acciaio";
             this.Result2Fase.Click += new System.EventHandler(this.Result2Fase_Click);
             // 
             // Result1Fase
@@ -256,9 +256,9 @@
             this.Result1Fase.AutoSize = true;
             this.Result1Fase.Location = new System.Drawing.Point(225, 67);
             this.Result1Fase.Name = "Result1Fase";
-            this.Result1Fase.Size = new System.Drawing.Size(202, 17);
+            this.Result1Fase.Size = new System.Drawing.Size(90, 17);
             this.Result1Fase.TabIndex = 4;
-            this.Result1Fase.Text = "Le ore per la prima fase sono: ";
+            this.Result1Fase.Text = "Ore Progetto";
             this.Result1Fase.Click += new System.EventHandler(this.Result1Fase_Click);
             // 
             // ShowValues

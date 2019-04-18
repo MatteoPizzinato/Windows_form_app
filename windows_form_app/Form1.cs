@@ -26,6 +26,8 @@ namespace windows_form_app
             CountTables();
             BlockInsertHours();
             TikTakClock.Start();
+
+            /* Clock Display with day/date */
             LocalDateHours.Text = DateTime.Now.ToLongTimeString(); // show the local hour
             Today.Text = DateTime.Today.ToLongDateString(); // show the current date
         }
@@ -44,13 +46,13 @@ namespace windows_form_app
         public void Clear()
         {
             // voglio creare un metodo clear per eliminare i risultati in coda al label 
-            Result1Fase.Text = "Le ore per la prima fase sono: ";
-            Result2Fase.Text = "Le ore per la seconda fase sono: ";
-            Result3Fase.Text = "Le ore per la terza fase sono: ";
-            Result4Fase.Text = "Le ore per la quarta fase sono: ";
-            Result5Fase.Text = "Le ore per la quinta fase sono: ";
-            Result6Fase.Text = "Le ore per la sesta fase sono: ";
-            Result7Fase.Text = "Le ore per la settima fase sono: ";
+            Result1Fase.Text = "Ore Progetto: ";
+            Result2Fase.Text = "Ore Arrivo Acciaio: ";
+            Result3Fase.Text = "Ore Cam: ";
+            Result4Fase.Text = "Ore Fresatura: ";
+            Result5Fase.Text = "Ore Elettroerosione: ";
+            Result6Fase.Text = "Ore Assemblaggio: ";
+            Result7Fase.Text = "Ore 1° Prova: ";
         }
 
         private void OreMacchina_TextChanged(object sender, EventArgs e)
@@ -761,17 +763,24 @@ namespace windows_form_app
 
             SLStyle commessa_style = document.CreateStyle();
             /* Date_style is the style which must have the date's cells */
+
             commessa_style.Alignment.Indent = 5;
-            commessa_style.Alignment.JustifyLastLine = true;                                
+            commessa_style.Alignment.JustifyLastLine = true;
+            commessa_style.Alignment.ReadingOrder = SLAlignmentReadingOrderValues.RightToLeft;
+            commessa_style.Alignment.ShrinkToFit = true;            
             commessa_style.Font.FontColor = System.Drawing.Color.Blue;
+            commessa_style.Alignment.TextRotation = 90;
             commessa_style.Font.FontName = "Gill-Sans";
-            commessa_style.Font.FontSize = 12;
-            commessa_style.Font.Bold = true;            
+            commessa_style.Font.FontSize = 10;
+            commessa_style.Font.Bold = true;
             commessa_style.Alignment.Horizontal = DocumentFormat.OpenXml.Spreadsheet.HorizontalAlignmentValues.Center;
 
-            document.SetColumnWidth("A1", 22);
-            document.SetCellValue("A1", "COMMESSA");
+            document.SetColumnWidth("A1", 25);
+
+            document.SetCellValue("A2", "COMMESSA");
             document.SetCellStyle("A1", commessa_style);
+
+            document.SetCellValue("B2", );
         }
      
         

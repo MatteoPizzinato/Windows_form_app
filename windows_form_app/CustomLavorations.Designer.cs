@@ -127,7 +127,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(143, 332);
+            this.label7.Location = new System.Drawing.Point(229, 332);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 17);
             this.label7.TabIndex = 23;
@@ -136,7 +136,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(143, 191);
+            this.label6.Location = new System.Drawing.Point(229, 191);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 17);
             this.label6.TabIndex = 22;
@@ -145,7 +145,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(143, 219);
+            this.label5.Location = new System.Drawing.Point(229, 219);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 17);
             this.label5.TabIndex = 21;
@@ -154,7 +154,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(143, 248);
+            this.label4.Location = new System.Drawing.Point(229, 248);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(20, 17);
             this.label4.TabIndex = 20;
@@ -163,7 +163,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(143, 275);
+            this.label3.Location = new System.Drawing.Point(229, 275);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 17);
             this.label3.TabIndex = 19;
@@ -172,7 +172,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(143, 304);
+            this.label2.Location = new System.Drawing.Point(229, 304);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 17);
             this.label2.TabIndex = 18;
@@ -181,7 +181,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 163);
+            this.label1.Location = new System.Drawing.Point(229, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 17);
             this.label1.TabIndex = 17;
@@ -189,7 +189,7 @@
             // 
             // CustPercFase2
             // 
-            this.CustPercFase2.Location = new System.Drawing.Point(72, 188);
+            this.CustPercFase2.Location = new System.Drawing.Point(160, 186);
             this.CustPercFase2.Name = "CustPercFase2";
             this.CustPercFase2.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase2.TabIndex = 16;
@@ -197,7 +197,7 @@
             // 
             // CustPercFase3
             // 
-            this.CustPercFase3.Location = new System.Drawing.Point(72, 216);
+            this.CustPercFase3.Location = new System.Drawing.Point(160, 214);
             this.CustPercFase3.Name = "CustPercFase3";
             this.CustPercFase3.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase3.TabIndex = 15;
@@ -205,7 +205,7 @@
             // 
             // CustPercFase4
             // 
-            this.CustPercFase4.Location = new System.Drawing.Point(72, 245);
+            this.CustPercFase4.Location = new System.Drawing.Point(160, 243);
             this.CustPercFase4.Name = "CustPercFase4";
             this.CustPercFase4.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase4.TabIndex = 14;
@@ -213,7 +213,7 @@
             // 
             // CustPercFase5
             // 
-            this.CustPercFase5.Location = new System.Drawing.Point(72, 272);
+            this.CustPercFase5.Location = new System.Drawing.Point(160, 270);
             this.CustPercFase5.Name = "CustPercFase5";
             this.CustPercFase5.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase5.TabIndex = 13;
@@ -221,7 +221,7 @@
             // 
             // CustPercFase6
             // 
-            this.CustPercFase6.Location = new System.Drawing.Point(72, 301);
+            this.CustPercFase6.Location = new System.Drawing.Point(160, 299);
             this.CustPercFase6.Name = "CustPercFase6";
             this.CustPercFase6.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase6.TabIndex = 12;
@@ -229,7 +229,7 @@
             // 
             // CustPercFase7
             // 
-            this.CustPercFase7.Location = new System.Drawing.Point(72, 329);
+            this.CustPercFase7.Location = new System.Drawing.Point(160, 327);
             this.CustPercFase7.Name = "CustPercFase7";
             this.CustPercFase7.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase7.TabIndex = 11;
@@ -237,7 +237,7 @@
             // 
             // CustPercFase1
             // 
-            this.CustPercFase1.Location = new System.Drawing.Point(72, 160);
+            this.CustPercFase1.Location = new System.Drawing.Point(160, 158);
             this.CustPercFase1.Name = "CustPercFase1";
             this.CustPercFase1.Size = new System.Drawing.Size(65, 22);
             this.CustPercFase1.TabIndex = 10;
@@ -248,63 +248,63 @@
             this.Lavorazione7Custom.AutoSize = true;
             this.Lavorazione7Custom.Location = new System.Drawing.Point(6, 328);
             this.Lavorazione7Custom.Name = "Lavorazione7Custom";
-            this.Lavorazione7Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione7Custom.Size = new System.Drawing.Size(74, 17);
             this.Lavorazione7Custom.TabIndex = 9;
-            this.Lavorazione7Custom.Text = "Fase 7";
+            this.Lavorazione7Custom.Text = "1° PROVA";
             // 
             // Lavorazione6Custom
             // 
             this.Lavorazione6Custom.AutoSize = true;
             this.Lavorazione6Custom.Location = new System.Drawing.Point(6, 301);
             this.Lavorazione6Custom.Name = "Lavorazione6Custom";
-            this.Lavorazione6Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione6Custom.Size = new System.Drawing.Size(117, 17);
             this.Lavorazione6Custom.TabIndex = 8;
-            this.Lavorazione6Custom.Text = "Fase 6";
+            this.Lavorazione6Custom.Text = "ASSEMBLAGGIO";
             // 
             // Lavorazione5Custom
             // 
             this.Lavorazione5Custom.AutoSize = true;
             this.Lavorazione5Custom.Location = new System.Drawing.Point(6, 272);
             this.Lavorazione5Custom.Name = "Lavorazione5Custom";
-            this.Lavorazione5Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione5Custom.Size = new System.Drawing.Size(145, 17);
             this.Lavorazione5Custom.TabIndex = 7;
-            this.Lavorazione5Custom.Text = "Fase 5";
+            this.Lavorazione5Custom.Text = "ELETTROEROSIONE";
             // 
             // Lavorazione4Custom
             // 
             this.Lavorazione4Custom.AutoSize = true;
             this.Lavorazione4Custom.Location = new System.Drawing.Point(6, 245);
             this.Lavorazione4Custom.Name = "Lavorazione4Custom";
-            this.Lavorazione4Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione4Custom.Size = new System.Drawing.Size(91, 17);
             this.Lavorazione4Custom.TabIndex = 6;
-            this.Lavorazione4Custom.Text = "Fase 4";
+            this.Lavorazione4Custom.Text = "FRESATURA";
             // 
             // Lavorazione3Custom
             // 
             this.Lavorazione3Custom.AutoSize = true;
             this.Lavorazione3Custom.Location = new System.Drawing.Point(6, 217);
             this.Lavorazione3Custom.Name = "Lavorazione3Custom";
-            this.Lavorazione3Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione3Custom.Size = new System.Drawing.Size(37, 17);
             this.Lavorazione3Custom.TabIndex = 5;
-            this.Lavorazione3Custom.Text = "Fase 3";
+            this.Lavorazione3Custom.Text = "CAM";
             // 
             // Lavorazione2Custom
             // 
             this.Lavorazione2Custom.AutoSize = true;
             this.Lavorazione2Custom.Location = new System.Drawing.Point(6, 191);
             this.Lavorazione2Custom.Name = "Lavorazione2Custom";
-            this.Lavorazione2Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione2Custom.Size = new System.Drawing.Size(117, 17);
             this.Lavorazione2Custom.TabIndex = 4;
-            this.Lavorazione2Custom.Text = "Fase 2";
+            this.Lavorazione2Custom.Text = "ARRIVO ACCIAIO";
             // 
             // Lavorazione1Custom
             // 
             this.Lavorazione1Custom.AutoSize = true;
             this.Lavorazione1Custom.Location = new System.Drawing.Point(6, 163);
             this.Lavorazione1Custom.Name = "Lavorazione1Custom";
-            this.Lavorazione1Custom.Size = new System.Drawing.Size(51, 17);
+            this.Lavorazione1Custom.Size = new System.Drawing.Size(87, 17);
             this.Lavorazione1Custom.TabIndex = 3;
-            this.Lavorazione1Custom.Text = "Fase 1";
+            this.Lavorazione1Custom.Text = "PROGETTO";
             // 
             // SavingDataInMySQLDB
             // 
