@@ -88,7 +88,7 @@ namespace windows_form_app
         {
             /* in questo label printo attraverso la funzione CalculateHours_LL il valore delle ore
             secondo le percentuali per ogni lavorazione */
-        }
+        } 
 
         private void Result3Fase_Click(object sender, EventArgs e)
         {
@@ -684,10 +684,11 @@ namespace windows_form_app
                 }
             }
 
+
+
             foreach (var sheetName in document.GetWorksheetNames())
             {
-              
-
+                
                 // with this for I read data as string in the second row of the excel sheet
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
@@ -778,11 +779,23 @@ namespace windows_form_app
             document.SetColumnWidth("A1", 25);
 
             document.SetCellValue("A2", "COMMESSA");
-            document.SetCellStyle("A1", commessa_style);
+            document.SetCellStyle("A1", commessa_style);           
+            
+            for (int y = 3; y <= 500; y++)
+            {
+                if (document.GetCellValueAsInt32("A" + y) == null)
+                {
+                    document.SetCellValue("A" + y, y);
+                }
+                
 
-            document.SetCellValue("B2", );
+            }
+            
+
+
         }
      
+
         
         /*
          * 
