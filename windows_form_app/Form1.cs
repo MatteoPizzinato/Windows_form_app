@@ -192,7 +192,7 @@ namespace windows_form_app
             myTimer.Start();
 
 
-            void check(object sender, EventArgs e)
+            void check(object sender, EventArgs e) 
             {
                 string query_2 = "USE lavorazioni_meccaniche; SELECT count(*) FROM information_schema.TABLES WHERE table_schema = database(); ";
                 MySqlCommand command = new MySqlCommand(query_2, connection);
@@ -649,6 +649,7 @@ namespace windows_form_app
             DateTime current_date = new DateTime(today_from.Year, today_from.Month, today_from.Day, new GregorianCalendar());
 
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
+
             var ciao = new List<string>();
 
             SLWorksheetStatistics stats = document.GetWorksheetStatistics();
@@ -700,31 +701,25 @@ namespace windows_form_app
                 if (document.GetCellValueAsDateTime("2") == document.GetCellValueAsDateTime("D4")) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
                 {
                     // works with the dateTime if was stored in a cell but if I try to get the cell value and compare it with DateTime.Today or current_date it doesn't work
-                    MessageBox.Show("Ho trovato la data odierna");                    
+                    MessageBox.Show("Ho trovato la data odierna");
+                
+                    for (int y = 3; y <= 500; y++)
+                    {
+                        if (document.GetCellValueAsInt32("A" + y) == 0)
+                        {
+                            document.SetCellValue("A" + y, y);
+                        }
+
+                    }
+
+
                     // document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
 
-                    cf = new SLConditionalFormatting("A5", "D9"); // control the color of the cells 
                 }
             }            
         }
 
 
-        public void GenerateExcel()
-        {
-
-            SLDocument sl_2 = new SLDocument();
-
-            CreateCalendar(sl_2);
-            TemplateCommesse(sl_2);
-            ColorCells(sl_2);
-            GetInformation(sl_2);
-
-            /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
-            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
-
-            MessageBox.Show("File Created");
-
-        }
 
         private void CreateExcel_Click(object sender, EventArgs e)
         {
@@ -747,8 +742,9 @@ namespace windows_form_app
             LocalDateHours.Text = DateTime.Now.ToLongTimeString();
             TikTakClock.Start();
         }
+        
 
-
+        /* Function that returned print a things in a cell if the selected index in the doropdown menu is hgreater than 0*/
         public void GetInformation(SLDocument document)
         {
            // var fileName = "C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx";
@@ -757,11 +753,23 @@ namespace windows_form_app
             if (ShowCustomLavorations.SelectedIndex >= 0)
             {
                 document.SetCellValue("A6", ShowCustomLavorations.SelectedItem.ToString());
-            }
-        }
-        public static void TemplateCommesse(SLDocument document)
-        {
 
+
+                string x = Result1Fase.Text;
+
+                for (int y = 50; y < 1; y--)
+                {
+                    document.SetCellValue("B7" + y, y);
+                }
+
+            }
+
+        }
+
+        
+        public void TemplateCommesse(SLDocument document)
+        {
+        
             SLStyle commessa_style = document.CreateStyle();
             /* Date_style is the style which must have the date's cells */
 
@@ -779,24 +787,29 @@ namespace windows_form_app
             document.SetColumnWidth("A1", 25);
 
             document.SetCellValue("A2", "COMMESSA");
-            document.SetCellStyle("A1", commessa_style);           
-            
-            for (int y = 3; y <= 500; y++)
-            {
-                if (document.GetCellValueAsInt32("A" + y) == null)
-                {
-                    document.SetCellValue("A" + y, y);
-                }
-                
+            document.SetCellStyle("A1", commessa_style);
+           
+        }
 
-            }
-            
 
+        public void GenerateExcel()
+        {
+
+            SLDocument sl_2 = new SLDocument();
+
+            CreateCalendar(sl_2);
+            TemplateCommesse(sl_2);
+            ColorCells(sl_2);
+            GetInformation(sl_2);
+            
+            /* FINISCI FOGLIO EXCEL VISUALIZZAZIONE DATA */
+            sl_2.SaveAs("C:/Users/Utente/Desktop/C#FormApp/Windows_form_app/windows_form_app/TEST_CALENDAR_EXCEL_WEEK_PROVA_COLORE_2.xlsx"); // savin my excel file
+
+            MessageBox.Show("File Created");
 
         }
-     
 
-        
+
         /*
          * 
          * 
@@ -831,6 +844,7 @@ namespace windows_form_app
             sl.AddConditionalFormatting(cf);
 
             cf = new SLConditionalFormatting("C15", "J18");
+            // the minimum is colored with accent 1 color that's lightened 20%
             // the minimum is colored with accent 1 color that's lightened 20%
             // the midpoint is at the 35th percentile, colored with accent 3 color that's darkened 10%
             // the maximum is colored with accent 6 color that's lightened 50%
