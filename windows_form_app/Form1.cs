@@ -650,7 +650,7 @@ namespace windows_form_app
 
             float.TryParse(oreMacchina.Text, out value); // parso la stringa in un float, lo faccio per poter fare i calcoli 
 
-            var ciao = new List<string>();
+            var list = new List<string>();
 
             SLWorksheetStatistics stats = document.GetWorksheetStatistics();
             int endColumnIndex = stats.EndColumnIndex;           
@@ -686,14 +686,14 @@ namespace windows_form_app
             }
 
 
-
+             
             foreach (var sheetName in document.GetWorksheetNames())
             {
                 
                 // with this for I read data as string in the second row of the excel sheet
                 for (int z = 1; z <= endColumnIndex; z++)
                 {
-                    ciao.Add(document.GetCellValueAsString(3, z));
+                    list.Add(document.GetCellValueAsString(3, z));
                 }
 
                 var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year);
@@ -712,8 +712,7 @@ namespace windows_form_app
 
                     }
 
-
-                    // document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
+                    document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
 
                 }
             }            
@@ -743,7 +742,6 @@ namespace windows_form_app
             TikTakClock.Start();
         }
         
-
         /* Function that returned print a things in a cell if the selected index in the doropdown menu is hgreater than 0*/
         public void GetInformation(SLDocument document)
         {
@@ -753,19 +751,20 @@ namespace windows_form_app
             if (ShowCustomLavorations.SelectedIndex >= 0)
             {
                 document.SetCellValue("A6", ShowCustomLavorations.SelectedItem.ToString());
+                
+            }
 
-
-                string x = Result1Fase.Text;
-
-                for (int y = 50; y < 1; y--)
+            for (int i = 9; i <= 15; i++) // print the sequence of the weeks of a year
+            {
+                document.SetCellValue("B" + i, Result1Fase.Text);
+                
+                if (Result1Fase.Text == "16")
                 {
-                    document.SetCellValue("B7" + y, y);
+                    
                 }
-
             }
 
         }
-
         
         public void TemplateCommesse(SLDocument document)
         {
@@ -794,7 +793,7 @@ namespace windows_form_app
 
         public void GenerateExcel()
         {
-
+            
             SLDocument sl_2 = new SLDocument();
 
             CreateCalendar(sl_2);
