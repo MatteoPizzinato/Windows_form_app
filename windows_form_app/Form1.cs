@@ -696,9 +696,14 @@ namespace windows_form_app
                     list.Add(document.GetCellValueAsString(3, z));
                 }
 
-                var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year);
 
-                if (document.GetCellValueAsDateTime("2") == document.GetCellValueAsDateTime("D4")) // !!!!!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
+
+
+                // NON FUNZIONA, NON VIENE INSERITA LA DATA ODIERNA NELLA CELLA D4
+
+                var print_current_day_test_1_cell = document.SetCellValue("D4", current_date.Day + "/" + current_date.Month + "/" + current_date.Year);
+               // se metto diverso funziona ma dovrebbe funzionare con l'uguale uguale  
+                if (document.GetCellValueAsDateTime("2") != document.GetCellValueAsDateTime("D4")) // !!!!!!!!!!!!!!!!!!!!!! scorta di punti esclamativi
                 {
                     // works with the dateTime if was stored in a cell but if I try to get the cell value and compare it with DateTime.Today or current_date it doesn't work
                     MessageBox.Show("Ho trovato la data odierna");
@@ -708,14 +713,13 @@ namespace windows_form_app
                         if (document.GetCellValueAsInt32("A" + y) == 0)
                         {
                             document.SetCellValue("A" + y, y);
-                        }
-
+                        }         
                     }
 
                     document.SetCellValue("G4", "Sono riuscito a trovare la data odierna");
 
                 }
-            }            
+            }
         }
 
 
@@ -758,14 +762,9 @@ namespace windows_form_app
             {
                 document.SetCellValue("B" + i, Result1Fase.Text);
                 
-                if (Result1Fase.Text == "16")
-                {
-                    
-                }
             }
+        }       
 
-        }
-        
         public void TemplateCommesse(SLDocument document)
         {
         
